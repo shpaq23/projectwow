@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import "styles/mixins";
+@import "styles/variables";
+body {
+  @include font1;
+  background: url('/assets/background.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.pw-label {
+  color: $yellow;
+  text-shadow: 1px -1px $textShadowColor;
+  font-weight: bold;
+}
+input.pw-input {
+  border-radius: 8px;
+  border: 1px solid $inputBorderColor;
+  box-sizing: border-box;
+  outline: none;
+  padding: 4px 8px;
+  font-family: inherit;
+  background-color: $inputBackgroundColor;
+  color: $inputTextColor;
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+@font-face {
+  font-family: wowfont;
+  src: url('/assets/wowfont.ttf');
+}

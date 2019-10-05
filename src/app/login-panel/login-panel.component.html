@@ -1,0 +1,8 @@
+<pw-button></pw-button>
+<form [formGroup]="form">
+  <label class="pw-label" for="login">Login</label>
+  <input class="pw-input" formControlName="login" type="email" id="login" autocomplete="off">
+  <label class="pw-label" for="password">Password</label>
+  <input class="pw-input" formControlName="password" type="password" id="password" autocomplete="off">
+  <pw-button (click)="onSubmit()"></pw-button>
+</form>
