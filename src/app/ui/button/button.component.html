@@ -1,1 +1,3 @@
-<p>button works!</p>
+<fa-icon *ngIf="loading" class="fa-left pw-mt-1" icon="cog" [spin]="true"></fa-icon>
+<span><ng-content></ng-content></span>
+<fa-icon *ngIf="loading" class="fa-right pw-mt-1" icon="cog" [spin]="true"></fa-icon>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'pw-login-panel',
@@ -9,6 +11,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 export class LoginPanelComponent implements OnInit {
 
   form: FormGroup;
+  loading = false;
 
   constructor() { }
 
@@ -17,11 +20,17 @@ export class LoginPanelComponent implements OnInit {
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
     });
-    // this.form.controls.login.disable();
+    this.form.controls.password.disable();
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    const fakeService = of('emitted').pipe(delay(1500));
+    this.loading = true;
+    fakeService
+      .subscribe(data => {
+      console.log(data);
+      this.loading = false;
+    });
   }
 
 }

@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <div>
+    <label class="pw-label" for="login">Login</label>
+    <input class="pw-input" formControlName="login" type="email" id="login" autocomplete="off">
+  </div>
+  <div>
+    <label class="pw-label" for="password">Password</label>
+    <input class="pw-input" formControlName="password" type="password" id="password" autocomplete="off">
+  </div>
+  <pw-button (click)="!loading && onSubmit()" [loading]="loading">Sign In !</pw-button>
+</form>

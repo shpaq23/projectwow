@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pw-button',
@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
+  @HostBinding('class.pw-btn-font')
+  private btnFont = true;
+  @HostBinding('class.disabled')
+  @Input() disabled: boolean;
+  @HostBinding('class.loading')
+  @Input() loading: boolean;
 
-
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    // console.log(this.isLoading);
+    // console.log(this.isDisabled);
   }
 
 }

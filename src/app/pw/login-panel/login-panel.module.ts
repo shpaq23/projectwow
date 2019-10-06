@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginPanelRoutingModule } from './login-panel-routing.module';
 import { LoginPanelComponent } from './login-panel.component';
-import {UiModule} from '../ui/ui.module';
+import {UiModule} from '../../ui/ui.module';
 import {ReactiveFormsModule} from '@angular/forms';
 
 

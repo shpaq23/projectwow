@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPanelModule } from './login-panel/login-panel.module';
+import { LoginPanelModule } from './pw/login-panel/login-panel.module';
 
 @NgModule({
   declarations: [

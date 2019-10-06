@@ -1,7 +1,8 @@
 @import "styles/mixins";
 @import "styles/variables";
+@import "styles/layout";
 body {
-  @include font1;
+  @include wowFont;
   background: url('/assets/background.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -9,10 +10,13 @@ body {
   background-size: cover;
 }
 
-.pw-label {
-  color: $yellow;
-  text-shadow: 1px -1px $textShadowColor;
+label.pw-label {
+  @include wowFontYellow;
   font-weight: bold;
+}
+pw-button.pw-btn-font {
+  @include wowFontYellow;
+  font-weight: normal;
 }
 input.pw-input {
   border-radius: 8px;
@@ -24,7 +28,8 @@ input.pw-input {
   background-color: $inputBackgroundColor;
   color: $inputTextColor;
   &:disabled {
-    cursor: not-allowed;
+    @include cursorNotAllowed;
+    background-color: $inputDisabledBackgroundColor;
   }
 }
 @font-face {

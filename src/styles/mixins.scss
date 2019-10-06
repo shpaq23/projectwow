@@ -1,5 +1,15 @@
 @import "variables";
 
-@mixin font1 {
+@mixin wowFont {
   font-family: wowfont, serif;
+}
+@mixin wowFontYellow {
+  color: $yellow;
+  text-shadow: 1px -1px $textShadowColor;
+}
+@mixin cursorNotAllowed {
+  cursor: not-allowed;
+}
+@mixin cursorPointer {
+  cursor: pointer;
 }

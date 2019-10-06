@@ -1,0 +1,34 @@
+@import "~src/styles/variables";
+@import "~src/styles/mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  background-color: $buttonBackgroundColor;
+  padding: 4px 8px;
+  border: 2px solid $buttonBorderColor;
+  max-width: 240px;
+  user-select: none;
+  &:active {
+    background-color: $buttonActiveBackgroundColor;
+  }
+  &:hover {
+    @include cursorPointer;
+  }
+  &.disabled, &.loading {
+    background-color: $buttonActiveBackgroundColor;
+    @include cursorNotAllowed
+  }
+  fa-icon {
+    position: absolute;
+    &.fa-left {
+      align-self: flex-start;
+    }
+    &.fa-right{
+      align-self: flex-end;
+    }
+  }
+
+}
