@@ -1,1 +1,10 @@
-
+@import "~src/styles/mixins";
+:host {
+  width: 240px;
+}
+.errors {
+  span {
+    @include fontError;
+    font-weight: bold;
+  }
+}

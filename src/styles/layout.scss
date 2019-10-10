@@ -1,3 +1,49 @@
-.pw-mt-1 {
-  margin-top: 1px;
+@import "mixins";
+
+.pw-center-horizontal {
+  display: flex;
+  align-items: center;
+}
+.pw-center-vertical {
+  display: flex;
+  justify-content: center;
+}
+.pw-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pw-column-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+$spaces: 1px 2px 4px 8px 16px 24px 32px;
+$directions: t b l r;
+$types: m p;
+$name: 0;
+$prefix: margin;
+$suffix: top;
+@each $space in $spaces {
+  @each $direction in $directions {
+    @each $type in $types {
+      @if $space == 1px { $name: 1; }
+      @if $space == 2px { $name: 2; }
+      @if $space == 4px { $name: 3; }
+      @if $space == 8px { $name: 4; }
+      @if $space == 16px { $name: 5; }
+      @if $space == 24px { $name: 6; }
+      @if $space == 32px { $name: 7; }
+      @if $type == m { $prefix: margin; }
+      @if $type == p { $prefix: padding; }
+      @if $direction == t {$suffix: top; }
+      @if $direction == b {$suffix: bottom; }
+      @if $direction == l {$suffix: left; }
+      @if $direction == r {$suffix: right; }
+      .pw-#{$type}#{$direction}-#{$name} {
+        #{$prefix}-#{$suffix}: $space;
+      }
+    }
+  }
 }

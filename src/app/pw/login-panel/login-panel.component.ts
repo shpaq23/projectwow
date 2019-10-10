@@ -12,6 +12,7 @@ export class LoginPanelComponent implements OnInit {
 
   form: FormGroup;
   loading = false;
+  submitted = false;
 
   constructor() { }
 
@@ -19,17 +20,24 @@ export class LoginPanelComponent implements OnInit {
     this.form = new FormGroup({
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
-    });
-    this.form.controls.password.disable();
+    }, {updateOn: 'change'});
+  }
+
+  get isValid(): boolean {
+    return !this.submitted || this.form.valid;
   }
 
   onSubmit() {
-    const fakeService = of('emitted').pipe(delay(1500));
+    const fakeService = of('emitted').pipe(delay(2500));
+    this.submitted = true;
+    if (this.form.invalid) { return; }
     this.loading = true;
+    this.form.disable();
     fakeService
       .subscribe(data => {
       console.log(data);
       this.loading = false;
+      this.form.enable();
     });
   }
 

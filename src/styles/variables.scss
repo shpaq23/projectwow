@@ -1,15 +1,28 @@
 // Colors:
 $yellow: rgb(255, 199, 0);
-
+$redError: #ff7f76;
 $textShadowColor: rgb(52, 52, 52);
 
 // Input Colors:
 $inputBorderColor: rgb(186, 183, 186);
 $inputBackgroundColor: rgba(78, 78, 78, 0.61);
 $inputDisabledBackgroundColor: rgba(38, 35, 35, 0.92);
-$inputTextColor: rgb(255, 255, 255);
+$inputTextColor: aliceblue;
+$inputPlaceholderColor: rgba(239, 240, 255, 0.38);
 
 // Button Colors:
 $buttonBackgroundColor: rgb(127, 13, 9);
 $buttonBorderColor: rgb(56, 55, 54);
 $buttonActiveBackgroundColor: rgb(69, 12, 9);
+
+// Body
+$bodyPaddingTop: 100px;
+
+// Border
+$borderYellow: rgb(255, 199, 0);
+$borderWeight: 2px;
+$borderRadius: 10px;
+$borderBoxShadow: 0 0 8px 4px aliceblue;
+
+// App
+$appBackgroundColor: rgba(0, 0, 0, 0.38);

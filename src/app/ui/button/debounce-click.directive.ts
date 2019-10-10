@@ -23,7 +23,6 @@ export class DebounceClickDirective implements OnInit, OnDestroy {
   clickEvent(event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('click from host element');
     this.clicks.next(event);
   }
 

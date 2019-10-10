@@ -3,6 +3,11 @@
 @import "styles/layout";
 body {
   @include wowFont;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  min-width: 1366px;
+  //background-color: black;
   background: url('/assets/background.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -11,11 +16,11 @@ body {
 }
 
 label.pw-label {
-  @include wowFontYellow;
+  @include fontYellow;
   font-weight: bold;
 }
 pw-button.pw-btn-font {
-  @include wowFontYellow;
+  @include fontYellow;
   font-weight: normal;
 }
 input.pw-input {
@@ -27,9 +32,15 @@ input.pw-input {
   font-family: inherit;
   background-color: $inputBackgroundColor;
   color: $inputTextColor;
+  text-align: center;
+  width: 100%;
+  max-width: 240px;
   &:disabled {
     @include cursorNotAllowed;
     background-color: $inputDisabledBackgroundColor;
+  }
+  &::placeholder {
+    color: $inputPlaceholderColor;
   }
 }
 @font-face {

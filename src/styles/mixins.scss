@@ -3,8 +3,12 @@
 @mixin wowFont {
   font-family: wowfont, serif;
 }
-@mixin wowFontYellow {
+@mixin fontYellow {
   color: $yellow;
+  text-shadow: 1px -1px $textShadowColor;
+}
+@mixin fontError {
+  color: $redError;
   text-shadow: 1px -1px $textShadowColor;
 }
 @mixin cursorNotAllowed {
@@ -13,3 +17,5 @@
 @mixin cursorPointer {
   cursor: pointer;
 }
+
+
