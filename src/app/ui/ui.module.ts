@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { FormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faArrowRight, faCog} from '@fortawesome/free-solid-svg-icons';
 import { DebounceClickDirective } from './button/debounce-click.directive';
 
 const declarations = [
   ButtonComponent,
-  DebounceClickDirective
+  DebounceClickDirective,
 ];
 
 @NgModule({
@@ -22,6 +22,6 @@ const declarations = [
 })
 export class UiModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faCog);
+    library.addIcons(faCog, faArrowRight, faArrowLeft);
   }
 }

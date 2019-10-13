@@ -1,1 +1,35 @@
-<p>register-panel works!</p>
+<div *ngIf="!loading && !isValid" class="errors pw-column-center-container pw-mb-5">
+  <span *ngIf="form.get('login').hasError('required')">Login is required</span>
+  <span *ngIf="form.get('login').hasError('email')">Invalid Login</span>
+  <span *ngIf="form.get('passwordGroup').get('password').hasError('required')">Password is required</span>
+  <span *ngIf="form.get('passwordGroup').hasError('differentPasswords')">Passwords do not match</span>
+  <span *ngIf="form.get('creationCode').hasError('required')">Creation Code is required</span>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="pw-column-center-container pw-mb-5">
+    <label class="pw-label pw-mb-1" for="login">Login</label>
+    <input placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" class="pw-input" formControlName="login" type="email" id="login" autocomplete="off">
+  </div>
+  <div formGroupName="passwordGroup">
+    <div class="pw-column-center-container  pw-mb-5">
+      <label class="pw-label pw-mb-1" for="password">Password</label>
+      <input (keyup.enter)="!loading && isValid && onSubmit()" class="pw-input" formControlName="password" type="password" id="password" autocomplete="off">
+    </div>
+    <div class="pw-column-center-container  pw-mb-5">
+      <label class="pw-label pw-mb-1" for="repassword">Re-Password</label>
+      <input (keyup.enter)="!loading && isValid && onSubmit()" class="pw-input" formControlName="repassword" type="password" id="repassword" autocomplete="off">
+    </div>
+  </div>
+  <div class="pw-column-center-container  pw-mb-5">
+    <label class="pw-label pw-mb-1" for="creationCode">Creation Code</label>
+    <input (keyup.enter)="!loading && isValid && onSubmit()" maxlength="8" class="pw-input" formControlName="creationCode" type="text" id="creationCode" autocomplete="off">
+  </div>
+  <pw-button (click)="!loading && isValid && onSubmit()"
+             [disabled]="!isValid || loading"
+             [spinLeft]="loading"
+             [spinRight]="loading"
+             [faIconLeft]="loading && faIcon.cog"
+             [faIconRight]="loading &&  faIcon.cog">Register</pw-button>
+
+  <pw-button class="pw-mt-2" routerLink="/login" [faIconLeft]="faIcon.leftArrow">Go to Login</pw-button>
+</form>

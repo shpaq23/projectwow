@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FaIcon } from '../../../ui/fa-icon.enum';
 
 @Component({
   selector: 'pw-login-panel',
@@ -13,6 +14,7 @@ export class LoginPanelComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
+  faIcon = FaIcon;
 
   constructor() { }
 
@@ -28,7 +30,7 @@ export class LoginPanelComponent implements OnInit {
   }
 
   onSubmit() {
-    const fakeService = of('emitted').pipe(delay(2500));
+    const fakeService = of('emitted login').pipe(delay(2500));
     this.submitted = true;
     if (this.form.invalid) { return; }
     this.loading = true;

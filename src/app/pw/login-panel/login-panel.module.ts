@@ -6,6 +6,7 @@ import { LoginPanelComponent } from './login/login-panel.component';
 import { UiModule } from '../../ui/ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterPanelComponent } from './register/register-panel.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegisterPanelComponent } from './register/register-panel.component';
     CommonModule,
     ReactiveFormsModule,
     LoginPanelRoutingModule,
-    UiModule
+    UiModule,
+    FontAwesomeModule
   ]
 })
 export class LoginPanelModule { }

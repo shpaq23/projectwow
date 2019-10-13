@@ -1,4 +1,5 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'pw-button',
@@ -10,12 +11,15 @@ export class ButtonComponent implements OnInit {
   @HostBinding('class.pw-btn-font') btnFont = true;
   @HostBinding('class.disabled')
   @Input() disabled: boolean;
-  @HostBinding('class.loading')
-  @Input() loading: boolean;
+
+  @Input() faIconLeft: IconProp;
+  @Input() faIconRight: IconProp;
+  @Input() spinLeft: boolean;
+  @Input() spinRight: boolean;
+
+
 
   ngOnInit(): void {
-    // console.log(this.isLoading);
-    // console.log(this.isDisabled);
   }
 
 }

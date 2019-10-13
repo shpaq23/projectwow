@@ -1,5 +1,5 @@
-@import "~src/styles/variables";
-@import "~src/styles/mixins";
+@import "~styles/variables";
+@import "~styles/mixins";
 
 :host {
   display: flex;
@@ -10,6 +10,7 @@
   padding: 2px 8px;
   border: 2px solid $buttonBorderColor;
   user-select: none;
+  outline: none;
   &:active {
     background-color: $buttonActiveBackgroundColor;
   }
