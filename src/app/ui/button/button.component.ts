@@ -7,8 +7,7 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-  @HostBinding('class.pw-btn-font')
-  private btnFont = true;
+  @HostBinding('class.pw-btn-font') btnFont = true;
   @HostBinding('class.disabled')
   @Input() disabled: boolean;
   @HostBinding('class.loading')

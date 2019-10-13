@@ -11,8 +11,8 @@ import { LoginPanelModule } from './pw/login-panel/login-panel.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    LoginPanelModule
+    LoginPanelModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

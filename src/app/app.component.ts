@@ -6,6 +6,6 @@ import {Component, HostBinding} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @HostBinding('class.pw-center') private classCenter = true;
+  @HostBinding('class.pw-center') classCenter = true;
   title = 'projectwow';
 }
