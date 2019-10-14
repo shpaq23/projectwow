@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faArrowLeft, faArrowRight, faCog} from '@fortawesome/free-solid-svg-icons';
 import { DebounceClickDirective } from './button/debounce-click.directive';
+import { TooltipDirective } from './directives/tooltip.directive';
 
 const declarations = [
   ButtonComponent,
   DebounceClickDirective,
+  TooltipDirective
 ];
 
 @NgModule({

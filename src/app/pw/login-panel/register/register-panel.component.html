@@ -12,7 +12,7 @@
   </div>
   <div formGroupName="passwordGroup">
     <div class="pw-column-center-container  pw-mb-5">
-      <label class="pw-label pw-mb-1" for="password">Password</label>
+      <label pwTooltip description="dupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupa" class="pw-label pw-mb-1" for="password">Password</label>
       <input (keyup.enter)="!loading && isValid && onSubmit()" class="pw-input" formControlName="password" type="password" id="password" autocomplete="off">
     </div>
     <div class="pw-column-center-container  pw-mb-5">
@@ -31,5 +31,5 @@
              [faIconLeft]="loading && faIcon.cog"
              [faIconRight]="loading &&  faIcon.cog">Register</pw-button>
 
-  <pw-button class="pw-mt-2" routerLink="/login" [faIconLeft]="faIcon.leftArrow">Go to Login</pw-button>
+  <pw-button pwTooltip description="dupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupadupa dupa" class="pw-mt-2" routerLink="/login" [faIconLeft]="faIcon.leftArrow">Go to Login</pw-button>
 </form>

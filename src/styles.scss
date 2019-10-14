@@ -47,3 +47,10 @@ input.pw-input {
   font-family: wowfont;
   src: url('/assets/wowfont.ttf');
 }
+.pw-tooltip {
+  position: absolute;
+  background-color: red;
+  border: 2px solid blue;
+  max-width: 100px;
+  transition: opacity 500ms;
+}
