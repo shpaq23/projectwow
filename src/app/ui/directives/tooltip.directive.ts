@@ -39,7 +39,9 @@ export class TooltipDirective {
   setPosition() {
     const hostPos = this.elementRef.nativeElement.getBoundingClientRect();
     const tooltipPos = this.tooltipElement.getBoundingClientRect();
-    const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollYPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollXPos = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+
     let x;
     let y;
     switch (this.gravity) {
@@ -64,8 +66,8 @@ export class TooltipDirective {
         break;
       }
     }
-    this.renderer2.setStyle(this.tooltipElement, 'top', `${y + scrollPos}px`);
-    this.renderer2.setStyle(this.tooltipElement, 'left', `${x}px`);
+    this.renderer2.setStyle(this.tooltipElement, 'top', `${y + scrollYPos}px`);
+    this.renderer2.setStyle(this.tooltipElement, 'left', `${x + scrollXPos}px`);
   }
 }
 
