@@ -21,6 +21,10 @@
     background-color: $buttonActiveBackgroundColor;
     @include cursorNotAllowed
   }
+  &.pw-btn-font {
+    @include fontYellow;
+    font-weight: normal;
+  }
   fa-icon {
     position: absolute;
     &.fa-left {
