@@ -8,6 +8,7 @@ import { DebounceClickDirective } from './button/debounce-click.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipService } from './tooltip/tooltip.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const declarations = [
   ButtonComponent,
@@ -22,7 +23,8 @@ const declarations = [
   imports: [
     CommonModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   entryComponents: [ TooltipComponent ],
   providers: [ TooltipService ]

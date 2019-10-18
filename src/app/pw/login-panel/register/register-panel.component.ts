@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {FaIcon} from '../../../ui/fa-icon.enum';
+import {Gravity} from '../../../ui/gravity.enum';
 
 @Component({
   selector: 'pw-register-panel',
@@ -15,6 +16,7 @@ export class RegisterPanelComponent implements OnInit {
   loading = false;
   submitted = false;
   faIcon = FaIcon;
+  gravity = Gravity;
   constructor() { }
 
   ngOnInit() {

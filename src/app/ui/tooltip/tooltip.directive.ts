@@ -18,9 +18,10 @@ export class TooltipDirective {
               private tooltipService: TooltipService) { }
   @Input() gravity: Gravity = Gravity.NORTH;
   @Input() description: string;
+  @Input() offset = 5;
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.tooltipService.showTooltip(this.gravity, this.description, this.elementRef);
+    this.tooltipService.showTooltip(this.gravity, this.description, this.elementRef, this.offset);
   }
   @HostListener('mouseleave') onMouseLeave() {
     this.tooltipService.hideTooltip();
