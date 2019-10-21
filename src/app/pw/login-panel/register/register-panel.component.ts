@@ -38,7 +38,21 @@ export class RegisterPanelComponent implements OnInit {
   get isValid(): boolean {
     return !this.submitted || this.form.valid;
   }
+  get isLoginInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('login').invalid;
+  }
+  get isPasswordInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('passwordGroup').get('password').invalid;
+  }
+  get isRePasswordInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('passwordGroup').hasError('differentPasswords');
+  }
+  get isCreationCodeInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('creationCode').invalid;
+  }
+
   onSubmit() {
+    console.log(this.form);
     const fakeService = of('emitted register').pipe(delay(2500));
     this.submitted = true;
     if (this.form.invalid) { return; }

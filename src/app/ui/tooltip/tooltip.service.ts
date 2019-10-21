@@ -42,7 +42,7 @@ export class TooltipService {
 
     let x;
     let y;
-    const tooltipArrowSize = 15; /// $tooltipArrowSize variable from css
+    const tooltipArrowSize = 11; /// $tooltipArrowSize variable from css
 
     switch (gravity) {
       case Gravity.NORTH: {

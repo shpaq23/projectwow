@@ -31,6 +31,9 @@ input.pw-input {
   text-align: center;
   width: 100%;
   max-width: 240px;
+  &.invalid {
+    border-color: $redError;
+  }
   &:disabled {
     @include cursorNotAllowed;
     background-color: $inputDisabledBackgroundColor;

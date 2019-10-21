@@ -6,9 +6,11 @@
   align-items: center;
   background-color: $tooltipBackgroundColor;
   border-radius: $borderRadius;
-  max-width: 240px;
+  max-width: 160px;
   min-height: 26px;
   color: $inputTextColor;
+  text-align: center;
+  font-size: $tooltipFontSize;
   .pw-tooltip-arrow {
     position: absolute;
     &.north {

@@ -28,6 +28,12 @@ export class LoginPanelComponent implements OnInit {
   get isValid(): boolean {
     return !this.submitted || this.form.valid;
   }
+  get isLoginInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('login').invalid;
+  }
+  get isPasswordInvalid(): boolean {
+    return !this.loading && this.submitted && this.form.get('password').invalid;
+  }
 
   onSubmit() {
     const fakeService = of('emitted login').pipe(delay(2500));
