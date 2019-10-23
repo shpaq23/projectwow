@@ -6,7 +6,11 @@ import { LoginPanelComponent } from './login/login-panel.component';
 import { UiModule } from '../../ui/ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterPanelComponent } from './register/register-panel.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from '../../store/reducers/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffect } from '../../store/effects/user.effect';
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     LoginPanelRoutingModule,
     UiModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    StoreModule.forFeature('loggedUser', userReducer),
+    EffectsModule.forFeature([UserEffect])
   ]
 })
 export class LoginPanelModule { }

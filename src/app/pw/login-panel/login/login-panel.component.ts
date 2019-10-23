@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { FaIcon } from '../../../ui/fa-icon.enum';
+import {select, Store} from '@ngrx/store';
+import {UserState} from '../../../store/state/user.state';
+import {getLoading} from '../../../store/selectors/user.selector';
+import {LoginUser} from '../../../store/actions/user.action';
+
+export interface LoginForm {
+  login: string;
+  password: string;
+}
 
 @Component({
   selector: 'pw-login-panel',
@@ -10,15 +17,16 @@ import { FaIcon } from '../../../ui/fa-icon.enum';
   styleUrls: ['./login-panel.component.scss']
 })
 export class LoginPanelComponent implements OnInit {
-
+  // TODO: error must be displayed in absolute div
   form: FormGroup;
-  loading = false;
+  loading: boolean;
   submitted = false;
   faIcon = FaIcon;
 
-  constructor() { }
+  constructor(private userStore: Store<UserState>) { }
 
   ngOnInit() {
+    this.userStore.pipe(select(getLoading)).subscribe(loading => this.loading = loading);
     this.form = new FormGroup({
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
@@ -34,19 +42,15 @@ export class LoginPanelComponent implements OnInit {
   get isPasswordInvalid(): boolean {
     return !this.loading && this.submitted && this.form.get('password').invalid;
   }
+  get formValue(): LoginForm {
+    return this.form.value;
+  }
 
   onSubmit() {
-    const fakeService = of('emitted login').pipe(delay(2500));
     this.submitted = true;
-    if (this.form.invalid) { return; }
-    this.loading = true;
     this.form.disable();
-    fakeService
-      .subscribe(data => {
-      console.log(data);
-      this.loading = false;
-      this.form.enable();
-    });
+    if (this.form.invalid) { return; }
+    this.userStore.dispatch(new LoginUser(this.formValue));
   }
 
 }

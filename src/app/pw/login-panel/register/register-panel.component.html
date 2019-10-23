@@ -2,6 +2,7 @@
   <span *ngIf="form.get('login').hasError('required')">Login is required</span>
   <span *ngIf="form.get('login').hasError('email')">Invalid Login</span>
   <span *ngIf="form.get('passwordGroup').get('password').hasError('required')">Password is required</span>
+  <span *ngIf="form.get('passwordGroup').get('password').hasError('strongPassword')">Password is too weak</span>
   <span *ngIf="form.get('passwordGroup').hasError('differentPasswords')">Passwords do not match</span>
   <span *ngIf="form.get('creationCode').hasError('required')">Creation Code is required</span>
 </div>

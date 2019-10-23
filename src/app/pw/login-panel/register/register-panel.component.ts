@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {of} from 'rxjs';
-import {delay} from 'rxjs/operators';
-import {FaIcon} from '../../../ui/fa-icon.enum';
-import {Gravity} from '../../../ui/gravity.enum';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FaIcon } from '../../../ui/fa-icon.enum';
+import { Gravity } from '../../../ui/gravity.enum';
+import { AuthService } from '../../../api/services/auth.service';
+
+export interface RegisterForm {
+  login: string;
+  password: string;
+  creationCode: string;
+}
 
 @Component({
   selector: 'pw-register-panel',
@@ -12,18 +17,21 @@ import {Gravity} from '../../../ui/gravity.enum';
 })
 export class RegisterPanelComponent implements OnInit {
 
+  // TODO: onSuccess & onFailure displays & errors in absolute div
   form: FormGroup;
   loading = false;
   submitted = false;
   faIcon = FaIcon;
   gravity = Gravity;
-  constructor() { }
+  success = false;
+  error = false;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       passwordGroup: new FormGroup({
-        password: new FormControl('', {validators: [Validators.required]}),
+        password: new FormControl('', {validators: [Validators.required, this.strongPasswordValidator]}),
         repassword: new FormControl('', {validators: [Validators.required]}),
       }, {validators: [this.passwordValidator]}),
       creationCode: new FormControl('', {validators: [Validators.required]})
@@ -35,6 +43,15 @@ export class RegisterPanelComponent implements OnInit {
       {differentPasswords: true} :
       null;
   }
+  strongPasswordValidator(formControl: FormControl) {
+    const hasNumber = /\d/.test(formControl.value);
+    const hasUpper = /[A-Z]/.test(formControl.value);
+    const hasLower = /[a-z]/.test(formControl.value);
+    const valid = hasNumber && hasUpper && hasLower && formControl.value.length > 8;
+    if (!valid) { return { strongPassword: true }; }
+    return null;
+  }
+
   get isValid(): boolean {
     return !this.submitted || this.form.valid;
   }
@@ -50,19 +67,39 @@ export class RegisterPanelComponent implements OnInit {
   get isCreationCodeInvalid(): boolean {
     return !this.loading && this.submitted && this.form.get('creationCode').invalid;
   }
-
+  get formValue(): RegisterForm {
+    return {
+      login: this.form.get('login').value,
+      password: this.form.get('passwordGroup').get('password').value,
+      creationCode: this.form.get('creationCode').value
+    };
+  }
+  private onSuccess() {
+    this.loading = false;
+    this.success = true;
+    this.form.reset();
+    this.form.enable();
+    this.submitted = false;
+  }
+  private onFailure(err: any) {
+    this.loading = false;
+    this.error = err;
+    this.form.enable();
+  }
   onSubmit() {
-    console.log(this.form);
-    const fakeService = of('emitted register').pipe(delay(2500));
     this.submitted = true;
     if (this.form.invalid) { return; }
     this.loading = true;
     this.form.disable();
-    fakeService
-      .subscribe(data => {
-        console.log(data);
-        this.loading = false;
-        this.form.enable();
+    this.authService.register(this.formValue)
+      .subscribe({
+        next: data => {
+          this.onSuccess();
+          console.log(data);
+        },
+        error: err => {
+         this.onFailure(err);
+        }
       });
   }
 
