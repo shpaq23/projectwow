@@ -11,6 +11,10 @@
   color: $redError;
   text-shadow: 1px -1px $textShadowColor;
 }
+@mixin fontSuccess {
+  color: $greenSuccess;
+  text-shadow: 1px -1px $textShadowColor;
+}
 @mixin cursorNotAllowed {
   cursor: not-allowed;
 }
@@ -18,4 +22,9 @@
   cursor: pointer;
 }
 
-
+@mixin absoluteBlock($spanNumbers:1) {
+  position: absolute;
+  width: 100%;
+  min-height: #{$spanNumbers*20}px;
+  top: -#{$spanNumbers*20+15}px;
+}

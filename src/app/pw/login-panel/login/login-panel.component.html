@@ -1,7 +1,8 @@
-<div *ngIf="!loading && !isValid" class="errors pw-column-center-container pw-mb-5">
+<div *ngIf="(!loading && !isValid) || serverError" class="errors pw-column-center-container pw-bottom-vertical">
   <span *ngIf="form.get('login').hasError('required')">Login is required</span>
   <span *ngIf="form.get('login').hasError('email')">Invalid Login</span>
   <span *ngIf="form.get('password').hasError('required')">Password is required</span>
+  <span *ngIf="serverError">{{serverError}}</span>
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="pw-column-center-container pw-mb-5">

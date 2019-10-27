@@ -1,8 +1,10 @@
-@import "../../../../styles/mixins";
+@import "~src/styles/mixins";
 :host {
   width: 240px;
+  position: relative;
 }
 .errors {
+  @include absoluteBlock(2);
   span {
     @include fontError;
     font-weight: bold;

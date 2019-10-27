@@ -1,10 +1,14 @@
-<div *ngIf="!loading && !isValid" class="errors pw-column-center-container pw-mb-5">
+<div *ngIf="(!loading && !isValid) || serverError" class="errors pw-column-center-container pw-bottom-vertical">
   <span *ngIf="form.get('login').hasError('required')">Login is required</span>
   <span *ngIf="form.get('login').hasError('email')">Invalid Login</span>
   <span *ngIf="form.get('passwordGroup').get('password').hasError('required')">Password is required</span>
   <span *ngIf="form.get('passwordGroup').get('password').hasError('strongPassword')">Password is too weak</span>
   <span *ngIf="form.get('passwordGroup').hasError('differentPasswords')">Passwords do not match</span>
   <span *ngIf="form.get('creationCode').hasError('required')">Creation Code is required</span>
+  <span *ngIf="serverError">{{serverError}}</span>
+</div>
+<div *ngIf="success" class="success pw-column-center-container pw-center-vertical">
+  <span>Account Successfully Created</span>
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="pw-column-center-container pw-mb-5">
@@ -29,8 +33,8 @@
 
     <input (keyup.enter)="!loading && isValid && onSubmit()" maxlength="8" [class.invalid]="isCreationCodeInvalid" class="pw-input" formControlName="creationCode" type="text" id="creationCode" autocomplete="off">
   </div>
-  <pw-button (click)="!loading && isValid && onSubmit()"
-             [disabled]="!isValid || loading"
+  <pw-button (click)="isSubmitButtonClickable && onSubmit()"
+             [disabled]="isSubmitButtonDisabled"
              [spinLeft]="loading"
              [spinRight]="loading"
              [faIconLeft]="loading && faIcon.cog"

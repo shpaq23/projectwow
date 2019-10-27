@@ -17,14 +17,13 @@ export interface RegisterForm {
 })
 export class RegisterPanelComponent implements OnInit {
 
-  // TODO: onSuccess & onFailure displays & errors in absolute div
   form: FormGroup;
   loading = false;
   submitted = false;
   faIcon = FaIcon;
   gravity = Gravity;
   success = false;
-  error = false;
+  serverError = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -74,21 +73,28 @@ export class RegisterPanelComponent implements OnInit {
       creationCode: this.form.get('creationCode').value
     };
   }
+  get isSubmitButtonDisabled(): boolean {
+    return !this.isValid || this.loading || this.success;
+  }
+  get isSubmitButtonClickable(): boolean {
+    return !this.loading && this.isValid && !this.success;
+  }
   private onSuccess() {
     this.loading = false;
     this.success = true;
-    this.form.reset();
-    this.form.enable();
+    // this.form.reset();
+    // this.form.enable();
     this.submitted = false;
   }
   private onFailure(err: any) {
     this.loading = false;
-    this.error = err;
+    this.serverError = err;
     this.form.enable();
   }
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) { return; }
+    this.serverError = false;
     this.loading = true;
     this.form.disable();
     this.authService.register(this.formValue)
