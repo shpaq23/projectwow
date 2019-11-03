@@ -7,6 +7,7 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
       return {
         ... state,
         character: action.payload,
+        loaded: true,
         error: ''
       };
     case CharacterActionsTypes.GetCharacterFail:

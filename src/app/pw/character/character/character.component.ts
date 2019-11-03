@@ -3,7 +3,7 @@ import { Character } from '../../../services/api/character.service';
 import { Store } from '@ngrx/store';
 import { CharacterState } from '../../../store/state/character.state';
 import { GetCharacter } from '../../../store/actions/character.action';
-import { getCharacter } from '../../../store/selectors/character.selector';
+import { getCharacter, getCharacterLoaded } from '../../../store/selectors/character.selector';
 
 @Component({
   selector: 'pw-character',
@@ -16,8 +16,11 @@ export class CharacterComponent implements OnInit {
   constructor(private characterStore: Store<CharacterState>) { }
 
   ngOnInit() {
-    this.characterStore.select(getCharacter)
-      .subscribe(character => this.character = character);
-    this.characterStore.dispatch(new GetCharacter());
+    this.characterStore.select(getCharacter).subscribe(character => this.character = character);
+    this.characterStore.select(getCharacterLoaded)
+      .subscribe(loaded => {
+        if (!loaded) {
+          this.characterStore.dispatch(new GetCharacter());
+    }});
   }
 }

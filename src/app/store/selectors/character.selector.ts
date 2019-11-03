@@ -11,4 +11,7 @@ export const getCharacterError = createSelector(
   getCharacterFeatureState,
   state => state.error
 );
-
+export const getCharacterLoaded = createSelector(
+  getCharacterFeatureState,
+  state => state.loaded
+);
