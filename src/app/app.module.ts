@@ -8,7 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {EffectsModule} from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
+import { CharacterModule } from './pw/character/character.module';
 
 @NgModule({
   declarations: [
@@ -17,16 +18,18 @@ import {EffectsModule} from '@ngrx/effects';
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       name: 'projectwow',
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([]),
     LoginPanelModule,
+    CharacterModule,
     AppRoutingModule,
     HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

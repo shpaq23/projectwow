@@ -1,6 +1,6 @@
-import {Component, Input } from '@angular/core';
-import {Gravity} from '../gravity.enum';
-import {FaIcon} from '../fa-icon.enum';
+import { Component, Input } from '@angular/core';
+import { Gravity } from '../gravity.enum';
+import { FaIcon } from '../fa-icon.enum';
 
 @Component({
   selector: 'pw-question-icon',

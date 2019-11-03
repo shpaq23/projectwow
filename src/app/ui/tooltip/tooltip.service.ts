@@ -6,16 +6,19 @@ import {
   EmbeddedViewRef,
   Injectable, Injector,
 } from '@angular/core';
-import {TooltipComponent} from './tooltip.component';
-import {Gravity} from '../gravity.enum';
+import { TooltipComponent } from './tooltip.component';
+import { Gravity } from '../gravity.enum';
 
 @Injectable()
 export class TooltipService {
 
   private tooltipComponentRef: ComponentRef<TooltipComponent>;
+
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private appRef: ApplicationRef,
-              private injector: Injector) { }
+              private injector: Injector) {
+  }
+
   showTooltip(gravity: Gravity, description: string, hostElementRef: ElementRef, offset: number) {
     this.tooltipComponentRef = this.componentFactoryResolver
       .resolveComponentFactory(TooltipComponent)
@@ -29,10 +32,12 @@ export class TooltipService {
     document.body.appendChild(domElem);
     this.setPosition(hostElementRef, gravity, domElem, offset);
   }
+
   hideTooltip() {
     this.appRef.detachView(this.tooltipComponentRef.hostView);
     this.tooltipComponentRef.destroy();
   }
+
   private setPosition(hostElementRef: ElementRef, gravity: Gravity, domElem: HTMLElement, offset: number) {
     const hostPos = hostElementRef.nativeElement.getBoundingClientRect();
     const tooltipPos = domElem.getBoundingClientRect();

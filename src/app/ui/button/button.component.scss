@@ -11,26 +11,33 @@
   border: 2px solid $buttonBorderColor;
   user-select: none;
   outline: none;
+
   &:active {
     background-color: $buttonActiveBackgroundColor;
   }
+
   &:hover {
     @include cursorPointer;
   }
+
   &.disabled, &.loading {
     background-color: $buttonActiveBackgroundColor;
     @include cursorNotAllowed
   }
+
   &.pw-btn-font {
     @include fontYellow;
     font-weight: normal;
   }
+
   fa-icon {
     position: absolute;
+
     &.fa-left {
       align-self: flex-start;
     }
-    &.fa-right{
+
+    &.fa-right {
       align-self: flex-end;
     }
   }

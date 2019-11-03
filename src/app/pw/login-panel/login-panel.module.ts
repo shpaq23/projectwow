@@ -15,9 +15,6 @@ import { UserEffect } from '../../store/effects/user.effect';
 
 @NgModule({
   declarations: [LoginPanelComponent, RegisterPanelComponent],
-  exports: [
-    LoginPanelComponent
-  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -28,4 +25,5 @@ import { UserEffect } from '../../store/effects/user.effect';
     EffectsModule.forFeature([UserEffect])
   ]
 })
-export class LoginPanelModule { }
+export class LoginPanelModule {
+}

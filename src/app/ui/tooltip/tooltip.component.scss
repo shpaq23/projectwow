@@ -11,8 +11,10 @@
   color: $inputTextColor;
   text-align: center;
   font-size: $tooltipFontSize;
+
   .pw-tooltip-arrow {
     position: absolute;
+
     &.north {
       bottom: -$tooltipArrowSize;
       left: calc(50% - #{$tooltipArrowSize});
@@ -20,6 +22,7 @@
       border-right: $tooltipArrowSize solid transparent;
       border-top: $tooltipArrowSize solid $tooltipBackgroundColor;
     }
+
     &.south {
       top: -$tooltipArrowSize;
       left: calc(50% - #{$tooltipArrowSize});
@@ -27,6 +30,7 @@
       border-right: $tooltipArrowSize solid transparent;
       border-bottom: $tooltipArrowSize solid $tooltipBackgroundColor;
     }
+
     &.east {
       left: -$tooltipArrowSize;
       top: calc(50% - #{$tooltipArrowSize});
@@ -34,6 +38,7 @@
       border-bottom: $tooltipArrowSize solid transparent;
       border-right: $tooltipArrowSize solid $tooltipBackgroundColor;
     }
+
     &.west {
       right: -$tooltipArrowSize;
       top: calc(50% - #{$tooltipArrowSize});

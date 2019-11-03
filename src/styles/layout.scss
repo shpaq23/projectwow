@@ -4,163 +4,424 @@
   display: flex;
   align-items: center;
 }
+
 .pw-center-vertical {
   display: flex;
   justify-content: center;
 }
+
 .pw-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .pw-column-center-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .pw-bottom-vertical {
   display: flex;
   justify-content: flex-end;
 }
+
 $spaces: 1px 2px 4px 8px 12px 16px 24px 32px;
 
 
 @each $space in $spaces {
   @if $space == 1px {
-    .pw-mt-1 { margin-top: $space; }
-    .pw-mb-1 { margin-bottom: $space; }
-    .pw-ml-1 { margin-left: $space; }
-    .pw-mr-1 { margin-right: $space; }
-    .pw-mx-1 { margin-left: $space; margin-right: $space; }
-    .pw-my-1 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-1 { margin: $space; }
+    .pw-mt-1 {
+      margin-top: $space;
+    }
+    .pw-mb-1 {
+      margin-bottom: $space;
+    }
+    .pw-ml-1 {
+      margin-left: $space;
+    }
+    .pw-mr-1 {
+      margin-right: $space;
+    }
+    .pw-mx-1 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-1 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-1 {
+      margin: $space;
+    }
 
-    .pw-pt-1 { padding-top: $space; }
-    .pw-pb-1 { padding-bottom: $space; }
-    .pw-pl-1 { padding-left: $space; }
-    .pw-pr-1 { padding-right: $space; }
-    .pw-px-1 { padding-left: $space; margin-right: $space; }
-    .pw-py-1 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-1 { padding: $space; }
+    .pw-pt-1 {
+      padding-top: $space;
+    }
+    .pw-pb-1 {
+      padding-bottom: $space;
+    }
+    .pw-pl-1 {
+      padding-left: $space;
+    }
+    .pw-pr-1 {
+      padding-right: $space;
+    }
+    .pw-px-1 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-1 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-1 {
+      padding: $space;
+    }
   }
   @if $space == 2px {
-    .pw-mt-2 { margin-top: $space; }
-    .pw-mb-2 { margin-bottom: $space; }
-    .pw-ml-2 { margin-left: $space; }
-    .pw-mr-2 { margin-right: $space; }
-    .pw-mx-2 { margin-left: $space; margin-right: $space; }
-    .pw-my-2 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-2 { margin: $space; }
+    .pw-mt-2 {
+      margin-top: $space;
+    }
+    .pw-mb-2 {
+      margin-bottom: $space;
+    }
+    .pw-ml-2 {
+      margin-left: $space;
+    }
+    .pw-mr-2 {
+      margin-right: $space;
+    }
+    .pw-mx-2 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-2 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-2 {
+      margin: $space;
+    }
 
-    .pw-pt-2 { padding-top: $space; }
-    .pw-pb-2 { padding-bottom: $space; }
-    .pw-pl-2 { padding-left: $space; }
-    .pw-pr-2 { padding-right: $space; }
-    .pw-px-2 { padding-left: $space; margin-right: $space; }
-    .pw-py-2 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-2 { padding: $space; }
+    .pw-pt-2 {
+      padding-top: $space;
+    }
+    .pw-pb-2 {
+      padding-bottom: $space;
+    }
+    .pw-pl-2 {
+      padding-left: $space;
+    }
+    .pw-pr-2 {
+      padding-right: $space;
+    }
+    .pw-px-2 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-2 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-2 {
+      padding: $space;
+    }
   }
   @if $space == 4px {
-    .pw-mt-3 { margin-top: $space; }
-    .pw-mb-3 { margin-bottom: $space; }
-    .pw-ml-3 { margin-left: $space; }
-    .pw-mr-3 { margin-right: $space; }
-    .pw-mx-3 { margin-left: $space; margin-right: $space; }
-    .pw-my-3 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-3 { margin: $space; }
+    .pw-mt-3 {
+      margin-top: $space;
+    }
+    .pw-mb-3 {
+      margin-bottom: $space;
+    }
+    .pw-ml-3 {
+      margin-left: $space;
+    }
+    .pw-mr-3 {
+      margin-right: $space;
+    }
+    .pw-mx-3 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-3 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-3 {
+      margin: $space;
+    }
 
-    .pw-pt-3 { padding-top: $space; }
-    .pw-pb-3 { padding-bottom: $space; }
-    .pw-pl-3 { padding-left: $space; }
-    .pw-pr-3 { padding-right: $space; }
-    .pw-px-3 { padding-left: $space; margin-right: $space; }
-    .pw-py-3 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-3 { padding: $space; }
+    .pw-pt-3 {
+      padding-top: $space;
+    }
+    .pw-pb-3 {
+      padding-bottom: $space;
+    }
+    .pw-pl-3 {
+      padding-left: $space;
+    }
+    .pw-pr-3 {
+      padding-right: $space;
+    }
+    .pw-px-3 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-3 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-3 {
+      padding: $space;
+    }
   }
   @if $space == 8px {
-    .pw-mt-4 { margin-top: $space; }
-    .pw-mb-4 { margin-bottom: $space; }
-    .pw-ml-4 { margin-left: $space; }
-    .pw-mr-4 { margin-right: $space; }
-    .pw-mx-4 { margin-left: $space; margin-right: $space; }
-    .pw-my-4 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-4 { margin: $space; }
+    .pw-mt-4 {
+      margin-top: $space;
+    }
+    .pw-mb-4 {
+      margin-bottom: $space;
+    }
+    .pw-ml-4 {
+      margin-left: $space;
+    }
+    .pw-mr-4 {
+      margin-right: $space;
+    }
+    .pw-mx-4 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-4 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-4 {
+      margin: $space;
+    }
 
-    .pw-pt-4 { padding-top: $space; }
-    .pw-pb-4 { padding-bottom: $space; }
-    .pw-pl-4 { padding-left: $space; }
-    .pw-pr-4 { padding-right: $space; }
-    .pw-px-4 { padding-left: $space; margin-right: $space; }
-    .pw-py-4 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-4 { padding: $space; }
+    .pw-pt-4 {
+      padding-top: $space;
+    }
+    .pw-pb-4 {
+      padding-bottom: $space;
+    }
+    .pw-pl-4 {
+      padding-left: $space;
+    }
+    .pw-pr-4 {
+      padding-right: $space;
+    }
+    .pw-px-4 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-4 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-4 {
+      padding: $space;
+    }
   }
   @if $space == 12px {
-    .pw-mt-5 { margin-top: $space; }
-    .pw-mb-5 { margin-bottom: $space; }
-    .pw-ml-5 { margin-left: $space; }
-    .pw-mr-5 { margin-right: $space; }
-    .pw-mx-5 { margin-left: $space; margin-right: $space; }
-    .pw-my-5 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-5 { margin: $space; }
+    .pw-mt-5 {
+      margin-top: $space;
+    }
+    .pw-mb-5 {
+      margin-bottom: $space;
+    }
+    .pw-ml-5 {
+      margin-left: $space;
+    }
+    .pw-mr-5 {
+      margin-right: $space;
+    }
+    .pw-mx-5 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-5 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-5 {
+      margin: $space;
+    }
 
-    .pw-pt-5 { padding-top: $space; }
-    .pw-pb-5 { padding-bottom: $space; }
-    .pw-pl-5 { padding-left: $space; }
-    .pw-pr-5 { padding-right: $space; }
-    .pw-px-5 { padding-left: $space; margin-right: $space; }
-    .pw-py-5 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-5 { padding: $space; }
+    .pw-pt-5 {
+      padding-top: $space;
+    }
+    .pw-pb-5 {
+      padding-bottom: $space;
+    }
+    .pw-pl-5 {
+      padding-left: $space;
+    }
+    .pw-pr-5 {
+      padding-right: $space;
+    }
+    .pw-px-5 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-5 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-5 {
+      padding: $space;
+    }
   }
   @if $space == 16px {
-    .pw-mt-6 { margin-top: $space; }
-    .pw-mb-6 { margin-bottom: $space; }
-    .pw-ml-6 { margin-left: $space; }
-    .pw-mr-6 { margin-right: $space; }
-    .pw-mx-6 { margin-left: $space; margin-right: $space; }
-    .pw-my-6 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-6 { margin: $space; }
+    .pw-mt-6 {
+      margin-top: $space;
+    }
+    .pw-mb-6 {
+      margin-bottom: $space;
+    }
+    .pw-ml-6 {
+      margin-left: $space;
+    }
+    .pw-mr-6 {
+      margin-right: $space;
+    }
+    .pw-mx-6 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-6 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-6 {
+      margin: $space;
+    }
 
-    .pw-pt-6 { padding-top: $space; }
-    .pw-pb-6 { padding-bottom: $space; }
-    .pw-pl-6 { padding-left: $space; }
-    .pw-pr-6 { padding-right: $space; }
-    .pw-px-6 { padding-left: $space; margin-right: $space; }
-    .pw-py-6 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-6 { padding: $space; }
+    .pw-pt-6 {
+      padding-top: $space;
+    }
+    .pw-pb-6 {
+      padding-bottom: $space;
+    }
+    .pw-pl-6 {
+      padding-left: $space;
+    }
+    .pw-pr-6 {
+      padding-right: $space;
+    }
+    .pw-px-6 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-6 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-6 {
+      padding: $space;
+    }
   }
   @if $space == 24px {
-    .pw-mt-7 { margin-top: $space; }
-    .pw-mb-7 { margin-bottom: $space; }
-    .pw-ml-7 { margin-left: $space; }
-    .pw-mr-7 { margin-right: $space; }
-    .pw-mx-7 { margin-left: $space; margin-right: $space; }
-    .pw-my-7 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-7 { margin: $space; }
+    .pw-mt-7 {
+      margin-top: $space;
+    }
+    .pw-mb-7 {
+      margin-bottom: $space;
+    }
+    .pw-ml-7 {
+      margin-left: $space;
+    }
+    .pw-mr-7 {
+      margin-right: $space;
+    }
+    .pw-mx-7 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-7 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-7 {
+      margin: $space;
+    }
 
-    .pw-pt-7 { padding-top: $space; }
-    .pw-pb-7 { padding-bottom: $space; }
-    .pw-pl-7 { padding-left: $space; }
-    .pw-pr-7 { padding-right: $space; }
-    .pw-px-7 { padding-left: $space; margin-right: $space; }
-    .pw-py-7 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-7 { padding: $space; }
+    .pw-pt-7 {
+      padding-top: $space;
+    }
+    .pw-pb-7 {
+      padding-bottom: $space;
+    }
+    .pw-pl-7 {
+      padding-left: $space;
+    }
+    .pw-pr-7 {
+      padding-right: $space;
+    }
+    .pw-px-7 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-7 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-7 {
+      padding: $space;
+    }
   }
   @if $space == 32px {
-    .pw-mt-8 { margin-top: $space; }
-    .pw-mb-8 { margin-bottom: $space; }
-    .pw-ml-8 { margin-left: $space; }
-    .pw-mr-8 { margin-right: $space; }
-    .pw-mx-8 { margin-left: $space; margin-right: $space; }
-    .pw-my-8 { margin-top: $space; margin-bottom: $space; }
-    .pw-m-8 { margin: $space; }
+    .pw-mt-8 {
+      margin-top: $space;
+    }
+    .pw-mb-8 {
+      margin-bottom: $space;
+    }
+    .pw-ml-8 {
+      margin-left: $space;
+    }
+    .pw-mr-8 {
+      margin-right: $space;
+    }
+    .pw-mx-8 {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    .pw-my-8 {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-m-8 {
+      margin: $space;
+    }
 
-    .pw-pt-8 { padding-top: $space; }
-    .pw-pb-8 { padding-bottom: $space; }
-    .pw-pl-8 { padding-left: $space; }
-    .pw-pr-8 { padding-right: $space; }
-    .pw-px-8 { padding-left: $space; margin-right: $space; }
-    .pw-py-8 { padding-top: $space; margin-bottom: $space; }
-    .pw-p-8 { padding: $space; }
+    .pw-pt-8 {
+      padding-top: $space;
+    }
+    .pw-pb-8 {
+      padding-bottom: $space;
+    }
+    .pw-pl-8 {
+      padding-left: $space;
+    }
+    .pw-pr-8 {
+      padding-right: $space;
+    }
+    .pw-px-8 {
+      padding-left: $space;
+      margin-right: $space;
+    }
+    .pw-py-8 {
+      padding-top: $space;
+      margin-bottom: $space;
+    }
+    .pw-p-8 {
+      padding: $space;
+    }
   }
 }
 

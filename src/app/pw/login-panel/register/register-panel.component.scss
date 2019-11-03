@@ -4,15 +4,19 @@
   position: relative;
   width: 240px;
 }
+
 .errors {
   @include absoluteBlock(5);
+
   span {
     @include fontError;
     font-weight: bold;
   }
 }
+
 .success {
   @include absoluteBlock(1);
+
   span {
     @include fontSuccess;
     font-weight: bold;

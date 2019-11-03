@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({

@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPanelComponent } from './login/login-panel.component';
 import { RegisterPanelComponent } from './register/register-panel.component';
+import { LoginGuard } from '../../guards/login.guard';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginPanelComponent },
-  { path: 'register', component: RegisterPanelComponent }
+  {path: 'login', component: LoginPanelComponent, canActivate: [LoginGuard]},
+  {path: 'register', component: RegisterPanelComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LoginPanelRoutingModule { }
+export class LoginPanelRoutingModule {
+}

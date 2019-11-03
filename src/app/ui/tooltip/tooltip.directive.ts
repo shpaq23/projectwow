@@ -5,8 +5,8 @@ import {
   Input,
   ViewContainerRef
 } from '@angular/core';
-import {Gravity} from '../gravity.enum';
-import {TooltipService} from './tooltip.service';
+import { Gravity } from '../gravity.enum';
+import { TooltipService } from './tooltip.service';
 
 @Directive({
   selector: '[pwTooltip]',
@@ -15,7 +15,9 @@ export class TooltipDirective {
 
   constructor(private elementRef: ElementRef,
               private viewContainer: ViewContainerRef,
-              private tooltipService: TooltipService) { }
+              private tooltipService: TooltipService) {
+  }
+
   @Input() gravity: Gravity = Gravity.NORTH;
   @Input() description: string;
   @Input() offset = 5;
@@ -23,6 +25,7 @@ export class TooltipDirective {
   @HostListener('mouseenter') onMouseEnter() {
     this.tooltipService.showTooltip(this.gravity, this.description, this.elementRef, this.offset);
   }
+
   @HostListener('mouseleave') onMouseLeave() {
     this.tooltipService.hideTooltip();
   }

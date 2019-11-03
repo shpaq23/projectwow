@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from '../../api/services/auth.service';
-import {Actions, Effect, ofType} from '@ngrx/effects';
-import {Observable, of} from 'rxjs';
-import {Action, Store} from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { AuthService } from '../../services/api/auth.service';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Observable, of } from 'rxjs';
+import { Action, Store } from '@ngrx/store';
 import {
   LoginUser,
   LoginUserFail,
   LoginUserSuccess, LogoutUserSuccess, StartLoadingUser, StopLoadingUser,
   UserActionsTypes
 } from '../actions/user.action';
-import {catchError, map, mergeMap, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {UserState} from '../state/user.state';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { UserState } from '../state/user.state';
 
 @Injectable()
 export class UserEffect {
@@ -19,7 +19,7 @@ export class UserEffect {
   constructor(private authService: AuthService,
               private actions$: Actions,
               private router: Router,
-              private store: Store<UserState>) {}
+              private store: Store<UserState>) { }
 
   @Effect()
   loginUser: Observable<Action> = this.actions$.pipe(
@@ -52,7 +52,7 @@ export class UserEffect {
   @Effect({dispatch: false})
   redirectAfterLogin$ = this.actions$.pipe(
     ofType(UserActionsTypes.LoginUserSuccess),
-    tap(() => this.router.navigate(['/register']))
+    tap(() => this.router.navigate(['/character']))
   );
 
 }

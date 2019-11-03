@@ -3,21 +3,26 @@
 @mixin wowFont {
   font-family: wowfont, serif;
 }
+
 @mixin fontYellow {
   color: $yellow;
   text-shadow: 1px -1px $textShadowColor;
 }
+
 @mixin fontError {
   color: $redError;
   text-shadow: 1px -1px $textShadowColor;
 }
+
 @mixin fontSuccess {
   color: $greenSuccess;
   text-shadow: 1px -1px $textShadowColor;
 }
+
 @mixin cursorNotAllowed {
   cursor: not-allowed;
 }
+
 @mixin cursorPointer {
   cursor: pointer;
 }

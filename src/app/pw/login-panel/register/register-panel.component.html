@@ -13,16 +13,19 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="pw-column-center-container pw-mb-5">
     <label class="pw-label pw-mb-1" for="login">Login</label>
-    <input placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" [class.invalid]="isLoginInvalid" class="pw-input" formControlName="login" type="email" id="login" autocomplete="off">
+    <input placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" [class.invalid]="isLoginInvalid" class="pw-input"
+           formControlName="login" type="email" id="login" autocomplete="off">
   </div>
   <div formGroupName="passwordGroup">
     <div class="pw-column-center-container  pw-mb-5">
       <label class="pw-label pw-mb-1" for="password">Password</label>
-      <input (keyup.enter)="!loading && isValid && onSubmit()" [class.invalid]="isPasswordInvalid" class="pw-input" formControlName="password" type="password" id="password" autocomplete="off">
+      <input (keyup.enter)="!loading && isValid && onSubmit()" [class.invalid]="isPasswordInvalid" class="pw-input"
+             formControlName="password" type="password" id="password" autocomplete="off">
     </div>
     <div class="pw-column-center-container  pw-mb-5">
       <label class="pw-label pw-mb-1" for="repassword">Re-Password</label>
-      <input (keyup.enter)="!loading && isValid && onSubmit()" class="pw-input" [class.invalid]="isRePasswordInvalid" formControlName="repassword" type="password" id="repassword" autocomplete="off">
+      <input (keyup.enter)="!loading && isValid && onSubmit()" class="pw-input" [class.invalid]="isRePasswordInvalid"
+             formControlName="repassword" type="password" id="repassword" autocomplete="off">
     </div>
   </div>
   <div class="pw-column-center-container  pw-mb-5">
@@ -31,14 +34,17 @@
       <pw-info-icon description="Contact the administrator for more information"></pw-info-icon>
     </label>
 
-    <input (keyup.enter)="!loading && isValid && onSubmit()" maxlength="8" [class.invalid]="isCreationCodeInvalid" class="pw-input" formControlName="creationCode" type="text" id="creationCode" autocomplete="off">
+    <input (keyup.enter)="!loading && isValid && onSubmit()" maxlength="8" [class.invalid]="isCreationCodeInvalid"
+           class="pw-input" formControlName="creationCode" type="text" id="creationCode" autocomplete="off">
   </div>
   <pw-button (click)="isSubmitButtonClickable && onSubmit()"
              [disabled]="isSubmitButtonDisabled"
              [spinLeft]="loading"
              [spinRight]="loading"
              [faIconLeft]="loading && faIcon.cog"
-             [faIconRight]="loading &&  faIcon.cog">Register</pw-button>
+             [faIconRight]="loading &&  faIcon.cog">Register
+  </pw-button>
 
-  <pw-button class="pw-mt-2" routerLink="/login" [faIconLeft]="faIcon.leftArrow" [disabled]="loading">Go to Login</pw-button>
+  <pw-button class="pw-mt-2" routerLink="/login" [faIconLeft]="faIcon.leftArrow" [disabled]="loading">Go to Login
+  </pw-button>
 </form>

@@ -1,33 +1,33 @@
-import {initUserState, UserState} from '../state/user.state';
-import {UserActions, UserActionsTypes} from '../actions/user.action';
+import { initUserState, UserState } from '../state/user.state';
+import { UserActions, UserActionsTypes } from '../actions/user.action';
 
 export function userReducer(state = initUserState, action: UserActions): UserState {
   switch (action.type) {
     case UserActionsTypes.LoginUserSuccess:
       return {
-        ... state,
+        ...state,
         user: action.payload,
         error: ''
       };
     case UserActionsTypes.LoginUserFail:
-      return  {
-        ... state,
+      return {
+        ...state,
         error: action.payload
       };
     case UserActionsTypes.LogoutUserSuccess:
       return {
-        ... state,
+        ...state,
         user: null,
         error: ''
       };
     case UserActionsTypes.StartLoadingUser:
       return {
-        ... state,
+        ...state,
         loading: true
       };
     case UserActionsTypes.StopLoadingUser:
       return {
-        ... state,
+        ...state,
         loading: false
       };
     default:

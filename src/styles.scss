@@ -1,6 +1,7 @@
 @import "styles/mixins";
 @import "styles/variables";
 @import "styles/layout";
+
 body {
   @include wowFont;
   height: 100vh;
@@ -19,6 +20,7 @@ label.pw-label {
   @include fontYellow;
   font-weight: bold;
 }
+
 input.pw-input {
   border-radius: 8px;
   border: 1px solid $inputBorderColor;
@@ -31,17 +33,21 @@ input.pw-input {
   text-align: center;
   width: 100%;
   max-width: 240px;
+
   &.invalid {
     border-color: $redError;
   }
+
   &:disabled {
     @include cursorNotAllowed;
     background-color: $inputDisabledBackgroundColor;
   }
+
   &::placeholder {
     color: $inputPlaceholderColor;
   }
 }
+
 @font-face {
   font-family: wowfont;
   src: url('/assets/wowfont.ttf');

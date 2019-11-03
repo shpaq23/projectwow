@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { Gravity } from '../gravity.enum';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'pw-tooltip',
