@@ -5,15 +5,10 @@
   width: 1366px;
   height: 766px;
   margin: auto;
+  position: relative;
 
   border: $borderWeight solid $borderYellow;
   border-radius: $borderRadius;
   box-shadow: $borderBoxShadow;
   background-color: $appBackgroundColor;
-}
-.loader {
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  background-color: crimson;
 }

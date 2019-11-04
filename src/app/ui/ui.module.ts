@@ -11,6 +11,7 @@ import { TooltipService } from './tooltip/tooltip.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionIconComponent } from './question-icon/question-icon.component';
 import { InfoIconComponent } from './info-icon/info-icon.component';
+import { GlobalLoaderComponent } from './global-loader/global-loader.component';
 
 const declarations = [
   ButtonComponent,
@@ -18,7 +19,8 @@ const declarations = [
   TooltipDirective,
   TooltipComponent,
   QuestionIconComponent,
-  InfoIconComponent
+  InfoIconComponent,
+  GlobalLoaderComponent
 ];
 
 @NgModule({

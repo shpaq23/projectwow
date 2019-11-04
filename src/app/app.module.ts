@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { CharacterModule } from './pw/character/character.module';
+import { UiModule } from './ui/ui.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CharacterModule } from './pw/character/character.module';
     CharacterModule,
     AppRoutingModule,
     HttpClientModule,
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
