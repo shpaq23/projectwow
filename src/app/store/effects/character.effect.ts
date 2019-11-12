@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CharacterService } from '../../services/api/character.service';
+import { Character, CharacterService, NewCharacterRace } from '../../services/api/character.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -16,13 +16,29 @@ export class CharacterEffect {
   @Effect()
   getCharacter: Observable<Action> = this.actions$.pipe(
     ofType(CharacterActionsTypes.GetCharacter),
-    map((action: GetCharacter) => action.forNewCharacter),
+    map((action: GetCharacter) => action.forNewCharacter), // TODO: REMOVE 'forNewCharacter' parameter from payload
     mergeMap((forNewCharacter) => this.characterService.getCharacter().pipe(
       map(character => {
-        if (!character && !forNewCharacter) { this.router.navigate(['/character/new']); }
-        if (character && forNewCharacter) { this.router.navigate(['/character']); }
-        return new GetCharacterSuccess(character);
+        if (this.isCharacterResponse(character)) {
+          this.router.navigate(['/character']);
+          console.log('characterResponseEffect');
+          return new GetCharacterSuccess(character);
+        }
+        if (this.isNewCharacterResponse(character)) {
+          this.router.navigate(['/character/new']);
+          console.log('newCharacterResponseEffect: ', character);
+          console.log('TODO STORE FOR NEW CHARACTER');
+          return new GetCharacterSuccess(null);
+        }
       }),
       catchError(err => of(new GetCharacterFail(err)))
     )));
+
+  private isCharacterResponse(character: any): character is Character {
+    return 'nickname' in character;
+  }
+
+  private isNewCharacterResponse(character: any): character is NewCharacterRace[] {
+    return Array.isArray(character) && 'race' in character[0];
+  }
 }

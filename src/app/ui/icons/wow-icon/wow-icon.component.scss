@@ -1,0 +1,13 @@
+@import "~src/styles/mixins";
+
+:host {
+  width: 64px;
+  height: 64px;
+  &.disabled {
+    @include cursorNotAllowed;
+    filter: saturate(0);
+  }
+  &.faded {
+    filter: saturate(0);
+  }
+}

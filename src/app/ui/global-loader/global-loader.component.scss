@@ -35,6 +35,7 @@
         ::ng-deep {
           .fa-spin {
             animation: fa-spin 3s infinite linear;
+            animation-direction: reverse;
           }
         }
       }

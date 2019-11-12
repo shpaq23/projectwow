@@ -9,9 +9,10 @@ import { TooltipDirective } from './tooltip/tooltip.directive';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipService } from './tooltip/tooltip.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { QuestionIconComponent } from './question-icon/question-icon.component';
-import { InfoIconComponent } from './info-icon/info-icon.component';
+import { QuestionIconComponent } from './icons/question-icon/question-icon.component';
+import { InfoIconComponent } from './icons/info-icon/info-icon.component';
 import { GlobalLoaderComponent } from './global-loader/global-loader.component';
+import { WowIconComponent } from './icons/wow-icon/wow-icon.component';
 
 const declarations = [
   ButtonComponent,
@@ -20,7 +21,8 @@ const declarations = [
   TooltipComponent,
   QuestionIconComponent,
   InfoIconComponent,
-  GlobalLoaderComponent
+  GlobalLoaderComponent,
+  WowIconComponent
 ];
 
 @NgModule({
@@ -33,7 +35,7 @@ const declarations = [
     BrowserAnimationsModule
   ],
   entryComponents: [TooltipComponent],
-  providers: [TooltipService]
+  providers: [TooltipService],
 })
 export class UiModule {
   constructor(library: FaIconLibrary) {
