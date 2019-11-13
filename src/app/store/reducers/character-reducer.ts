@@ -15,6 +15,13 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
         ... state,
         error: action.payload
       };
+    case CharacterActionsTypes.GetNewCharacterSuccess:
+      return {
+        ... state,
+        newCharacter: action.payload,
+        loaded: true,
+        error: ''
+      };
     default:
       return state;
   }

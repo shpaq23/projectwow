@@ -1,6 +1,6 @@
 export enum CharacterRaceEnum {
   HUMAN = 'human',
-  NIGHTELF = 'mightelf',
+  NIGHTELF = 'nightelf',
   GNOME = 'gnome',
   DWARF = 'dwarf',
 

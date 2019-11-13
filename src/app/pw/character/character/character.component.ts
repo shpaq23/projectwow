@@ -16,8 +16,11 @@ export class CharacterComponent implements OnInit {
   constructor(private characterStore: Store<CharacterState>) { }
 
   ngOnInit() {
-    this.characterStore.select(getCharacter).subscribe(character => this.character = character);
-    this.characterStore.select(getCharacterLoaded)
+    this.characterStore
+      .select(getCharacter)
+      .subscribe(character => this.character = character);
+    this.characterStore
+      .select(getCharacterLoaded)
       .subscribe(loaded => {
         if (!loaded) {
           this.characterStore.dispatch(new GetCharacter());

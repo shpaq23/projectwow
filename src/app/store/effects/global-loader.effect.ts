@@ -7,11 +7,13 @@ import { map } from 'rxjs/operators';
 import { StartLoading, StopLoading } from '../actions/global-loader.action';
 
 const startLoaderActions = [
-  CharacterActionsTypes.GetCharacter
+  CharacterActionsTypes.GetCharacter,
+  CharacterActionsTypes.GetNewCharacter
 ];
 const stopLoaderActions = [
   CharacterActionsTypes.GetCharacterFail,
-  CharacterActionsTypes.GetCharacterSuccess
+  CharacterActionsTypes.GetCharacterSuccess,
+  CharacterActionsTypes.GetNewCharacterSuccess
 ];
 
 @Injectable()

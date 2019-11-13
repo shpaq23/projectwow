@@ -4,7 +4,13 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { CharacterActionsTypes, GetCharacter, GetCharacterFail, GetCharacterSuccess } from '../actions/character.action';
+import {
+  CharacterActionsTypes,
+  GetCharacter,
+  GetCharacterFail,
+  GetCharacterSuccess,
+  GetNewCharacterSuccess
+} from '../actions/character.action';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
@@ -15,20 +21,16 @@ export class CharacterEffect {
 
   @Effect()
   getCharacter: Observable<Action> = this.actions$.pipe(
-    ofType(CharacterActionsTypes.GetCharacter),
-    map((action: GetCharacter) => action.forNewCharacter), // TODO: REMOVE 'forNewCharacter' parameter from payload
-    mergeMap((forNewCharacter) => this.characterService.getCharacter().pipe(
+    ofType(CharacterActionsTypes.GetCharacter, CharacterActionsTypes.GetNewCharacter),
+    mergeMap(() => this.characterService.getCharacter().pipe(
       map(character => {
         if (this.isCharacterResponse(character)) {
           this.router.navigate(['/character']);
-          console.log('characterResponseEffect');
           return new GetCharacterSuccess(character);
         }
         if (this.isNewCharacterResponse(character)) {
           this.router.navigate(['/character/new']);
-          console.log('newCharacterResponseEffect: ', character);
-          console.log('TODO STORE FOR NEW CHARACTER');
-          return new GetCharacterSuccess(null);
+          return new GetNewCharacterSuccess(character);
         }
       }),
       catchError(err => of(new GetCharacterFail(err)))
