@@ -4,16 +4,19 @@ import { Store } from '@ngrx/store';
 import { CharacterState } from '../../../store/state/character.state';
 import { GetCharacter } from '../../../store/actions/character.action';
 import { getCharacter, getCharacterLoaded } from '../../../store/selectors/character.selector';
+import { BaseComponent } from '../../base-component';
 
 @Component({
   selector: 'pw-character',
   templateUrl: './character.component.html',
   styleUrls: ['./character.component.scss']
 })
-export class CharacterComponent implements OnInit {
+export class CharacterComponent extends BaseComponent implements OnInit {
 
   character: Character;
-  constructor(private characterStore: Store<CharacterState>) { }
+  constructor(private characterStore: Store<CharacterState>) {
+    super();
+  }
 
   ngOnInit() {
     this.characterStore

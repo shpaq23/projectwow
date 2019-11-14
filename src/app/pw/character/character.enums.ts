@@ -1,33 +1,33 @@
 export enum CharacterRaceEnum {
-  HUMAN = 'human',
-  NIGHTELF = 'nightelf',
-  GNOME = 'gnome',
-  DWARF = 'dwarf',
+  HUMAN = 'Human',
+  NIGHTELF = 'Night Elf',
+  GNOME = 'Gnome',
+  DWARF = 'Dwarf',
 
-  ORC = 'orc',
-  TROLL = 'troll',
-  TAUREN = 'tauren',
-  UNDEAD = 'undead'
+  ORC = 'Orc',
+  TROLL = 'Troll',
+  TAUREN = 'Tauren',
+  UNDEAD = 'Undead'
 }
 
 export enum CharacterRaceClassEnum {
-  WARRIOR = 'warrior',
-  MAGE = 'mage',
-  HUNTER = 'hunter',
-  ROGUE = 'rogue',
-  WARLOCK = 'warlock',
-  SHAMAN = 'shaman',
-  DRUID = 'druid',
-  PALADIN = 'paladin',
-  PRIEST = 'priest'
+  WARRIOR = 'Warrior',
+  MAGE = 'Mage',
+  HUNTER = 'Hunter',
+  ROGUE = 'Rogue',
+  WARLOCK = 'Warlock',
+  SHAMAN = 'Shaman',
+  DRUID = 'Druid',
+  PALADIN = 'Paladin',
+  PRIEST = 'Priest'
 }
 
 export enum CharacterRaceGenderEnum {
-  FEMALE = 'female',
-  MALE = 'male'
+  FEMALE = 'Female',
+  MALE = 'Male'
 }
 
 export enum CharacterRaceFactionEnum {
-  HORDE = 'horde',
-  ALLIANCE = 'alliance'
+  HORDE = 'Horde',
+  ALLIANCE = 'Alliance'
 }

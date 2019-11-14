@@ -35,13 +35,13 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
     }, {updateOn: 'change'});
-    this.userStore.pipe(select(getLoggedUserError), takeWhile(() => this.componentAlive))
+    this.userStore.pipe(select(getLoggedUserError)) // TODO: takeuntil destroy
       .subscribe(error => {
         if (this.submitted) {
           this.serverError = error;
         }
       });
-    this.userStore.pipe(select(getLoggedUserLoading), takeWhile(() => this.componentAlive))
+    this.userStore.pipe(select(getLoggedUserLoading)) // TODO: takeuntil destroy
       .subscribe(loading => {
           this.loading = loading;
           if (!this.loading) {
@@ -49,10 +49,6 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
           }
         }
       );
-  }
-
-  ngOnDestroy(): void {
-    this.componentAlive = false;
   }
 
   get isValid(): boolean {

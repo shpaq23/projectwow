@@ -13,6 +13,7 @@ import { QuestionIconComponent } from './icons/question-icon/question-icon.compo
 import { InfoIconComponent } from './icons/info-icon/info-icon.component';
 import { GlobalLoaderComponent } from './global-loader/global-loader.component';
 import { WowIconComponent } from './icons/wow-icon/wow-icon.component';
+import { WowAbilityTooltipComponent } from './tooltip/wow-ability-tooltip/wow-ability-tooltip.component';
 
 const declarations = [
   ButtonComponent,
@@ -22,7 +23,8 @@ const declarations = [
   QuestionIconComponent,
   InfoIconComponent,
   GlobalLoaderComponent,
-  WowIconComponent
+  WowIconComponent,
+  WowAbilityTooltipComponent
 ];
 
 @NgModule({
@@ -35,7 +37,7 @@ const declarations = [
     BrowserAnimationsModule
   ],
   entryComponents: [TooltipComponent],
-  providers: [TooltipService],
+  providers: [TooltipService]
 })
 export class UiModule {
   constructor(library: FaIconLibrary) {

@@ -10,6 +10,8 @@ import {
   CharacterRaceGenderEnum
 } from '../../pw/character/character.enums';
 import { newCharacterMockResponse } from './new-character-mock';
+import { WowAbility } from '../../ui/tooltip/wow-ability-tooltip/wow-ability-tooltip.component';
+import { WowSimpleIcon } from '../../ui/icons/wow-icon/wow-icon.component';
 
 export interface Character {
   nickname: string;
@@ -18,13 +20,12 @@ export interface Character {
 }
 
 export interface NewCharacterRace {
-  race: CharacterRaceEnum;
-  gender: CharacterRaceGenderEnum;
-  availableClasses: CharacterRaceClassEnum[];
-  faction: CharacterRaceFactionEnum;
+  race: WowSimpleIcon;
+  gender: WowSimpleIcon;
+  availableClasses: WowSimpleIcon[];
+  faction: WowSimpleIcon;
+  racialAbilities: WowAbility[];
 }
-
-
 
 @Injectable({
   providedIn: 'root'

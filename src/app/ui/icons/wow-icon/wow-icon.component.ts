@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { WowIcon } from './wow-icon.enum';
+
+export interface WowSimpleIcon {
+  name: string;
+  icon: string;
+}
 
 @Component({
   selector: 'pw-wow-icon',
@@ -9,7 +13,9 @@ import { WowIcon } from './wow-icon.enum';
 })
 export class WowIconComponent {
 
-  @Input() wowIcon = WowIcon;
+  @Input() iconUrl: string;
+
+  @Input() description: string;
 
   @HostBinding('class.disabled') @Input() disabled = false;
 

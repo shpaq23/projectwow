@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { Gravity } from '../gravity.enum';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -13,7 +13,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       })),
       transition('void<=>*', animate(300)),
     ]),
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent {
 
