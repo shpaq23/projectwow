@@ -9,15 +9,14 @@ export abstract class BaseComponent implements OnDestroy {
   private readonly parentNgOnDestroyMethod: () => void;
 
   protected constructor() {
-    // @ts-ignore
-    this.parentNgOnDestroyMethod = this.ngOnDestroy();
+    this.parentNgOnDestroyMethod = this.ngOnDestroy;
     this.ngOnDestroy = () => {
       this.parentNgOnDestroyMethod();
       this.complete();
     };
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy() { }
 
   protected takeUntilDestroy<T>(): MonoTypeOperatorFunction<T> {
     return (input$) => input$.pipe(

@@ -5,7 +5,6 @@ import { select, Store } from '@ngrx/store';
 import { UserState } from '../../../store/state/user.state';
 import { getLoggedUserError, getLoggedUserLoading } from '../../../store/selectors/user.selector';
 import { LoginUser } from '../../../store/actions/user.action';
-import { takeWhile } from 'rxjs/operators';
 import { BaseComponent } from '../../base-component';
 
 export interface LoginForm {
@@ -35,13 +34,15 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
     }, {updateOn: 'change'});
-    this.userStore.pipe(select(getLoggedUserError)) // TODO: takeuntil destroy
+    this.userStore.pipe(select(getLoggedUserError))
+      .pipe(this.takeUntilDestroy())
       .subscribe(error => {
         if (this.submitted) {
           this.serverError = error;
         }
       });
-    this.userStore.pipe(select(getLoggedUserLoading)) // TODO: takeuntil destroy
+    this.userStore.pipe(select(getLoggedUserLoading))
+      .pipe(this.takeUntilDestroy())
       .subscribe(loading => {
           this.loading = loading;
           if (!this.loading) {

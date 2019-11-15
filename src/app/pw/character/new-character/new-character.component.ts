@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CharacterState } from '../../../store/state/character.state';
-import { GetNewCharacter } from '../../../store/actions/character.action';
 import { getCharacterLoaded, getNewCharacter } from '../../../store/selectors/character.selector';
 import { NewCharacterRace } from '../../../services/api/character.service';
-import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '../../base-component';
 
 @Component({
@@ -22,14 +20,8 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.characterStore
       .select(getNewCharacter)
+      .pipe(this.takeUntilDestroy())
       .subscribe(newCharacter => this.newCharacter = newCharacter);
-    this.characterStore
-      .select(getCharacterLoaded)
-      .subscribe(loaded => {
-        if (!loaded) {
-          this.characterStore.dispatch(new GetNewCharacter());
-        }
-      });
   }
 
 }
