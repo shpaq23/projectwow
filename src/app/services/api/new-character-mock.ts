@@ -169,7 +169,7 @@ export const newCharacterMockResponse: NewCharacterRace[] = [
     ]
   },
   {
-    race: { name: CharacterRaceEnum.TAUREN, icon: 'taurenamel' },
+    race: { name: CharacterRaceEnum.TAUREN, icon: 'taurenmale' },
     availableClasses: [ warlockIcon, hunterIcon, shamanIcon, druidIcon ],
     faction: hordeIcon,
     gender: maleIcon,
@@ -181,7 +181,7 @@ export const newCharacterMockResponse: NewCharacterRace[] = [
     ]
   },
   {
-    race: { name: CharacterRaceEnum.TAUREN, icon: 'taurenfeamel' },
+    race: { name: CharacterRaceEnum.TAUREN, icon: 'taurenfemale' },
     availableClasses: [ warlockIcon, hunterIcon, shamanIcon, druidIcon ],
     faction: hordeIcon,
     gender: femaleIcon,

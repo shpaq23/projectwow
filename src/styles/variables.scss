@@ -3,6 +3,8 @@ $yellow: rgb(255, 199, 0);
 $redError: #ff7f76;
 $greenSuccess: #a3ff85;
 $textShadowColor: rgb(52, 52, 52);
+$hordeRed: #710002;
+$allianceBlue: #000485;
 
 // Input Colors:
 $inputBorderColor: rgb(186, 183, 186);
@@ -22,11 +24,15 @@ $bodyPaddingTop: 100px;
 // Border
 $borderYellow: rgb(255, 199, 0);
 $borderWeight: 2px;
+$borderRadiusSmall: 6px;
 $borderRadius: 10px;
+$borderRadiusBig: 14px;
 $borderBoxShadow: 0 0 8px 4px aliceblue;
+$borderBoxShadowIconActive: 0 0 8px 4px #82b9db;
 
 // App
-$appBackgroundColor: rgba(0, 0, 0, 0.38);
+$appLoginBackgroundColor: rgba(0, 0, 0, 0.38);
+$appCharacterBackgroundColor: rgba(92, 86, 84, 0.82);
 
 // tooltip
 $tooltipBackgroundColor: rgb(11, 20, 50);

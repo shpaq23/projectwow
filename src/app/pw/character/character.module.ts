@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CharacterEffect } from '../../store/effects/character.effect';
 import { GlobalLoaderEffect } from '../../store/effects/global-loader.effect';
 import { globalLoaderReducer } from '../../store/reducers/global-loader.reducer';
+import { UiModule } from '../../ui/ui.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { globalLoaderReducer } from '../../store/reducers/global-loader.reducer'
     CharacterRoutingModule,
     StoreModule.forFeature('character', characterReducer),
     StoreModule.forFeature('globalLoader', globalLoaderReducer),
-    EffectsModule.forFeature([CharacterEffect, GlobalLoaderEffect])
+    EffectsModule.forFeature([CharacterEffect, GlobalLoaderEffect]),
+    UiModule
   ]
 })
 export class CharacterModule {

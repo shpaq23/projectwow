@@ -3,12 +3,6 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import {
-  CharacterRaceClassEnum,
-  CharacterRaceEnum,
-  CharacterRaceFactionEnum,
-  CharacterRaceGenderEnum
-} from '../../pw/character/character.enums';
 import { newCharacterMockResponse } from './new-character-mock';
 import { WowAbility } from '../../ui/tooltip/wow-ability-tooltip/wow-ability-tooltip.component';
 import { WowSimpleIcon } from '../../ui/icons/wow-icon/wow-icon.component';
@@ -33,7 +27,7 @@ export interface NewCharacterRace {
 export class CharacterService {
 
   url = environment.apiUrl + '/character';
-  delay = 1500;
+  delay = 1;
 
   constructor(private httpClient: HttpClient) {
   }

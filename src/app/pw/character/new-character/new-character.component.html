@@ -1,1 +1,30 @@
-<p>new-character works!</p>
+<div class="pw-column-container">
+  <div class="pw-row-container">
+    <div class="alliance pw-mp-5">
+      <pw-wow-icon class="pw-mb-8" iconUrl="alliance" [description]="faction.ALLIANCE" ></pw-wow-icon>
+      <ng-container *ngFor="let nchar of newCharacter">
+        <pw-wow-icon class="pw-my-5"
+                     *ngIf="meetRequirements(nchar, faction.ALLIANCE)"
+                     [iconUrl]="nchar.race.icon"
+                     [description]="isRaceChosen(nchar) && nchar.race.name"
+                     [active]="isRaceChosen(nchar)"></pw-wow-icon>
+      </ng-container>
+    </div>
+    <div class="horde pw-mp-5">
+      <pw-wow-icon class="pw-mb-8" iconUrl="horde" [description]="faction.HORDE"></pw-wow-icon>
+      <ng-container *ngFor="let nchar of newCharacter">
+        <pw-wow-icon class="pw-my-5"
+                     *ngIf="meetRequirements(nchar, faction.HORDE)"
+                     [iconUrl]="nchar.race.icon"
+                     [description]="isRaceChosen(nchar) && nchar.race.name"
+                     [active]="isRaceChosen(nchar)"></pw-wow-icon>
+      </ng-container>
+    </div>
+  </div>
+  <div class="pw-row-container-center gender pw-mp-5">
+    <pw-wow-icon class="pw-mx-4" iconUrl="male"
+                 [description]="isGenderChosen(gender.MALE) && gender.MALE" [active]="isGenderChosen(gender.MALE)"></pw-wow-icon>
+    <pw-wow-icon class="pw-mx-4" iconUrl="female"
+                 [description]="isGenderChosen(gender.FEMALE) && gender.MALE" [active]="isGenderChosen(gender.FEMALE)"></pw-wow-icon>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@import "~src/styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 96%;
+  height: 93%;
+  padding: 2%;
+
+
+  .alliance {
+    background-color: $allianceBlue;
+    border-radius: $borderRadiusSmall;
+  }
+
+  .horde {
+    background-color: $hordeRed;
+    border-radius: $borderRadiusSmall;
+  }
+
+
+  .gender {
+    background-color: antiquewhite;
+    border-radius: $borderRadiusSmall;
+  }
+}

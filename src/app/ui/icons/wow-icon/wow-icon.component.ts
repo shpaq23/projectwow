@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface WowSimpleIcon {
   name: string;
@@ -11,7 +11,7 @@ export interface WowSimpleIcon {
   styleUrls: ['./wow-icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WowIconComponent {
+export class WowIconComponent implements OnChanges {
 
   @Input() iconUrl: string;
 
@@ -19,5 +19,16 @@ export class WowIconComponent {
 
   @HostBinding('class.disabled') @Input() disabled = false;
 
+  @HostBinding('class.active') @Input() active = false;
+
   @HostBinding('class.faded') @Input() faded = false;
+
+  alt: string;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.iconUrl) {
+      this.alt = this.iconUrl;
+      this.iconUrl = `assets/icons/${this.iconUrl}.png`;
+    }
+  }
 }
