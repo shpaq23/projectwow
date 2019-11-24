@@ -8,20 +8,28 @@
   height: 93%;
   padding: 2%;
 
+  div {
+    border-radius: $borderRadiusSmall;
+    border: 1px solid $borderYellow;
+  }
 
   .alliance {
     background-color: $allianceBlue;
-    border-radius: $borderRadiusSmall;
   }
 
   .horde {
     background-color: $hordeRed;
-    border-radius: $borderRadiusSmall;
   }
-
 
   .gender {
     background-color: antiquewhite;
-    border-radius: $borderRadiusSmall;
   }
+
+  .character-classes {
+    margin-left: auto;
+  }
+  .main-container, .form {
+    width: 100%;
+  }
+
 }

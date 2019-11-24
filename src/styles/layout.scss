@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.pw-flex-grow {
+  flex: 1 0;
+}
+
 .pw-column-container-center {
   display: flex;
   flex-direction: column;

@@ -5,24 +5,23 @@
   position: relative;
   width: 64px;
   height: 64px;
+  @include cursorPointer;
 
   &.active {
     box-shadow: $borderBoxShadowIconActive;
     border-radius: $borderRadius;
   }
+
   &.faded {
     filter: saturate(0.2);
   }
-}
-img {
+
   &.disabled {
     @include cursorNotAllowed;
-    filter: saturate(0);
-  }
-  &.faded {
-    filter: saturate(0);
+    filter: saturate(0.2);
   }
 }
+
 span {
   position: absolute;
   bottom: 0;

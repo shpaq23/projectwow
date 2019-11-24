@@ -5,6 +5,7 @@ import { getNewCharacter } from '../../../store/selectors/character.selector';
 import { NewCharacterRace } from '../../../services/api/character.service';
 import { BaseComponent } from '../../base-component';
 import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceFactionEnum, CharacterRaceGenderEnum } from '../character.enums';
+import { WowSimpleIcon } from '../../../ui/icons/wow-icon/wow-icon.component';
 
 @Component({
   selector: 'pw-new-character',
@@ -14,10 +15,17 @@ import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceFactionEnum, Ch
 export class NewCharacterComponent extends BaseComponent implements OnInit {
 
   newCharacter: NewCharacterRace[] = null;
+
   chosenRace: CharacterRaceEnum;
+
   chosenClass: CharacterRaceClassEnum;
+
   chosenGender: CharacterRaceGenderEnum;
+
+  chosenRacialAbilities: string[] = ['Diplomancy', 'The Human Spirit'];
+
   faction = CharacterRaceFactionEnum;
+
   gender = CharacterRaceGenderEnum;
 
   constructor(private characterStore: Store<CharacterState>) {
@@ -48,6 +56,26 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
 
   isGenderChosen(gender: CharacterRaceGenderEnum): boolean {
     return this.chosenGender === gender;
+  }
+
+  isRacialAbilityChosen(racial: string): boolean {
+    return this.chosenRacialAbilities.includes(racial);
+  }
+
+  getChosenRaceClasses(): WowSimpleIcon[] {
+    const characterClasses = this.newCharacter
+      .filter(race => race.gender.name === this.chosenGender &&
+        race.race.name === this.chosenRace);
+
+    return characterClasses[0].availableClasses;
+  }
+
+  getChosenRaceRacialAbilities(): WowSimpleIcon[] {
+    const racialAbilities = this.newCharacter
+      .filter(race => race.gender.name === this.chosenGender &&
+      race.race.name === this.chosenRace);
+
+    return racialAbilities[0].racialAbilities;
   }
 
   private initChosen(): void {

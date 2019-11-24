@@ -1,30 +1,58 @@
-<div class="pw-column-container">
-  <div class="pw-row-container">
-    <div class="alliance pw-mp-5">
-      <pw-wow-icon class="pw-mb-8" iconUrl="alliance" [description]="faction.ALLIANCE" ></pw-wow-icon>
-      <ng-container *ngFor="let nchar of newCharacter">
-        <pw-wow-icon class="pw-my-5"
-                     *ngIf="meetRequirements(nchar, faction.ALLIANCE)"
-                     [iconUrl]="nchar.race.icon"
-                     [description]="isRaceChosen(nchar) && nchar.race.name"
-                     [active]="isRaceChosen(nchar)"></pw-wow-icon>
-      </ng-container>
+<div class="pw-row-container main-container">
+  <div>
+    <div class="pw-row-container">
+      <div class="pw-column-container alliance pw-mp-5">
+        <pw-wow-icon class="pw-mb-8" iconUrl="alliance" [description]="faction.ALLIANCE" ></pw-wow-icon>
+        <ng-container *ngFor="let nchar of newCharacter">
+          <pw-wow-icon class="pw-mb-5"
+                       *ngIf="meetRequirements(nchar, faction.ALLIANCE)"
+                       [iconUrl]="nchar.race.icon"
+                       [description]="isRaceChosen(nchar) && nchar.race.name"
+                       [active]="isRaceChosen(nchar)"></pw-wow-icon>
+        </ng-container>
+      </div>
+      <div class="pw-column-container horde pw-mp-5">
+        <pw-wow-icon class="pw-mb-8" iconUrl="horde" [description]="faction.HORDE"></pw-wow-icon>
+        <ng-container *ngFor="let nchar of newCharacter">
+          <pw-wow-icon class="pw-mb-5"
+                       *ngIf="meetRequirements(nchar, faction.HORDE)"
+                       [iconUrl]="nchar.race.icon"
+                       [description]="isRaceChosen(nchar) && nchar.race.name"
+                       [active]="isRaceChosen(nchar)"></pw-wow-icon>
+        </ng-container>
+      </div>
     </div>
-    <div class="horde pw-mp-5">
-      <pw-wow-icon class="pw-mb-8" iconUrl="horde" [description]="faction.HORDE"></pw-wow-icon>
-      <ng-container *ngFor="let nchar of newCharacter">
-        <pw-wow-icon class="pw-my-5"
-                     *ngIf="meetRequirements(nchar, faction.HORDE)"
-                     [iconUrl]="nchar.race.icon"
-                     [description]="isRaceChosen(nchar) && nchar.race.name"
-                     [active]="isRaceChosen(nchar)"></pw-wow-icon>
-      </ng-container>
+    <div class="pw-row-container-center gender pw-mp-5">
+      <pw-wow-icon class="pw-mx-4" iconUrl="male"
+                   [description]="isGenderChosen(gender.MALE) && gender.MALE" [active]="isGenderChosen(gender.MALE)"></pw-wow-icon>
+      <pw-wow-icon class="pw-mx-4" iconUrl="female"
+                   [description]="isGenderChosen(gender.FEMALE) && gender.MALE" [active]="isGenderChosen(gender.FEMALE)"></pw-wow-icon>
     </div>
   </div>
-  <div class="pw-row-container-center gender pw-mp-5">
-    <pw-wow-icon class="pw-mx-4" iconUrl="male"
-                 [description]="isGenderChosen(gender.MALE) && gender.MALE" [active]="isGenderChosen(gender.MALE)"></pw-wow-icon>
-    <pw-wow-icon class="pw-mx-4" iconUrl="female"
-                 [description]="isGenderChosen(gender.FEMALE) && gender.MALE" [active]="isGenderChosen(gender.FEMALE)"></pw-wow-icon>
+
+  <div class="pw-flex-grow pw-column-container pw-mp-5">
+    <div class="pw-flex-grow character-model">
+
+    </div>
+    <div class="pw-row-container-center racial-skills pw-mp-5">
+      <ng-container *ngFor="let racialAbility of getChosenRaceRacialAbilities()">
+        <pw-wow-icon class="pw-ml-5"
+                     [iconUrl]="racialAbility.icon"
+                     [active]="isRacialAbilityChosen(racialAbility.name)"
+                     [disabled]="!isRacialAbilityChosen(racialAbility.name)"></pw-wow-icon>
+      </ng-container>
+
+    </div>
   </div>
+  <div class="right-container pw-column-container character-classes pw-mp-5">
+    <ng-container *ngFor="let characterClass of getChosenRaceClasses()">
+      <pw-wow-icon class="pw-mb-5"
+        [iconUrl]="characterClass.icon"
+        [description]="characterClass.name"
+        [active]="characterClass.name === chosenClass"></pw-wow-icon>
+    </ng-container>
+  </div>
+</div>
+<div class="pw-row-container-center form">
+  <p>{{chosenRace}} {{chosenClass}}</p>
 </div>

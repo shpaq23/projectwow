@@ -21,16 +21,16 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   register(registerForm: RegisterForm): Observable<any> {
-    return this.httpClient.post(this.url + '/register', registerForm);
-    // return of({data: 'success'})
-    //   .pipe(delay(this.delay));
+    // return this.httpClient.post(this.url + '/register', registerForm);
+    return of({data: 'success'})
+      .pipe(delay(this.delay));
     // return timer(this.delay).pipe(mergeMap(() => throwError('External Server Error')));
   }
 
   login(loginForm: LoginForm): Observable<User> {
-    return this.httpClient.post<User>(this.url + '/login', loginForm);
-    // return of({token: '0192830921893012830128390192873123091823'})
-    //   .pipe(delay(this.delay));
+    // return this.httpClient.post<User>(this.url + '/login', loginForm);
+    return of({token: '0192830921893012830128390192873123091823'})
+      .pipe(delay(this.delay));
     // return timer(this.delay).pipe(mergeMap(() => throwError('Wrong E-mail or Password')));
   }
 
