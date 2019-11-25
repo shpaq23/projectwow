@@ -8,7 +8,11 @@ import { FaIcon } from '../fa-icon.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalLoaderComponent {
+
   @HostBinding('class.pw-center') center = true;
+
   @HostBinding('class.pw-z-index-3') zIndex = true;
+
   faIcon: FaIcon = FaIcon.cog;
+
 }

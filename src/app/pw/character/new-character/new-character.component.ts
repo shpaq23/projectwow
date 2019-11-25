@@ -39,7 +39,6 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
       .pipe(this.takeUntilDestroy())
       .subscribe(newCharacter => {
         this.newCharacter = newCharacter;
-        console.log(this.newCharacter);
       });
   }
 

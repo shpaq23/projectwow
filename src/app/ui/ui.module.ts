@@ -14,6 +14,7 @@ import { InfoIconComponent } from './icons/info-icon/info-icon.component';
 import { GlobalLoaderComponent } from './global-loader/global-loader.component';
 import { WowIconComponent } from './icons/wow-icon/wow-icon.component';
 import { WowAbilityTooltipComponent } from './tooltip/wow-ability-tooltip/wow-ability-tooltip.component';
+import { WowModelComponent } from './wow-model/wow-model.component';
 
 const declarations = [
   ButtonComponent,
@@ -24,7 +25,8 @@ const declarations = [
   InfoIconComponent,
   GlobalLoaderComponent,
   WowIconComponent,
-  WowAbilityTooltipComponent
+  WowAbilityTooltipComponent,
+  WowModelComponent
 ];
 
 @NgModule({

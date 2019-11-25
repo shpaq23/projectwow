@@ -30,9 +30,12 @@
     </div>
   </div>
 
-  <div class="pw-flex-grow pw-column-container pw-mp-5">
-    <div class="pw-flex-grow character-model">
-
+  <div class="pw-flex-grow pw-column-container">
+    <div class="pw-flex-grow pw-center-vertical character-model">
+      <pw-wow-model [characterRace]="chosenRace"
+                    [characterRaceClass]="chosenClass"
+                    [characterRaceGender]="chosenGender">
+      </pw-wow-model>
     </div>
     <div class="pw-row-container-center racial-skills pw-mp-5">
       <ng-container *ngFor="let racialAbility of getChosenRaceRacialAbilities()">
@@ -41,7 +44,9 @@
                      [active]="isRacialAbilityChosen(racialAbility.name)"
                      [disabled]="!isRacialAbilityChosen(racialAbility.name)"></pw-wow-icon>
       </ng-container>
-
+    </div>
+    <div class="pw-row-container-center">
+      <p>{{chosenRace}} {{chosenClass}}</p>
     </div>
   </div>
   <div class="right-container pw-column-container character-classes pw-mp-5">
@@ -52,7 +57,4 @@
         [active]="characterClass.name === chosenClass"></pw-wow-icon>
     </ng-container>
   </div>
-</div>
-<div class="pw-row-container-center form">
-  <p>{{chosenRace}} {{chosenClass}}</p>
 </div>
