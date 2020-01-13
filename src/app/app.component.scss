@@ -11,10 +11,5 @@
   border: $borderWeight solid $borderYellow;
   border-radius: $borderRadius;
   box-shadow: $borderBoxShadow;
-  &.login-background {
-    background-color: $appLoginBackgroundColor;
-  }
-  &.character-background {
-    background-color: $appCharacterBackgroundColor;
-  }
+  background-color: $appLoginBackgroundColor;
 }

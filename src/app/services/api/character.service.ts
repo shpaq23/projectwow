@@ -27,13 +27,13 @@ export interface NewCharacterRace {
 export class CharacterService {
 
   url = environment.apiUrl + '/character';
-  delay = 1;
+  delay = 1500;
 
   constructor(private httpClient: HttpClient) {
   }
 
   getCharacter(): Observable<Character | NewCharacterRace[]> {
-    // return of({nickname: 'Shpaq', level: 1, copper: 0}).pipe(delay(this.delay));
-    return of(newCharacterMockResponse).pipe(delay(this.delay));
+    return of({nickname: 'Shpaq', level: 1, copper: 0}).pipe(delay(this.delay));
+    // return of(newCharacterMockResponse).pipe(delay(this.delay));
   }
 }

@@ -81,12 +81,20 @@
 
 $spaces: 1px 2px 4px 8px 12px 16px 24px 32px;
 $z-indexes: 1 2 3 4 5 6;
+$border-radius-values: 1 2 3 4 5 6;
 
 @each $z-index in $z-indexes {
   .pw-z-index-#{$z-index} {
-    z-index: $z-index*1000;
+    z-index: $z-index*100;
   }
 }
+
+@each $border-radius in $border-radius-values {
+  .pw-border-radius-#{$border-radius} {
+    border-radius: #{$border-radius*4}px;
+  }
+}
+
 @each $space in $spaces {
   @if $space == 1px {
     .pw-mt-1 {

@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { CharacterModule } from './pw/character/character.module';
 import { UiModule } from './ui/ui.module';
+import { DungeonModule } from './pw/dungeon/dungeon.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UiModule } from './ui/ui.module';
     }),
     LoginPanelModule,
     CharacterModule,
+    DungeonModule,
     AppRoutingModule,
     HttpClientModule,
     UiModule,
