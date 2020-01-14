@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CharacterModule } from './pw/game/character/character.module';
 import { UiModule } from './ui/ui.module';
 import { DungeonModule } from './pw/game/dungeon/dungeon.module';
+import { GameModule } from './pw/game/game.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DungeonModule } from './pw/game/dungeon/dungeon.module';
     LoginPanelModule,
     CharacterModule,
     DungeonModule,
+    GameModule,
     AppRoutingModule,
     HttpClientModule,
     UiModule,

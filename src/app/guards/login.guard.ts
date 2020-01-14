@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate {
     return this.userStore.select(getLoggedUser).pipe(
       map(user => {
         if (user) {
-          this.router.navigate(['/character']);
+          this.router.navigate(['/game']);
           return false;
         } else {
           return true;

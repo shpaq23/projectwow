@@ -13,19 +13,12 @@ const routes: Routes = [
     path: 'game',
     component: GameComponent,
     canActivate: [AuthGuard],
+    resolve: { character: CharacterResolver },
     children: [
-      {
-        path: 'character',
-        component: CharacterComponent,
-        resolve: { character: CharacterResolver },
-        children: [
-          {
-            path: 'new',
-            component: NewCharacterComponent
-          }
-        ]
-      },
-      { path: 'dungeon', component: DungeonComponent }
+      { path: 'character', component: CharacterComponent },
+      { path: 'new', component: NewCharacterComponent },
+      { path: 'dungeon', component: DungeonComponent },
+      { path: '', redirectTo: 'character', pathMatch: 'full' },
     ]
 
   }

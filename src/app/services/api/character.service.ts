@@ -33,7 +33,7 @@ export class CharacterService {
   }
 
   getCharacter(): Observable<Character | NewCharacterRace[]> {
-    return of({nickname: 'Shpaq', level: 1, copper: 0}).pipe(delay(this.delay));
-    // return of(newCharacterMockResponse).pipe(delay(this.delay));
+    // return of({nickname: 'Shpaq', level: 1, copper: 0}).pipe(delay(this.delay));
+    return of(newCharacterMockResponse).pipe(delay(this.delay));
   }
 }

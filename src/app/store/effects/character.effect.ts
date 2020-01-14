@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Character, CharacterService, NewCharacterRace } from '../../services/api/character.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import {
@@ -25,11 +25,11 @@ export class CharacterEffect {
     mergeMap(() => this.characterService.getCharacter().pipe(
       map(character => {
         if (this.isCharacterResponse(character)) {
-          this.router.navigate(['/character']);
+          this.router.navigate(['/game/character']);
           return new GetCharacterSuccess(character);
         }
         if (this.isNewCharacterResponse(character)) {
-          this.router.navigate(['/character/new']);
+          this.router.navigate(['/game/new']);
           return new GetNewCharacterSuccess(character);
         }
       }),
