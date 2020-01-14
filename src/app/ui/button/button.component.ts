@@ -6,19 +6,17 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
 
-  @HostBinding('class.pw-btn-font') btnFont = true;
-  @HostBinding('class.disabled')
-
-  @Input() disabled: boolean;
+  @HostBinding('class.disabled') @Input() disabled: boolean;
 
   @Input() faIconLeft: IconProp;
+
   @Input() faIconRight: IconProp;
+
   @Input() spinLeft: boolean;
+
   @Input() spinRight: boolean;
 
-  ngOnInit(): void {
-  }
 
 }

@@ -1,0 +1,36 @@
+@import "~src/styles/variables";
+@import "~src/styles/mixins";
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+
+  .pw-game-nav-bar {
+    width: 100%;
+    background: $gameNavBarBackground;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    pw-button {
+      width: 150px;
+
+      &:not(:last-child) {
+        margin-right: 32px;
+      }
+    }
+
+    &.disabled {
+      pw-button {
+        background-color: $buttonActiveBackgroundColor;
+        color: $yellowLighter;
+        @include cursorNotAllowed
+      }
+    }
+  }
+
+}

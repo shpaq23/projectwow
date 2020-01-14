@@ -6,6 +6,7 @@ import {CharacterComponent} from './character/character/character.component';
 import {CharacterResolver} from '../../resolvers/character-resolver.service';
 import {NewCharacterComponent} from './character/new-character/new-character.component';
 import {DungeonComponent} from './dungeon/dungeon.component';
+import {CharacterGuard} from '../../guards/character.guard';
 
 
 const routes: Routes = [
@@ -15,9 +16,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: { character: CharacterResolver },
     children: [
-      { path: 'character', component: CharacterComponent },
+      { path: 'character', component: CharacterComponent, canActivate: [CharacterGuard] },
+      { path: 'dungeon', component: DungeonComponent, canActivate: [CharacterGuard] },
       { path: 'new', component: NewCharacterComponent },
-      { path: 'dungeon', component: DungeonComponent },
       { path: '', redirectTo: 'character', pathMatch: 'full' },
     ]
 

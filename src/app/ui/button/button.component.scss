@@ -7,14 +7,13 @@
   align-items: center;
   border-radius: 12px;
   background-color: $buttonBackgroundColor;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border: 2px solid $buttonBorderColor;
   user-select: none;
   outline: none;
 
-  &:active {
-    background-color: $buttonActiveBackgroundColor;
-  }
+  @include fontYellow;
+  font-weight: normal;
 
   &:hover {
     @include cursorPointer;
@@ -22,12 +21,13 @@
 
   &.disabled, &.loading {
     background-color: $buttonActiveBackgroundColor;
+    color: $yellowLighter;
     @include cursorNotAllowed
   }
 
-  &.pw-btn-font {
-    @include fontYellow;
-    font-weight: normal;
+  &:active {
+    background-color: $buttonActiveBackgroundColor;
+    color: $yellowLighter;
   }
 
   fa-icon {

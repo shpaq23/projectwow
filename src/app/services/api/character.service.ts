@@ -27,7 +27,7 @@ export interface NewCharacterRace {
 export class CharacterService {
 
   url = environment.apiUrl + '/character';
-  delay = 1500;
+  delay = 500;
 
   constructor(private httpClient: HttpClient) {
   }
