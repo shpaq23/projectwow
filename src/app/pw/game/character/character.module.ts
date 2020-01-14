@@ -5,12 +5,12 @@ import { CharacterRoutingModule } from './character-routing.module';
 import { CharacterComponent } from './character/character.component';
 import { NewCharacterComponent } from './new-character/new-character.component';
 import { StoreModule } from '@ngrx/store';
-import { characterReducer } from '../../store/reducers/character-reducer';
+import { characterReducer } from '../../../store/reducers/character-reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { CharacterEffect } from '../../store/effects/character.effect';
-import { GlobalLoaderEffect } from '../../store/effects/global-loader.effect';
-import { globalLoaderReducer } from '../../store/reducers/global-loader.reducer';
-import { UiModule } from '../../ui/ui.module';
+import { CharacterEffect } from '../../../store/effects/character.effect';
+import { GlobalLoaderEffect } from '../../../store/effects/global-loader.effect';
+import { globalLoaderReducer } from '../../../store/reducers/global-loader.reducer';
+import { UiModule } from '../../../ui/ui.module';
 
 
 @NgModule({

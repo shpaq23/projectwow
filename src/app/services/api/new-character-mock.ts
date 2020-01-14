@@ -4,7 +4,7 @@ import {
   CharacterRaceEnum,
   CharacterRaceFactionEnum,
   CharacterRaceGenderEnum
-} from '../../pw/character/character.enums';
+} from '../../pw/game/character/character.enums';
 import { WowAbilityType } from '../../ui/tooltip/wow-ability-tooltip/wow-ability-tooltip.component';
 import { WowSimpleIcon } from '../../ui/icons/wow-icon/wow-icon.component';
 

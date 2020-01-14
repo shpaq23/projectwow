@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { PhaserMainScene } from '../../phaser/PhaserMainScene';
+import { PhaserMainScene } from '../../../phaser/PhaserMainScene';
 
 @Component({
   selector: 'pw-dungeon',

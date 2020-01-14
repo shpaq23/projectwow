@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CharacterComponent } from './character/character.component';
-import { AuthGuard } from '../../guards/auth.guard';
+import { AuthGuard } from '../../../guards/auth.guard';
 import { NewCharacterComponent } from './new-character/new-character.component';
-import { CharacterResolver } from '../../resolvers/character-resolver.service';
+import { CharacterResolver } from '../../../resolvers/character-resolver.service';
 
 
 const routes: Routes = [

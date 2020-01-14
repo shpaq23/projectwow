@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges } from '@angular/core';
-import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceGenderEnum } from '../../pw/character/character.enums';
+import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceGenderEnum } from '../../pw/game/character/character.enums';
 
 @Component({
   selector: 'pw-wow-model',

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CharacterState } from '../../../store/state/character.state';
-import { getNewCharacter } from '../../../store/selectors/character.selector';
-import { NewCharacterRace } from '../../../services/api/character.service';
-import { BaseComponent } from '../../base-component';
+import { CharacterState } from '../../../../store/state/character.state';
+import { getNewCharacter } from '../../../../store/selectors/character.selector';
+import { NewCharacterRace } from '../../../../services/api/character.service';
+import { BaseComponent } from '../../../base-component';
 import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceFactionEnum, CharacterRaceGenderEnum } from '../character.enums';
-import { WowSimpleIcon } from '../../../ui/icons/wow-icon/wow-icon.component';
+import { WowSimpleIcon } from '../../../../ui/icons/wow-icon/wow-icon.component';
 
 @Component({
   selector: 'pw-new-character',

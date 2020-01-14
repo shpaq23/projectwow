@@ -9,9 +9,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { CharacterModule } from './pw/character/character.module';
+import { CharacterModule } from './pw/game/character/character.module';
 import { UiModule } from './ui/ui.module';
-import { DungeonModule } from './pw/dungeon/dungeon.module';
+import { DungeonModule } from './pw/game/dungeon/dungeon.module';
 
 @NgModule({
   declarations: [
