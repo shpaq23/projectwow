@@ -9,7 +9,7 @@ import {getCharacter, getCharacterLoaded} from '../store/selectors/character.sel
 @Injectable({
   providedIn: 'root'
 })
-export class CharacterGuard implements CanActivate {
+export class NoCharacterGuard implements CanActivate {
 
   private characterLoaded: boolean;
 
@@ -19,12 +19,13 @@ export class CharacterGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     this.characterStore.select(getCharacterLoaded).pipe(take(1)).subscribe(loaded => this.characterLoaded = loaded);
+
     return this.characterStore.select(getCharacter).pipe(
       map(character => {
-        if (character || !this.characterLoaded) {
+        if (!character && this.characterLoaded) {
           return true;
         } else {
-          this.router.navigate(['/game/new']);
+          this.router.navigate(['/game/character']);
           return false;
         }
       }));

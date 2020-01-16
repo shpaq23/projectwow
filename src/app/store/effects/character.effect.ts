@@ -25,7 +25,7 @@ export class CharacterEffect {
     mergeMap(() => this.characterService.getCharacter().pipe(
       map(character => {
         if (this.isCharacterResponse(character)) {
-          this.router.navigate(['/game/character']);
+          // this.router.navigate(['/game/character']);
           return new GetCharacterSuccess(character);
         }
         if (this.isNewCharacterResponse(character)) {
