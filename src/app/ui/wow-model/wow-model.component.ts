@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnChanges, Renderer2} from '@angular/core';
 import { CharacterRaceClassEnum, CharacterRaceEnum, CharacterRaceGenderEnum } from '../../pw/game/character/character.enums';
 
 @Component({
@@ -17,6 +17,8 @@ export class WowModelComponent implements OnChanges{
 
   @HostBinding('class.pw-center-vertical') centerVertical = true;
 
+  @HostBinding('style.height.px') @Input() height: number;
+
   modelUrl: string;
 
   loading: boolean;
@@ -26,8 +28,7 @@ export class WowModelComponent implements OnChanges{
   ngOnChanges(): void {
     this.loading = true;
     this.alt = this.characterRace + this.characterRaceGender + this.characterRaceClass;
-    this.modelUrl =
-      `assets/models/${this.alt.toLowerCase()}.gif`;
+    this.modelUrl = `assets/models/${this.alt.toLowerCase()}.gif`;
   }
 
 }
