@@ -10,7 +10,9 @@ import {getCharacter} from '../store/selectors/character.selector';
   providedIn: 'root'
 })
 export class CharacterGuard implements CanActivate {
-  constructor(private userStore: Store<CharacterState>) {
+
+  constructor(private userStore: Store<CharacterState>,
+              private router: Router) {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
@@ -19,6 +21,7 @@ export class CharacterGuard implements CanActivate {
         if (character) {
           return true;
         } else {
+          this.router.navigate(['/game/new']);
           return false;
         }
       }));

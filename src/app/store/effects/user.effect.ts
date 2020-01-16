@@ -32,6 +32,7 @@ export class UserEffect {
       }),
       catchError(err => of(new LoginUserFail(err)))
     )));
+
   @Effect()
   logoutUser: Observable<Action> = this.actions$.pipe(
     ofType(UserActionsTypes.LogoutUser),
@@ -39,20 +40,23 @@ export class UserEffect {
       this.authService.logout();
       return new LogoutUserSuccess();
     }));
+
   @Effect({dispatch: false})
   startLoading$ = this.actions$.pipe(
     ofType(UserActionsTypes.LoginUser),
     tap(() => this.store.dispatch(new StartLoadingUser()))
   );
+
   @Effect({dispatch: false})
   stopLoading$ = this.actions$.pipe(
     ofType(UserActionsTypes.LoginUserSuccess, UserActionsTypes.LoginUserFail),
     tap(() => this.store.dispatch(new StopLoadingUser()))
   );
+
   @Effect({dispatch: false})
   redirectAfterLogin$ = this.actions$.pipe(
     ofType(UserActionsTypes.LoginUserSuccess),
-    tap(() => this.router.navigate(['/character']))
+    tap(() => this.router.navigate(['/game']))
   );
 
 }
