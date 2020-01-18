@@ -33,6 +33,7 @@ export class DungeonComponent implements OnInit {
       parent: 'content',
       width: 640,
       height: 480,
+      zoom: 1.3,
       backgroundColor: '#FFF',
       physics: {
         default: 'arcade',

@@ -4,6 +4,7 @@ export class PhaserWorldScene extends Phaser.Scene {
   private tiles: Phaser.Tilemaps.Tileset;
   private grass: Phaser.Tilemaps.StaticTilemapLayer;
   private obstacles: Phaser.Tilemaps.StaticTilemapLayer;
+  private character: Phaser.Physics.Arcade.Sprite;
 
   constructor() {
     super({ key: 'WorldScene' });
@@ -16,6 +17,8 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
+    this.character =  this.physics.add.sprite(100, 100, 'character', 19);
+    this.character.setScale(0.4);
   }
 
   preload(): void {
