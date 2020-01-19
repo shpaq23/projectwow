@@ -1,4 +1,30 @@
-<pw-arrow-list-selector
-  listName="Imiona"
-  [list]="list" (selectedItemEmitter)="onItemSelect($event)">
-</pw-arrow-list-selector>
+<div class="pw-column-container pw-p-5">
+  <h2>Body</h2>
+
+  <pw-arrow-list-selector
+    listName="Sex"
+    [list]="newCharacterStructure.body.sex" (selectedItemEmitter)="onItemSelect($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Skin Color"
+    [list]="newCharacterStructure.body.skin" (selectedItemEmitter)="onItemSelect($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Nose"
+    [list]="newCharacterStructure.body.nose" (selectedItemEmitter)="onItemSelect($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Eyes"
+    [list]="newCharacterStructure.body.eyes" (selectedItemEmitter)="onItemSelect($event)">
+  </pw-arrow-list-selector>
+
+
+  <pw-arrow-list-selector
+    listName="Ears"
+    [list]="newCharacterStructure.body.ears" (selectedItemEmitter)="onItemSelect($event)">
+  </pw-arrow-list-selector>
+
+</div>

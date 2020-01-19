@@ -2,9 +2,19 @@
 
 :host {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 96%;
-  height: 93%;
-  padding: 2%;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+  }
+
+  .pw-column-container {
+    border: 2px $borderYellow solid;
+    border-radius: $borderRadius;
+
+    pw-arrow-list-selector:not(:first-child) {
+      margin-top: 12px;
+
+    }
+  }
 }

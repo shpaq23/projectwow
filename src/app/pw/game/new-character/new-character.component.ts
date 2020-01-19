@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NewCharacterService } from '../../../services/utils/new-character/new-character.service';
+import { NewCharacterStructure } from '../../../services/utils/new-character/new-character-structure';
 
 @Component({
   selector: 'pw-new-character',
@@ -7,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewCharacterComponent implements OnInit {
 
-  list = ['Andrzej', 'Michal', 'Marcin'];
+  newCharacterStructure: NewCharacterStructure;
+
+  constructor(private newCharacterService: NewCharacterService) {
+
+  }
 
   ngOnInit(): void {
-
+    this.newCharacterStructure = this.newCharacterService.getNewCharacterStructure();
+    console.log(this.newCharacterStructure);
   }
 
 
