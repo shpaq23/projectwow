@@ -13,6 +13,7 @@ import { CharacterModule } from './pw/game/character/character.module';
 import { UiModule } from './ui/ui.module';
 import { DungeonModule } from './pw/game/dungeon/dungeon.module';
 import { GameModule } from './pw/game/game.module';
+import { NewCharacterModule } from './pw/game/new-character/new-character.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GameModule } from './pw/game/game.module';
     }),
     LoginPanelModule,
     CharacterModule,
+    NewCharacterModule,
     DungeonModule,
     GameModule,
     AppRoutingModule,

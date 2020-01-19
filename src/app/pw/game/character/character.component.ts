@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from '../../../../services/api/character.service';
+import { Character } from '../../../services/api/character.service';
 import { Store } from '@ngrx/store';
-import { CharacterState } from '../../../../store/state/character.state';
-import { getCharacter } from '../../../../store/selectors/character.selector';
-import { BaseComponent } from '../../../base-component';
+import { CharacterState } from '../../../store/state/character.state';
+import { getCharacter } from '../../../store/selectors/character.selector';
+import { BaseComponent } from '../../base-component';
 
 @Component({
   selector: 'pw-character',

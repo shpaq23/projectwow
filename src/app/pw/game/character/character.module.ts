@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CharacterComponent } from './character/character.component';
-import { NewCharacterComponent } from './new-character/new-character.component';
+import { CharacterComponent } from './character.component';
 import { StoreModule } from '@ngrx/store';
 import { characterReducer } from '../../../store/reducers/character-reducer';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,7 +12,7 @@ import { UiModule } from '../../../ui/ui.module';
 
 
 @NgModule({
-  declarations: [CharacterComponent, NewCharacterComponent],
+  declarations: [CharacterComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('character', characterReducer),

@@ -1,0 +1,43 @@
+@import "~src/styles/variables";
+@import "~src/styles/mixins";
+
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  fa-icon {
+    @include cursorPointer;
+    font-size: 20px;
+
+    &.disabled {
+      @include cursorNotAllowed;
+      color: #1d1d1d;
+
+    }
+
+  }
+
+  span, h3 {
+    color: $aliceBlue;
+    text-align: center;
+  }
+
+  h3 {
+    margin: 0 0 4px 0;
+    color: $arrowListHeaderColor;
+  }
+
+  span {
+    width: 200px;
+    border-radius: 8px;
+    background-color: $arrowListSelectBackground;
+    padding: 3px 8px;
+    border: 2px solid $arrowListBorderColor;
+    user-select: none;
+  }
+
+
+}

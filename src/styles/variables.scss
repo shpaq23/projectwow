@@ -6,6 +6,7 @@ $textShadowColor: rgb(52, 52, 52);
 $yellowLighter: rgb(255, 218, 9);
 $hordeRed: #710002;
 $allianceBlue: #000485;
+$aliceBlue: aliceblue;
 
 // Input Colors:
 $inputBorderColor: rgb(186, 183, 186);
@@ -18,6 +19,11 @@ $inputPlaceholderColor: rgba(239, 240, 255, 0.38);
 $buttonBackgroundColor: rgb(127, 13, 9);
 $buttonBorderColor: rgb(56, 55, 54);
 $buttonActiveBackgroundColor: rgb(69, 12, 9);
+
+//ArrowList colors:
+$arrowListSelectBackground: #292929;
+$arrowListBorderColor: black;
+$arrowListHeaderColor: #9E9E9E;
 
 // Body
 $bodyPaddingTop: 100px;
@@ -34,6 +40,7 @@ $borderBoxShadowIconActive: 0 0 8px 4px #82b9db;
 // App
 $appLoginBackgroundColor: rgba(0, 0, 0, 0.38);
 $appCharacterBackgroundColor: rgba(92, 86, 84, 0.82);
+$gameBackground: #3e3532;
 
 // tooltip
 $tooltipBackgroundColor: rgb(11, 20, 50);
