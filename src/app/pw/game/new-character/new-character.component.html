@@ -3,28 +3,31 @@
 
   <pw-arrow-list-selector
     listName="Sex"
-    [list]="newCharacterStructure.body.sex" (selectedItemEmitter)="onItemSelect($event)">
+    [list]="newCharacterStructure.body.sex" (selectedItemEmitter)="selectSex($event)">
   </pw-arrow-list-selector>
 
   <pw-arrow-list-selector
     listName="Skin Color"
-    [list]="newCharacterStructure.body.skin" (selectedItemEmitter)="onItemSelect($event)">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Nose"
-    [list]="newCharacterStructure.body.nose" (selectedItemEmitter)="onItemSelect($event)">
+    [list]="newCharacterStructure.body.skin" (selectedItemEmitter)="selectSkin($event)">
   </pw-arrow-list-selector>
 
   <pw-arrow-list-selector
     listName="Eyes"
-    [list]="newCharacterStructure.body.eyes" (selectedItemEmitter)="onItemSelect($event)">
+    [list]="newCharacterStructure.body.eyes" (selectedItemEmitter)="selectEyes($event)">
   </pw-arrow-list-selector>
 
+  <pw-arrow-list-selector
+    listName="Nose"
+    [list]="newCharacterStructure.body.nose" (selectedItemEmitter)="selectNose($event)">
+  </pw-arrow-list-selector>
 
   <pw-arrow-list-selector
     listName="Ears"
-    [list]="newCharacterStructure.body.ears" (selectedItemEmitter)="onItemSelect($event)">
+    [list]="newCharacterStructure.body.ears" (selectedItemEmitter)="selectEars($event)">
   </pw-arrow-list-selector>
 
+</div>
+
+<div class="pw-column-container">
+  <pw-model-viewer></pw-model-viewer>
 </div>

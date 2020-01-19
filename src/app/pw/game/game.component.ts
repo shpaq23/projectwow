@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {BaseComponent} from '../base-component';
 import {CharacterState} from '../../store/state/character.state';
 import {Store} from '@ngrx/store';
-import {getCharacter} from '../../store/selectors/character.selector';
+import { getNewCharacter } from '../../store/selectors/character.selector';
 
 @Component({
   selector: 'pw-game',
@@ -12,7 +12,7 @@ import {getCharacter} from '../../store/selectors/character.selector';
 })
 export class GameComponent extends BaseComponent implements OnInit {
 
-  characterLoaded = false;
+  newCharacter = false;
 
   constructor(private characterStore: Store<CharacterState>,
               private changeDetectorRef: ChangeDetectorRef) {
@@ -25,10 +25,10 @@ export class GameComponent extends BaseComponent implements OnInit {
 
   private setCharacterLoaded(): void {
     this.characterStore
-      .select(getCharacter)
+      .select(getNewCharacter)
       .pipe(this.takeUntilDestroy())
       .subscribe(character => {
-        this.characterLoaded = !(character);
+        this.newCharacter = character;
         this.changeDetectorRef.detectChanges();
       });
   }

@@ -21,6 +21,7 @@ import { QuestionIconComponent } from './icons/question-icon/question-icon.compo
 import { InfoIconComponent } from './icons/info-icon/info-icon.component';
 import { GlobalLoaderComponent } from './global-loader/global-loader.component';
 import { ArrowListSelectorComponent } from './arrow-list-selector/arrow-list-selector.component';
+import { ModelViewerComponent } from './model-viewer/model-viewer.component';
 
 const declarations = [
   ButtonComponent,
@@ -30,7 +31,8 @@ const declarations = [
   QuestionIconComponent,
   InfoIconComponent,
   GlobalLoaderComponent,
-  ArrowListSelectorComponent
+  ArrowListSelectorComponent,
+  ModelViewerComponent
 ];
 
 @NgModule({

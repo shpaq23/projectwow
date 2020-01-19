@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PhaserWorldScene } from '../../../phaser/PhaserWorldScene';
 import { PhaserBootScene } from '../../../phaser/PhaserBootScene';
 
@@ -9,8 +9,6 @@ import { PhaserBootScene } from '../../../phaser/PhaserBootScene';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DungeonComponent implements OnInit {
-
-  @HostBinding('class.pw-mt-8') marginTop = true;
 
   phaserConfig: Phaser.Types.Core.GameConfig;
 

@@ -5,10 +5,7 @@ import { RegisterForm } from '../../pw/login-panel/register/register-panel.compo
 import { Observable, of, throwError, timer } from 'rxjs';
 import { delay, mergeMap } from 'rxjs/operators';
 import { LoginForm } from '../../pw/login-panel/login/login-panel.component';
-
-export interface User {
-  token: string;
-}
+import { UserResponse } from './structure-responses/user.response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +24,7 @@ export class AuthService {
     // return timer(this.delay).pipe(mergeMap(() => throwError('External Server Error')));
   }
 
-  login(loginForm: LoginForm): Observable<User> {
+  login(loginForm: LoginForm): Observable<UserResponse> {
     // return this.httpClient.post<User>(this.url + '/login', loginForm);
     return of({token: '0192830921893012830128390192873123091823'})
       .pipe(delay(this.delay));

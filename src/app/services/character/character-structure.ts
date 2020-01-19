@@ -1,4 +1,4 @@
-export interface NewCharacterStructure {
+export interface CharacterStructure {
   body: {
     sex: string[],
     skin: string[],

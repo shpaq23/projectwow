@@ -1,4 +1,4 @@
-import { Character } from '../../services/api/character.service';
+import { Character } from '../../utils/character/Character';
 
 export interface CharacterState {
   character: Character;

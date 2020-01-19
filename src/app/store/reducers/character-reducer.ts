@@ -8,6 +8,7 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
         ... state,
         character: action.payload,
         loaded: true,
+        newCharacter: false,
         error: ''
       };
     case CharacterActionsTypes.GetCharacterFail:
@@ -21,6 +22,11 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
         newCharacter: action.payload,
         loaded: true,
         error: ''
+      };
+    case CharacterActionsTypes.UpdateCharacter:
+      return {
+        ... state,
+        character: action.payload
       };
     default:
       return state;
