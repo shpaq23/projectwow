@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Character, NewCharacterRace } from '../../services/api/character.service';
+import { Character } from '../../services/api/character.service';
 
 export enum CharacterActionsTypes {
   GetCharacter = '[Character] Get Character',
@@ -32,7 +32,7 @@ export class GetNewCharacter implements Action {
 
 export class GetNewCharacterSuccess implements Action {
   public readonly type = CharacterActionsTypes.GetNewCharacterSuccess;
-  constructor(public payload: NewCharacterRace[]) { }
+  constructor(public payload: boolean) { }
 }
 
 export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail |

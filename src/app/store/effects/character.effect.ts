@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Character, CharacterService, NewCharacterRace } from '../../services/api/character.service';
+import { Character, CharacterService } from '../../services/api/character.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -37,10 +37,11 @@ export class CharacterEffect {
     )));
 
   private isCharacterResponse(character: any): character is Character {
-    return 'nickname' in character;
+    return typeof character !== 'boolean';
   }
 
-  private isNewCharacterResponse(character: any): character is NewCharacterRace[] {
-    return Array.isArray(character) && 'race' in character[0];
+  private isNewCharacterResponse(character: any): character is boolean {
+    return typeof character === 'boolean';
   }
+
 }
