@@ -64,6 +64,8 @@ export class CharacterAssetsService {
       this.assetsExtension;
   }
 
+
+
   private getBodyPath(look: CharacterLook): string {
     return this.assetsPath +
       '/body' +

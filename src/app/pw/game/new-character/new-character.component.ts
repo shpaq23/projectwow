@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CharacterStructureService } from '../../../services/character/character-structure.service';
-import { CharacterStructure } from '../../../services/character/character-structure';
+import {NewCharacterStructure, NewCharacterStructureInterface} from '../../../services/character/new-character-structure';
 import { Store } from '@ngrx/store';
 import { CharacterState } from '../../../store/state/character.state';
 import { Sex } from '../../../utils/character/enums/sex.enum';
@@ -19,7 +18,7 @@ import { UpdateCharacter } from '../../../store/actions/character.action';
 })
 export class NewCharacterComponent implements OnInit {
 
-  newCharacterStructure: CharacterStructure;
+  newCharacterStructure: NewCharacterStructureInterface;
   selectedSex: Sex = Sex.MALE;
   selectedSkin: Skin = Skin.LIGHT;
   selectedNose: Nose = Nose.DEFAULT;
@@ -27,37 +26,36 @@ export class NewCharacterComponent implements OnInit {
   selectedEars: Ears = Ears.DEFAULT;
 
 
-  constructor(private newCharacterService: CharacterStructureService,
-              private characterStore: Store<CharacterState>) {
+  constructor(private characterStore: Store<CharacterState>) {
 
   }
 
   ngOnInit(): void {
-    this.newCharacterStructure = this.newCharacterService.getNewCharacterStructure();
+    this.newCharacterStructure = NewCharacterStructure.getStructure();
   }
 
-  selectSex(sex: Sex): void {
-    this.selectedSex = sex;
+  selectSex(sex: string): void {
+    this.selectedSex = sex as Sex;
     this.setCharacter();
   }
 
-  selectSkin(skin: Skin): void {
-    this.selectedSkin = skin;
+  selectSkin(skin: string): void {
+    this.selectedSkin = skin as Skin;
     this.setCharacter();
   }
 
-  selectNose(nose: Nose): void {
-    this.selectedNose = nose;
+  selectNose(nose: string): void {
+    this.selectedNose = nose as Nose;
     this.setCharacter();
   }
 
-  selectEyes(eyes: Eyes): void {
-    this.selectedEyes = eyes;
+  selectEyes(eyes: string): void {
+    this.selectedEyes = eyes as Eyes;
     this.setCharacter();
   }
 
-  selectEars(ears: Ears): void {
-    this.selectedEars = ears;
+  selectEars(ears: string): void {
+    this.selectedEars = ears as Ears;
     this.setCharacter();
   }
 

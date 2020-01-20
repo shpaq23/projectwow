@@ -1,7 +1,7 @@
-import { User } from '../../services/api/auth.service';
+import {UserResponse} from '../../services/api/structure-responses/user.response';
 
 export interface UserState {
-  user: User;
+  user: UserResponse;
   error: string;
   loading: boolean;
 }

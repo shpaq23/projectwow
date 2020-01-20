@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { LoginForm } from '../../pw/login-panel/login/login-panel.component';
-import { User } from '../../services/api/auth.service';
+import {UserResponse} from '../../services/api/structure-responses/user.response';
 
 export enum UserActionsTypes {
   LoginUser = '[User] Login User',
@@ -24,7 +24,7 @@ export class LoginUser implements Action {
 export class LoginUserSuccess implements Action {
   public readonly type = UserActionsTypes.LoginUserSuccess;
 
-  constructor(public payload: User) { }
+  constructor(public payload: UserResponse) { }
 }
 
 export class LoginUserFail implements Action {
