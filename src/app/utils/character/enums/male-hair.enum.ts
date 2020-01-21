@@ -5,5 +5,6 @@ export enum MaleHair {
   BEDHEAD = 'Bed Head',
   MOHAWK = 'Mohawk',
   PAGE = 'Page',
-  PARTED = 'Parted'
+  PARTED = 'Parted',
+  INDEX = '78'
 }

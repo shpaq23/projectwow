@@ -9,6 +9,7 @@ import {HairColor} from '../../utils/character/enums/hair-color.enum';
 import {Torso} from '../../utils/character/enums/torso.enum';
 import {Legs} from '../../utils/character/enums/legs.enum';
 import {Shoes} from '../../utils/character/enums/shoes.enum';
+import {Weapon} from '../../utils/character/enums/weapon.enum';
 
 export interface NewCharacterStructureInterface {
   sex: string[];
@@ -22,6 +23,7 @@ export interface NewCharacterStructureInterface {
   torso: string[];
   legs: string[];
   shoes: string[];
+  weapons: string[];
 }
 
 export class NewCharacterStructure {
@@ -45,12 +47,13 @@ export class NewCharacterStructure {
         FemaleHair.PRINCESS, FemaleHair.SWOOP, FemaleHair.UNKEMPT
       ],
       hairColor: [
-        HairColor.WHITEBLONDE, HairColor.BLONDE, HairColor.DARKBLONDE, HairColor.DARKBLONDE,
+        HairColor.WHITEBLONDE, HairColor.BLONDE, HairColor.DARKBLONDE, HairColor.BRUNETTE,
         HairColor.BLUE, HairColor.GREEN, HairColor.PINK, HairColor.RAVEN
       ],
       torso: [Torso.DEFAULT, Torso.BROWNSHIRT, Torso.MAROONSHIRT, Torso.TEALSHIRT, Torso.WHITESHIRT],
       legs: [Legs.DEFAULT, Legs.MAGENTAPANTS, Legs.REDPANTS, Legs.TEALPANTS, Legs.WHITEPANTS],
-      shoes: [Shoes.DEFAULT, Shoes.BLACKSHOES, Shoes.BROWNSHOES, Shoes.MAROONSHOES]
+      shoes: [Shoes.DEFAULT, Shoes.BLACKSHOES, Shoes.BROWNSHOES, Shoes.MAROONSHOES],
+      weapons: [Weapon.DAGGER]
     };
   }
 

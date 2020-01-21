@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { FaIcon } from '../fa-icon.enum';
 import { Subject } from 'rxjs';
 import { BaseComponent } from '../../pw/base-component';
@@ -10,7 +20,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./arrow-list-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArrowListSelectorComponent extends BaseComponent implements OnInit {
+export class ArrowListSelectorComponent extends BaseComponent implements OnInit, OnChanges {
 
   @Input() list: string[];
 
@@ -32,6 +42,14 @@ export class ArrowListSelectorComponent extends BaseComponent implements OnInit 
 
   constructor(private changeDetectionRef: ChangeDetectorRef) {
     super();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.list.currentValue) {
+      this.selectedItem = this.list[0];
+      this.setCanSelectNext();
+      this.setCanSelectPrevious();
+    }
   }
 
   ngOnInit(): void {

@@ -5,5 +5,6 @@ export enum FemaleHair {
   PONYTAIL = 'Ponytail',
   PRINCESS = 'Princess',
   SWOOP = 'Swoop',
-  UNKEMPT = 'Unkempt'
+  UNKEMPT = 'Unkempt',
+  INDEX = '78'
 }

@@ -3,5 +3,6 @@ export enum Legs {
   MAGENTAPANTS = 'Magenta Pants',
   REDPANTS = 'Red Pants',
   TEALPANTS = 'Teal Pants',
-  WHITEPANTS = 'White Pants'
+  WHITEPANTS = 'White Pants',
+  INDEX = '78'
 }

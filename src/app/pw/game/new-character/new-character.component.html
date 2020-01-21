@@ -26,8 +26,44 @@
     [list]="newCharacterStructure.ears" (selectedItemEmitter)="selectEars($event)">
   </pw-arrow-list-selector>
 
+  <pw-arrow-list-selector
+    listName="Hair"
+    [list]="selectedSex === 'Male'? newCharacterStructure.maleHair : newCharacterStructure.femaleHair"
+    (selectedItemEmitter)="selectHair($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Hair Color"
+    [list]="newCharacterStructure.hairColor" (selectedItemEmitter)="selectHairColor($event)">
+  </pw-arrow-list-selector>
+
 </div>
 
 <div class="pw-column-container">
   <pw-model-viewer></pw-model-viewer>
+</div>
+<div class="pw-column-container pw-p-5">
+  <h2>Equipment</h2>
+
+  <pw-arrow-list-selector
+    listName="Torso"
+    [list]="newCharacterStructure.torso" (selectedItemEmitter)="selectTorso($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Legs"
+    [list]="newCharacterStructure.legs" (selectedItemEmitter)="selectLegs($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Shoes"
+    [list]="newCharacterStructure.shoes" (selectedItemEmitter)="selectShoes($event)">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Weapons"
+    [list]="newCharacterStructure.weapons" (selectedItemEmitter)="selectWeapon($event)">
+  </pw-arrow-list-selector>
+
+
 </div>

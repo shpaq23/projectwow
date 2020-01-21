@@ -3,5 +3,6 @@ export enum Torso {
   BROWNSHIRT = 'Brown Shirt',
   MAROONSHIRT = 'Maroon Shirt',
   WHITESHIRT = 'White Shirt',
-  TEALSHIRT = 'Teal Shirt'
+  TEALSHIRT = 'Teal Shirt',
+  INDEX = '78'
 }

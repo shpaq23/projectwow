@@ -49,7 +49,12 @@ export class ModelViewerComponent extends BaseComponent implements OnInit {
       { src: this.characterAssetsService.getSkin(character), loaded: false },
       { src: this.characterAssetsService.getEyes(character), loaded: false },
       { src: this.characterAssetsService.getNose(character), loaded: false },
-      { src: this.characterAssetsService.getEars(character), loaded: false }
+      { src: this.characterAssetsService.getEars(character), loaded: false },
+      { src: this.characterAssetsService.getHair(character), loaded: false },
+      { src: this.characterAssetsService.getTorso(character), loaded: false },
+      { src: this.characterAssetsService.getLegs(character), loaded: false },
+      { src: this.characterAssetsService.getShoes(character), loaded: false },
+      { src: this.characterAssetsService.getWeapon(character), loaded: false }
     ];
   }
 
