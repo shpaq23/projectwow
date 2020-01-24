@@ -1,0 +1,65 @@
+<div class="pw-column-container pw-p-7">
+
+  <pw-arrow-list-selector
+    listName="Sex"
+    [list]="newCharacterStructure.sex" (selectedItemEmitter)="selectSex($event)" [selected]="selectedSex">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Skin Color"
+    [list]="newCharacterStructure.skin" (selectedItemEmitter)="selectSkin($event)" [selected]="selectedSkin">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Eyes"
+    [list]="newCharacterStructure.eyes" (selectedItemEmitter)="selectEyes($event)" [selected]="selectedEyes">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Nose"
+    [list]="newCharacterStructure.nose" (selectedItemEmitter)="selectNose($event)" [selected]="selectedNose">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    class="pw-mb-6"
+    listName="Ears"
+    [list]="newCharacterStructure.ears" (selectedItemEmitter)="selectEars($event)" [selected]="selectedEars">
+  </pw-arrow-list-selector>
+
+</div>
+
+<div class="pw-column-container model-container">
+  <pw-model-viewer></pw-model-viewer>
+  <pw-button class="pw-m-6" (click)="selectRandomLook()">Randomize</pw-button>
+</div>
+<div class="pw-column-container pw-p-7">
+
+  <pw-arrow-list-selector
+    listName="Hair"
+    [list]="selectedSex === 'Male'? newCharacterStructure.maleHair : newCharacterStructure.femaleHair"
+    (selectedItemEmitter)="selectHair($event)"
+    [selected]="selectedHair">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Hair Color"
+    [list]="newCharacterStructure.hairColor" (selectedItemEmitter)="selectHairColor($event)" [selected]="selectedHairColor">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Torso"
+    [list]="newCharacterStructure.torso" (selectedItemEmitter)="selectTorso($event)" [selected]="selectedTorso">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    listName="Legs"
+    [list]="newCharacterStructure.legs" (selectedItemEmitter)="selectLegs($event)" [selected]="selectedLegs">
+  </pw-arrow-list-selector>
+
+  <pw-arrow-list-selector
+    class="pw-mb-6"
+    listName="Shoes"
+    [list]="newCharacterStructure.shoes" (selectedItemEmitter)="selectShoes($event)" [selected]="selectedShoes">
+  </pw-arrow-list-selector>
+
+</div>

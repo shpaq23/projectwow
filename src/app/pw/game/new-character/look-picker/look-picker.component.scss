@@ -1,0 +1,22 @@
+@import "~src/styles/variables";
+
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+
+  .pw-column-container {
+    border: 2px $borderYellow solid;
+    border-radius: $borderRadius;
+
+    &.model-container {
+      margin-top: auto;
+    }
+
+    pw-arrow-list-selector:not(:first-child) {
+      margin-top: 12px;
+
+    }
+
+  }
+}

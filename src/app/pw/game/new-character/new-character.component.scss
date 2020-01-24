@@ -1,20 +1,33 @@
 @import "~src/styles/variables";
+@import "~src/styles/mixins";
 
 :host {
   display: flex;
   width: 100%;
+  flex-direction: column;
+  margin: auto;
 
-  h2 {
-    text-align: center;
-  }
 
-  .pw-column-container {
-    border: 2px $borderYellow solid;
-    border-radius: $borderRadius;
+  .form-container {
+    height: 110px;
+    position: relative;
+    align-items: flex-end;
 
-    pw-arrow-list-selector:not(:first-child) {
-      margin-top: 12px;
+    .errors {
+      position: absolute;
+      top: 0;
 
+      span {
+        @include fontError;
+        font-weight: bold;
+      }
     }
+
   }
+
+  input {
+    width: 200px;
+  }
+
+
 }

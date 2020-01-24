@@ -1,70 +1,22 @@
-<div class="pw-column-container pw-p-5">
-  <h2>Body</h2>
-
-  <pw-arrow-list-selector
-    listName="Sex"
-    [list]="newCharacterStructure.sex" (selectedItemEmitter)="selectSex($event)" [selected]="selectedSex">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Skin Color"
-    [list]="newCharacterStructure.skin" (selectedItemEmitter)="selectSkin($event)" [selected]="selectedSkin">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Eyes"
-    [list]="newCharacterStructure.eyes" (selectedItemEmitter)="selectEyes($event)" [selected]="selectedEyes">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Nose"
-    [list]="newCharacterStructure.nose" (selectedItemEmitter)="selectNose($event)" [selected]="selectedNose">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Ears"
-    [list]="newCharacterStructure.ears" (selectedItemEmitter)="selectEars($event)" [selected]="selectedEars">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Hair"
-    [list]="selectedSex === 'Male'? newCharacterStructure.maleHair : newCharacterStructure.femaleHair"
-    (selectedItemEmitter)="selectHair($event)"
-    [selected]="selectedHair">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Hair Color"
-    [list]="newCharacterStructure.hairColor" (selectedItemEmitter)="selectHairColor($event)" [selected]="selectedHairColor">
-  </pw-arrow-list-selector>
-
-</div>
-
-<div class="pw-column-container">
-  <pw-model-viewer></pw-model-viewer>
-  <pw-button class="pw-m-6" (click)="selectRandomLook()">Randomize</pw-button>
-</div>
-<div class="pw-column-container pw-p-5">
-  <h2>Equipment</h2>
-
-  <pw-arrow-list-selector
-    listName="Torso"
-    [list]="newCharacterStructure.torso" (selectedItemEmitter)="selectTorso($event)" [selected]="selectedTorso">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Legs"
-    [list]="newCharacterStructure.legs" (selectedItemEmitter)="selectLegs($event)" [selected]="selectedLegs">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Shoes"
-    [list]="newCharacterStructure.shoes" (selectedItemEmitter)="selectShoes($event)" [selected]="selectedShoes">
-  </pw-arrow-list-selector>
-
-  <pw-arrow-list-selector
-    listName="Weapons"
-    [list]="newCharacterStructure.weapons" (selectedItemEmitter)="selectWeapon($event)" [selected]="selectedWeapon">
-  </pw-arrow-list-selector>
-
+<pw-look-picker></pw-look-picker>
+<div class="pw-row-container-center form-container pw-mt-8">
+  <div *ngIf="(!loading && !isValid) || serverError" class="errors pw-column-container-center pw-bottom-vertical">
+    <span *ngIf="form.get('nickname').hasError('required')">Nickname is required</span>
+    <span *ngIf="form.get('nickname').hasError('minlength')">Nickname too short</span>
+    <span *ngIf="serverError">{{serverError}}</span>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="pw-column-container-center pw-mb-5">
+      <label class="pw-label pw-mb-1" for="nickname">Nickname</label>
+      <input (keyup.enter)="!loading && onSubmit()" [class.invalid]="isNicknameValid" class="pw-input"
+             formControlName="nickname" type="email" id="nickname" autocomplete="off" maxlength="16">
+    </div>
+    <pw-button (click)="!loading && isValid && onSubmit()"
+               [disabled]="!isValid || loading"
+               [spinLeft]="loading"
+               [spinRight]="loading"
+               [faIconLeft]="loading && faIcon.cog"
+               [faIconRight]="loading && faIcon.cog">Log in
+    </pw-button>
+  </form>
 </div>
