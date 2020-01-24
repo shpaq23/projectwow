@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NewCharacterStructure, NewCharacterStructureInterface} from '../../../services/character/new-character-structure';
 import {Store} from '@ngrx/store';
 import {CharacterState} from '../../../store/state/character.state';
@@ -21,21 +21,22 @@ import {Weapon} from '../../../utils/character/enums/weapon.enum';
 @Component({
   selector: 'pw-new-character',
   templateUrl: './new-character.component.html',
-  styleUrls: ['./new-character.component.scss']
+  styleUrls: ['./new-character.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewCharacterComponent implements OnInit {
 
   newCharacterStructure: NewCharacterStructureInterface;
-  selectedSex: Sex = Sex.MALE;
-  selectedSkin: Skin = Skin.LIGHT;
-  selectedNose: Nose = Nose.DEFAULT;
-  selectedEyes: Eyes = Eyes.DEFAULT;
-  selectedEars: Ears = Ears.DEFAULT;
-  selectedHair: MaleHair | FemaleHair = MaleHair.DEFAULT;
-  selectedHairColor: HairColor = HairColor.BLONDE;
-  selectedTorso: Torso = Torso.DEFAULT;
-  selectedLegs: Legs = Legs.DEFAULT;
-  selectedShoes: Shoes = Shoes.DEFAULT;
+  selectedSex: Sex;
+  selectedSkin: Skin;
+  selectedNose: Nose;
+  selectedEyes: Eyes;
+  selectedEars: Ears;
+  selectedHair: MaleHair | FemaleHair;
+  selectedHairColor: HairColor;
+  selectedTorso: Torso;
+  selectedLegs: Legs;
+  selectedShoes: Shoes;
   selectedWeapon: Weapon = Weapon.DAGGER;
 
 
@@ -45,6 +46,7 @@ export class NewCharacterComponent implements OnInit {
 
   ngOnInit(): void {
     this.newCharacterStructure = NewCharacterStructure.getStructure();
+    this.selectRandomLook();
   }
 
   selectSex(sex: string): void {
@@ -106,6 +108,24 @@ export class NewCharacterComponent implements OnInit {
     this.selectedWeapon = weapon as Weapon;
     this.setCharacter();
   }
+
+  selectRandomLook(): void {
+    this.selectedSex = this.newCharacterStructure.sex[Math.round(Math.random())] as Sex;
+    this.selectedSkin = this.newCharacterStructure.skin[Math.floor(Math.random() * 5)] as Skin;
+    this.selectedEars = this.newCharacterStructure.ears[Math.floor(Math.random() * 2) + 1] as Ears;
+    this.selectedEyes = this.newCharacterStructure.eyes[Math.floor(Math.random() * 8) + 1] as Eyes;
+    this.selectedNose = this.newCharacterStructure.nose[Math.floor(Math.random() * 3) + 1] as Nose;
+    this.selectedHair = this.selectedSex === Sex.MALE ?
+      this.newCharacterStructure.maleHair[Math.floor(Math.random() * 6) + 1] as MaleHair :
+      this.newCharacterStructure.femaleHair[Math.floor(Math.random() * 6) + 1] as FemaleHair;
+    this.selectedHairColor = this.newCharacterStructure.hairColor[Math.floor(Math.random() * 8)] as HairColor;
+    this.selectedTorso = this.newCharacterStructure.torso[Math.floor(Math.random() * 4) + 1] as Torso;
+    this.selectedLegs = this.newCharacterStructure.legs[Math.floor(Math.random() * 4) + 1] as Legs;
+    this.selectedShoes = this.newCharacterStructure.shoes[Math.floor(Math.random() * 3) + 1] as Shoes;
+
+    this.setCharacter();
+  }
+
 
   private setCharacter(): void {
     const look: CharacterLook = {

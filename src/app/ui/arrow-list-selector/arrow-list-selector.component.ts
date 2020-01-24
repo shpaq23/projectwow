@@ -26,6 +26,8 @@ export class ArrowListSelectorComponent extends BaseComponent implements OnInit,
 
   @Input() listName: string;
 
+  @Input() selected: string;
+
   @Output() selectedItemEmitter = new EventEmitter<string>();
 
   chevronLeft = FaIcon.chevronLeft;
@@ -45,21 +47,29 @@ export class ArrowListSelectorComponent extends BaseComponent implements OnInit,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.list.currentValue) {
+
+    if (changes.list) {
       this.selectedItem = this.list[0];
       this.setCanSelectNext();
       this.setCanSelectPrevious();
     }
+
+    if (changes.selected) {
+      this.selectedItem = this.selected;
+      this.setCanSelectNext();
+      this.setCanSelectPrevious();
+      this.changeDetectionRef.detectChanges();
+    }
   }
 
   ngOnInit(): void {
-    this.selectedItem = this.list[0];
     this.debouncer
       .pipe(
         this.takeUntilDestroy(),
         debounceTime(150))
-      .subscribe(value => this.selectedItemEmitter.emit(value));
-    this.afterItemSelection();
+      .subscribe(value => {
+        this.selectedItemEmitter.emit(value);
+      });
   }
 
   selectNextItem(): void {

@@ -1,4 +1,3 @@
-<fa-icon class="pw-z-index-1 pw-center" *ngIf="showLoader" [icon]="loaderIcon" [spin]="true"></fa-icon>
 <ng-container *ngFor="let src of sources">
   <img *ngIf="src.src" draggable="false" [height]="height" [src]="src.src" (load)="imageLoaded(src.src)" alt="model">
 </ng-container>

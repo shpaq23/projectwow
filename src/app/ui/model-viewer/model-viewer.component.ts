@@ -20,9 +20,7 @@ export class ModelViewerComponent extends BaseComponent implements OnInit {
 
   sources: { src: string; loaded: boolean; }[] = [];
 
-  showLoader = true;
-
-  loaderIcon = FaIcon.cog;
+  loading = true;
 
   constructor(private characterStore: Store<CharacterState>,
               private changeDetectorRef: ChangeDetectorRef,
@@ -60,7 +58,7 @@ export class ModelViewerComponent extends BaseComponent implements OnInit {
 
   imageLoaded(src: string): void {
     this.sources.find(value => value.src === src).loaded = true;
-    this.showLoader = this.sources.some(value => value.src && !value.loaded);
+    this.loading = this.sources.some(value => value.src && !value.loaded);
     this.changeDetectorRef.detectChanges();
   }
 }
