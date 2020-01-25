@@ -1,5 +1,5 @@
-import { PhaserCustomKeys } from './PhaserCustomKeys';
-import { PhaserAnimations } from './PhaserAnimations';
+import { PhaserCustomKeys } from '../utils/PhaserCustomKeys';
+import { PhaserAnimations } from '../utils/PhaserAnimations';
 
 export class PhaserWorldScene extends Phaser.Scene {
 
@@ -26,6 +26,7 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.customKeys = new PhaserCustomKeys(this);
     this.animations = new PhaserAnimations(this.anims);
     this.animations.createCharacterMoveAnimations();
+    this.animations.createCharacterAttackAnimations();
     // this.physics.add.collider(this.character, this.obstacles);
   }
 
@@ -59,17 +60,23 @@ export class PhaserWorldScene extends Phaser.Scene {
   }
 
   private setMovementAnimations(): void {
-    const leftButtonDown = this.customKeys.activePointer.leftButtonDown();
+    const activePointer = this.customKeys.activePointer;
     if (this.customKeys.A.isDown) {
       this.character.anims.play('moveLeft', true);
-      if (leftButtonDown) {
-      }
     } else if (this.customKeys.D.isDown) {
       this.character.anims.play('moveRight', true);
     } else if (this.customKeys.S.isDown) {
       this.character.anims.play('moveDown', true);
     } else if (this.customKeys.W.isDown) {
       this.character.anims.play('moveUp', true);
+    } else if (activePointer.leftButtonDown()) {
+      console.log('activePointer  x', activePointer.worldX);
+      console.log('player  x', this.character.x);
+      if (activePointer.worldX <= this.character.x) {
+        this.character.anims.play('attackLeft', true);
+      } else {
+        this.character.anims.play('attackRight', true);
+      }
     } else {
       this.character.anims.stop();
     }

@@ -38,12 +38,12 @@ export class PhaserCharacterAnimationFramesGenerator {
     return this.generateFrames(this.attackAnimationLength, animationRow);
   }
 
-  getAttackAnimationDownFrames(): number[] {
+  getAttackDownAnimationFrames(): number[] {
     const animationRow = 14;
     return this.generateFrames(this.attackAnimationLength, animationRow);
   }
 
-  getAttackAnimationRight(): number[] {
+  getAttackRightAnimation(): number[] {
     const animationRow = 15;
     return this.generateFrames(this.attackAnimationLength, animationRow);
   }
