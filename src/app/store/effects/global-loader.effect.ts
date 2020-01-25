@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 import { StartLoading, StopLoading } from '../actions/global-loader.action';
 
 const startLoaderActions = [
-  CharacterActionsTypes.GetCharacter,
-  CharacterActionsTypes.GetNewCharacter
+  // CharacterActionsTypes.GetCharacter,
+  // CharacterActionsTypes.GetNewCharacter
 ];
 const stopLoaderActions = [
   CharacterActionsTypes.GetCharacterFail,

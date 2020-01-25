@@ -7,9 +7,12 @@
   flex-direction: column;
   margin: auto;
 
+  h2 {
+    text-align: center;
+  }
 
   .form-container {
-    height: 110px;
+    height: 130px;
     position: relative;
     align-items: flex-end;
 

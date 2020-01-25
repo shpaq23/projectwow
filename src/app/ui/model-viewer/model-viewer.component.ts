@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CharacterState } from '../../store/state/character.state';
 import { Store } from '@ngrx/store';
 import { CharacterAssetsService } from '../../services/character/character-assets.service';
@@ -14,7 +14,7 @@ import { FaIcon } from '../fa-icon.enum';
   styleUrls: ['./model-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModelViewerComponent extends BaseComponent implements OnInit {
+export class ModelViewerComponent extends BaseComponent implements OnInit, OnDestroy {
 
   @Input() height = 256;
 
@@ -30,9 +30,7 @@ export class ModelViewerComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.characterStore.select(getCharacter)
-      .pipe(
-        this.takeUntilDestroy(),
-        debounceTime(100))
+      .pipe(this.takeUntilDestroy())
       .subscribe((character: Character) => {
         if (character) {
           this.setSources(character);

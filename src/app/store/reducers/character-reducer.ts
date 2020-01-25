@@ -28,6 +28,21 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
         ... state,
         character: action.payload
       };
+    case CharacterActionsTypes.CreateNewCharacterSuccess:
+      return {
+        ... state,
+        error: ''
+      };
+    case CharacterActionsTypes.CreateNewCharacterFail:
+      return {
+        ... state,
+        error: action.payload
+      };
+    case CharacterActionsTypes.ClearErrorMessage:
+      return {
+        ... state,
+        error: ''
+      };
     default:
       return state;
   }

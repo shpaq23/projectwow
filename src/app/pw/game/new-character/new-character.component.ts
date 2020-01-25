@@ -1,8 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {CharacterState} from '../../../store/state/character.state';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { CharacterState } from '../../../store/state/character.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FaIcon } from '../../../ui/fa-icon.enum';
+import { ClearErrorMessage, CreateNewCharacter } from '../../../store/actions/character.action';
+import { getCharacterError } from '../../../store/selectors/character.selector';
+import { BaseComponent } from '../../base-component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pw-new-character',
@@ -10,7 +14,7 @@ import { FaIcon } from '../../../ui/fa-icon.enum';
   styleUrls: ['./new-character.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NewCharacterComponent implements OnInit {
+export class NewCharacterComponent extends BaseComponent implements OnInit {
 
   form: FormGroup;
   loading = false;
@@ -18,21 +22,22 @@ export class NewCharacterComponent implements OnInit {
   faIcon = FaIcon;
   serverError: string;
 
-  constructor(private characterStore: Store<CharacterState>) {
+  constructor(private characterStore: Store<CharacterState>,
+              private changeDetectorRef: ChangeDetectorRef,
+              private router: Router) {
+    super();
   }
 
   ngOnInit(): void {
-
-    this.form = new FormGroup({
-      nickname: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]})
-    }, {updateOn: 'change'});
+    this.createForm();
+    this.subscribeForNewCharacterErrorResponse();
   }
 
   get isNicknameValid(): boolean {
     return !this.loading && this.submitted && this.form.get('nickname').invalid;
   }
 
-  get formValue(): {nickname: string} {
+  get formValue(): { nickname: string } {
     return this.form.value;
   }
 
@@ -46,7 +51,28 @@ export class NewCharacterComponent implements OnInit {
       return;
     }
     this.form.disable();
-    console.log('submitted succesfully');
+    this.loading = true;
+    this.characterStore.dispatch(new ClearErrorMessage());
+    this.characterStore.dispatch(new CreateNewCharacter(this.formValue));
+  }
+
+  private subscribeForNewCharacterErrorResponse(): void {
+    this.characterStore.pipe(select(getCharacterError))
+      .pipe(this.takeUntilDestroy())
+      .subscribe(error => {
+        if (this.submitted && error) {
+          this.serverError = error;
+          this.form.enable();
+          this.loading = false;
+          this.changeDetectorRef.detectChanges();
+        }
+      });
+  }
+
+  private createForm(): void {
+    this.form = new FormGroup({
+      nickname: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]})
+    }, {updateOn: 'change'});
   }
 
 }

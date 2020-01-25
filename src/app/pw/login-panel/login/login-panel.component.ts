@@ -34,22 +34,10 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       password: new FormControl('', {validators: [Validators.required]})
     }, {updateOn: 'change'});
-    this.userStore.pipe(select(getLoggedUserError))
-      .pipe(this.takeUntilDestroy())
-      .subscribe(error => {
-        if (this.submitted) {
-          this.serverError = error;
-        }
-      });
-    this.userStore.pipe(select(getLoggedUserLoading))
-      .pipe(this.takeUntilDestroy())
-      .subscribe(loading => {
-          this.loading = loading;
-          if (!this.loading) {
-            this.form.enable();
-          }
-        }
-      );
+
+    this.subscribeForLoginResponseError();
+    this.subscribeForLoginLoading();
+
   }
 
   get isValid(): boolean {
@@ -75,6 +63,28 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
     }
     this.form.disable();
     this.userStore.dispatch(new LoginUser(this.formValue));
+  }
+
+  private subscribeForLoginResponseError(): void {
+    this.userStore.pipe(select(getLoggedUserError))
+      .pipe(this.takeUntilDestroy())
+      .subscribe(error => {
+        if (this.submitted) {
+          this.serverError = error;
+        }
+      });
+  }
+
+  private subscribeForLoginLoading(): void {
+    this.userStore.pipe(select(getLoggedUserLoading))
+      .pipe(this.takeUntilDestroy())
+      .subscribe(loading => {
+          this.loading = loading;
+          if (!this.loading) {
+            this.form.enable();
+          }
+        }
+      );
   }
 
 }

@@ -10,11 +10,17 @@ export enum CharacterActionsTypes {
   GetNewCharacterSuccess = '[Character] Get New Character Success',
 
   UpdateCharacter = '[Character] Update Character',
+
+  CreateNewCharacter = '[Character] Create New Character',
+  CreateNewCharacterSuccess = '[Character] Create New Character Success',
+  CreateNewCharacterFail = '[Character] Create New Character Fail',
+
+  ClearErrorMessage = '[Character] Clear Error Message'
 }
 
 export class GetCharacter implements Action {
   public readonly type = CharacterActionsTypes.GetCharacter;
-  constructor() { }
+  constructor(public withRedirection: boolean = false) { }
 }
 
 export class GetCharacterSuccess implements Action {
@@ -42,6 +48,26 @@ export class UpdateCharacter implements Action {
   constructor(public payload: Character) { }
 }
 
+export class CreateNewCharacter implements Action {
+  public readonly type = CharacterActionsTypes.CreateNewCharacter;
+  constructor(public payload: {nickname: string}) { }
+}
+
+export class CreateNewCharacterSuccess implements Action {
+  public readonly type = CharacterActionsTypes.CreateNewCharacterSuccess;
+  constructor() { }
+}
+
+export class CreateNewCharacterFail implements Action {
+  public readonly type = CharacterActionsTypes.CreateNewCharacterFail;
+  constructor(public payload: string) { }
+}
+
+export class ClearErrorMessage implements Action {
+  public readonly type = CharacterActionsTypes.ClearErrorMessage;
+  constructor() { }
+}
 
 export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail |
-  GetNewCharacter | GetNewCharacterSuccess | UpdateCharacter;
+  GetNewCharacter | GetNewCharacterSuccess | UpdateCharacter | CreateNewCharacter |
+  CreateNewCharacterSuccess | CreateNewCharacterFail | ClearErrorMessage;

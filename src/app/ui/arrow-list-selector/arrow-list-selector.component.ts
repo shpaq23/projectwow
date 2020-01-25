@@ -66,7 +66,7 @@ export class ArrowListSelectorComponent extends BaseComponent implements OnInit,
     this.debouncer
       .pipe(
         this.takeUntilDestroy(),
-        debounceTime(150))
+        debounceTime(50))
       .subscribe(value => {
         this.selectedItemEmitter.emit(value);
       });
