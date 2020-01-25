@@ -55,17 +55,21 @@ export class PhaserWorldScene extends Phaser.Scene {
     } else if (this.customKeys.S.isDown) {
       characterBody.setVelocityY(64);
     }
+
   }
 
   private setMovementAnimations(): void {
+    const leftButtonDown = this.customKeys.activePointer.leftButtonDown();
     if (this.customKeys.A.isDown) {
-      this.character.anims.play('A', true);
+      this.character.anims.play('moveLeft', true);
+      if (leftButtonDown) {
+      }
     } else if (this.customKeys.D.isDown) {
-      this.character.anims.play('D', true);
+      this.character.anims.play('moveRight', true);
     } else if (this.customKeys.S.isDown) {
-      this.character.anims.play('S', true);
+      this.character.anims.play('moveDown', true);
     } else if (this.customKeys.W.isDown) {
-      this.character.anims.play('W', true);
+      this.character.anims.play('moveUp', true);
     } else {
       this.character.anims.stop();
     }

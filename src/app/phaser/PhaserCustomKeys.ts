@@ -8,10 +8,13 @@ export class PhaserCustomKeys {
 
   public readonly D: Phaser.Input.Keyboard.Key;
 
+  public readonly activePointer: Phaser.Input.Pointer;
+
   constructor(phaserScene: Phaser.Scene) {
     this.W = phaserScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.S = phaserScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.A = phaserScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.D = phaserScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.activePointer = phaserScene.input.activePointer;
   }
 }

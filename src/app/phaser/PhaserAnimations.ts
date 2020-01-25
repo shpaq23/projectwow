@@ -17,31 +17,35 @@ export class PhaserAnimations {
     const frameRate = 12;
 
     this.animationManager.create({
-      key: 'W',
+      key: 'moveUp',
       frames: this.animationManager.generateFrameNumbers('character', {frames: moveUpFrames}),
       frameRate,
       repeat: -1
     });
 
     this.animationManager.create({
-      key: 'S',
+      key: 'moveDown',
       frames: this.animationManager.generateFrameNumbers('character', {frames: moveDownFrames}),
       frameRate,
       repeat: -1
     });
 
     this.animationManager.create({
-      key: 'A',
+      key: 'moveLeft',
       frames: this.animationManager.generateFrameNumbers('character', {frames: moveLeftFrames}),
       frameRate,
       repeat: -1
     });
 
     this.animationManager.create({
-      key: 'D',
+      key: 'moveRight',
       frames: this.animationManager.generateFrameNumbers('character', {frames: moveRightFrames}),
       frameRate,
       repeat: -1
     });
+  }
+
+  createCharacterAttackAnimations(): void {
+
   }
 }
