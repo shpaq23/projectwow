@@ -1,4 +1,5 @@
-import {PhaserCustomKeys} from './PhaserCustomKeys';
+import { PhaserCustomKeys } from './PhaserCustomKeys';
+import { PhaserAnimations } from './PhaserAnimations';
 
 export class PhaserWorldScene extends Phaser.Scene {
 
@@ -8,9 +9,10 @@ export class PhaserWorldScene extends Phaser.Scene {
   private obstacles: Phaser.Tilemaps.StaticTilemapLayer;
   private character: Phaser.Physics.Arcade.Sprite;
   private customKeys: PhaserCustomKeys;
+  private animations: PhaserAnimations;
 
   constructor() {
-    super({ key: 'WorldScene' });
+    super({key: 'WorldScene'});
   }
 
   create(): void {
@@ -20,11 +22,11 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
-    this.character =  this.physics.add.sprite(100, 100, 'character', 19);
-    this.character.setScale(0.4);
+    this.character = this.physics.add.sprite(100, 100, 'character', 0);
     this.customKeys = new PhaserCustomKeys(this);
-
-
+    this.animations = new PhaserAnimations(this.anims);
+    this.animations.createCharacterMoveAnimations();
+    // this.physics.add.collider(this.character, this.obstacles);
   }
 
   preload(): void {
@@ -33,6 +35,7 @@ export class PhaserWorldScene extends Phaser.Scene {
 
   update(time: number, delta: number) {
     this.setMovementEvents();
+    this.setMovementAnimations();
   }
 
   private setMovementEvents(): void {
@@ -42,17 +45,30 @@ export class PhaserWorldScene extends Phaser.Scene {
     characterBody.setVelocity(0);
 
     if (this.customKeys.A.isDown) {
-      characterBody.setVelocityX(-80);
+      characterBody.setVelocityX(-64);
     } else if (this.customKeys.D.isDown) {
-      characterBody.setVelocityX(80);
+      characterBody.setVelocityX(64);
     }
 
     if (this.customKeys.W.isDown) {
-      characterBody.setVelocityY(-80);
+      characterBody.setVelocityY(-64);
     } else if (this.customKeys.S.isDown) {
-      characterBody.setVelocityY(80);
+      characterBody.setVelocityY(64);
     }
+  }
 
+  private setMovementAnimations(): void {
+    if (this.customKeys.A.isDown) {
+      this.character.anims.play('A', true);
+    } else if (this.customKeys.D.isDown) {
+      this.character.anims.play('D', true);
+    } else if (this.customKeys.S.isDown) {
+      this.character.anims.play('S', true);
+    } else if (this.customKeys.W.isDown) {
+      this.character.anims.play('W', true);
+    } else {
+      this.character.anims.stop();
+    }
   }
 
   private setCamera(): void {

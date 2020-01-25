@@ -34,11 +34,12 @@ export class CharacterService {
   }
 
   getCharacter(): Observable<CharacterResponse | boolean> {
-    if (this.afterNewCharacterCreate) {
-      return of(fakeCharacterResponse).pipe(delay(this.delay));
-    } else {
-      return of(true).pipe(delay(this.delay));
-    }
+    // if (this.afterNewCharacterCreate) {
+    //   return of(fakeCharacterResponse).pipe(delay(this.delay));
+    // } else {
+    //   return of(true).pipe(delay(this.delay));
+    // }
+    return of(fakeCharacterResponse).pipe(delay(this.delay));
   }
 
   createNewCharacter(nickname: string): Observable<boolean> {

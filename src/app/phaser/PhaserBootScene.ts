@@ -14,7 +14,7 @@ export class PhaserBootScene extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('map', 'assets/phaser/worldmap.json');
 
-    this.load.spritesheet('character', 'assets/phaser/characterMove.png', { frameWidth: 30, frameHeight: 46, margin: 1});
+    this.load.spritesheet('character', 'assets/phaser/character.png', { frameWidth: 64, frameHeight: 64 });
 
     console.log('BootScene Preload');
   }
