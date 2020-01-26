@@ -19,7 +19,7 @@ export abstract class PhaserAnimationCreator {
       key,
       frames: animationManager.generateFrameNumbers(textureKey, {frames}),
       frameRate,
-      repeat: -1
+      repeat: 0
     });
   }
 }

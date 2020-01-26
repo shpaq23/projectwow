@@ -39,20 +39,16 @@ export class PhaserWorldScene extends Phaser.Scene {
 
   private setMovementEvents(): void {
 
-    this.character.stopMove();
-
-    if (this.customKeysManager.A.isDown) {
+    if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.A)) {
       this.character.tryMoveLeft();
-    } else if (this.customKeysManager.D.isDown) {
+    } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.D)) {
       this.character.tryMoveRight();
-    } else if (this.customKeysManager.W.isDown) {
+    } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.W)) {
       this.character.tryMoveUp();
-    } else if (this.customKeysManager.S.isDown) {
+    } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.S)) {
+
+      console.log('onDown key');
       this.character.tryMoveDown();
-    } else if (this.customKeysManager.SPACE.isDown || this.game.input.activePointer.leftButtonDown()) {
-      this.character.attack();
-    } else {
-      this.character.stopAnimate();
     }
 
   }
