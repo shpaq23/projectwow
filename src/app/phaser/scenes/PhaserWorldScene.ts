@@ -49,6 +49,8 @@ export class PhaserWorldScene extends Phaser.Scene {
       this.character.tryMoveUp();
     } else if (this.customKeysManager.S.isDown) {
       this.character.tryMoveDown();
+    } else if (this.customKeysManager.SPACE.isDown || this.game.input.activePointer.leftButtonDown()) {
+      this.character.attack();
     } else {
       this.character.stopAnimate();
     }

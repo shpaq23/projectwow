@@ -3,7 +3,7 @@ import { PhaserCharacterAnimationCreator } from '../utils/animations/PhaserChara
 
 export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
 
-  private direction: PhaserCharacterDirection;
+  private direction: PhaserCharacterDirection = PhaserCharacterDirection.DOWN;
 
   private characterBody: Phaser.Physics.Arcade.Body;
 
@@ -18,25 +18,51 @@ export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
   tryMoveLeft(): void {
     this.characterBody.setVelocityX(-64);
     this.anims.play('moveLeft', true);
+    this.direction = PhaserCharacterDirection.LEFT;
   }
 
   tryMoveRight(): void {
     this.characterBody.setVelocityX(64);
     this.anims.play('moveRight', true);
+    this.direction = PhaserCharacterDirection.RIGHT;
   }
 
   tryMoveUp(): void {
     this.characterBody.setVelocityY(-64);
     this.anims.play('moveUp', true);
+    this.direction = PhaserCharacterDirection.UP;
   }
 
   tryMoveDown(): void {
     this.characterBody.setVelocityY(64);
     this.anims.play('moveDown', true);
+    this.direction = PhaserCharacterDirection.DOWN;
   }
 
   stopAnimate(): void {
     this.anims.stop();
+
+    if (this.direction === PhaserCharacterDirection.UP) {
+      this.setFrame(8 * 13);
+    } else if (this.direction === PhaserCharacterDirection.LEFT) {
+      this.setFrame(9 * 13);
+    } else if (this.direction === PhaserCharacterDirection.DOWN) {
+      this.setFrame(10 * 13);
+    } else if (this.direction === PhaserCharacterDirection.RIGHT) {
+      this.setFrame(11 * 13);
+    }
+  }
+
+  attack(): void {
+    if (this.direction === PhaserCharacterDirection.UP) {
+      this.anims.play('attackUp', true);
+    } else if (this.direction === PhaserCharacterDirection.LEFT) {
+      this.anims.play('attackLeft', true);
+    } else if (this.direction === PhaserCharacterDirection.DOWN) {
+      this.anims.play('attackDown', true);
+    } else if (this.direction === PhaserCharacterDirection.RIGHT) {
+      this.anims.play('attackRight', true);
+    }
   }
 
   stopMove(): void {
