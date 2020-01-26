@@ -1,7 +1,9 @@
 export class PhaserBootScene extends Phaser.Scene {
 
+  public static SCENE_ID = 'BootScene';
+
   constructor() {
-    super({ key: 'BootScene' });
+    super({ key: PhaserBootScene.SCENE_ID });
   }
 
   create(): void {

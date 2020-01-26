@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CharacterComponent } from './character.component';
 import { StoreModule } from '@ngrx/store';
-import { characterReducer } from '../../../store/reducers/character-reducer';
+import { characterReducer } from '../../../store/reducers/character.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CharacterEffect } from '../../../store/effects/character.effect';
 import { GlobalLoaderEffect } from '../../../store/effects/global-loader.effect';

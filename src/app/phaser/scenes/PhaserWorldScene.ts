@@ -1,18 +1,24 @@
-import { PhaserCustomKeys } from '../utils/PhaserCustomKeys';
-import { PhaserAnimations } from '../utils/PhaserAnimations';
+import { PhaserCustomKeysManager } from '../utils/PhaserCustomKeysManager';
+import { PhaserCharacter } from '../character/PhaserCharacter';
 
 export class PhaserWorldScene extends Phaser.Scene {
+
+  public static SCENE_ID = 'WorldScene';
 
   private map: Phaser.Tilemaps.Tilemap;
   private tiles: Phaser.Tilemaps.Tileset;
   private grass: Phaser.Tilemaps.StaticTilemapLayer;
   private obstacles: Phaser.Tilemaps.StaticTilemapLayer;
-  private character: Phaser.Physics.Arcade.Sprite;
-  private customKeys: PhaserCustomKeys;
-  private animations: PhaserAnimations;
+  private character: PhaserCharacter;
+  private customKeysManager: PhaserCustomKeysManager;
 
   constructor() {
-    super({key: 'WorldScene'});
+    super({key: PhaserWorldScene.SCENE_ID});
+  }
+
+  preload(): void {
+    console.log('WorldScene Create');
+    this.customKeysManager = new PhaserCustomKeysManager();
   }
 
   create(): void {
@@ -22,64 +28,31 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
-    this.character = this.physics.add.sprite(100, 100, 'character', 0);
-    this.customKeys = new PhaserCustomKeys(this);
-    this.animations = new PhaserAnimations(this.anims);
-    this.animations.createCharacterMoveAnimations();
-    this.animations.createCharacterAttackAnimations();
+    this.character = new PhaserCharacter(this, 100, 100, 'character', 0);
+    this.customKeysManager.addMovementKeys(this);
     // this.physics.add.collider(this.character, this.obstacles);
-  }
-
-  preload(): void {
-    console.log('WorldScene Create');
   }
 
   update(time: number, delta: number) {
     this.setMovementEvents();
-    this.setMovementAnimations();
   }
 
   private setMovementEvents(): void {
 
-    const characterBody: Phaser.Physics.Arcade.Body = this.character.body as Phaser.Physics.Arcade.Body;
+    this.character.stopMove();
 
-    characterBody.setVelocity(0);
-
-    if (this.customKeys.A.isDown) {
-      characterBody.setVelocityX(-64);
-    } else if (this.customKeys.D.isDown) {
-      characterBody.setVelocityX(64);
-    }
-
-    if (this.customKeys.W.isDown) {
-      characterBody.setVelocityY(-64);
-    } else if (this.customKeys.S.isDown) {
-      characterBody.setVelocityY(64);
-    }
-
-  }
-
-  private setMovementAnimations(): void {
-    const activePointer = this.customKeys.activePointer;
-    if (this.customKeys.A.isDown) {
-      this.character.anims.play('moveLeft', true);
-    } else if (this.customKeys.D.isDown) {
-      this.character.anims.play('moveRight', true);
-    } else if (this.customKeys.S.isDown) {
-      this.character.anims.play('moveDown', true);
-    } else if (this.customKeys.W.isDown) {
-      this.character.anims.play('moveUp', true);
-    } else if (activePointer.leftButtonDown()) {
-      console.log('activePointer  x', activePointer.worldX);
-      console.log('player  x', this.character.x);
-      if (activePointer.worldX <= this.character.x) {
-        this.character.anims.play('attackLeft', true);
-      } else {
-        this.character.anims.play('attackRight', true);
-      }
+    if (this.customKeysManager.A.isDown) {
+      this.character.tryMoveLeft();
+    } else if (this.customKeysManager.D.isDown) {
+      this.character.tryMoveRight();
+    } else if (this.customKeysManager.W.isDown) {
+      this.character.tryMoveUp();
+    } else if (this.customKeysManager.S.isDown) {
+      this.character.tryMoveDown();
     } else {
-      this.character.anims.stop();
+      this.character.stopAnimate();
     }
+
   }
 
   private setCamera(): void {

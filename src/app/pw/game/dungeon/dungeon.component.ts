@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { PhaserWorldScene } from '../../../phaser/scenes/PhaserWorldScene';
-import { PhaserBootScene } from '../../../phaser/scenes/PhaserBootScene';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'pw-dungeon',
@@ -8,45 +6,10 @@ import { PhaserBootScene } from '../../../phaser/scenes/PhaserBootScene';
   styleUrls: ['./dungeon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DungeonComponent implements OnInit {
-
-  phaserConfig: Phaser.Types.Core.GameConfig;
-
-  renderConfig: Phaser.Types.Core.RenderConfig;
+export class DungeonComponent {
 
   phaserGame: Phaser.Game;
 
-  constructor() {
-
-  }
-
-  ngOnInit() {
-
-    this.renderConfig = {
-      pixelArt: true,
-    };
-
-    this.phaserConfig = {
-      type: Phaser.AUTO,
-      parent: 'content',
-      width: 640,
-      height: 480,
-      zoom: 1.3,
-      backgroundColor: '#FFF',
-      physics: {
-        default: 'arcade',
-        arcade: {
-          gravity: { y: 0 }
-        }
-      },
-      render: this.renderConfig,
-      scene: [
-        new PhaserBootScene(),
-        new PhaserWorldScene()
-      ]
-    };
-
-  }
 
   onGameReady(phaser: Phaser.Game): void {
     this.phaserGame = phaser;

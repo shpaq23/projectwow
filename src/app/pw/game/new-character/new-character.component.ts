@@ -6,7 +6,6 @@ import { FaIcon } from '../../../ui/fa-icon.enum';
 import { ClearErrorMessage, CreateNewCharacter } from '../../../store/actions/character.action';
 import { getCharacterError } from '../../../store/selectors/character.selector';
 import { BaseComponent } from '../../base-component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'pw-new-character',
@@ -23,8 +22,7 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
   serverError: string;
 
   constructor(private characterStore: Store<CharacterState>,
-              private changeDetectorRef: ChangeDetectorRef,
-              private router: Router) {
+              private changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
