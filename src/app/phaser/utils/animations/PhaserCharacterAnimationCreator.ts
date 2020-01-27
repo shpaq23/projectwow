@@ -13,6 +13,9 @@ export class PhaserCharacterAnimationCreator extends PhaserAnimationCreator {
   static ATTACK_LEFT_KEY = 'attackLeft';
   static ATTACK_RIGHT_KEY = 'attackRight';
 
+  static MOVEMENT_DURATION = 1000;
+  static ATTACK_DURATION = 500;
+
   constructor(animationManager: Phaser.Animations.AnimationManager, textureKey: string) {
     super(animationManager, textureKey);
   }
@@ -31,16 +34,24 @@ export class PhaserCharacterAnimationCreator extends PhaserAnimationCreator {
     const attackDownFrames = characterFramesGenerator.getAttackDownAnimationFrames();
     const attackLeftFrames = characterFramesGenerator.getAttackLeftAnimationFrames();
     const attackRightFrames = characterFramesGenerator.getAttackRightAnimation();
-    const attackFrameRate = 6;
+    const attackFrameRate = 6 * 2;
 
-    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_UP_KEY, moveUpFrames, moveFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_DOWN_KEY, moveDownFrames, moveFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_LEFT_KEY, moveLeftFrames, moveFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_RIGHT_KEY, moveRightFrames, moveFrameRate, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_UP_KEY, moveUpFrames,
+      PhaserCharacterAnimationCreator.MOVEMENT_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_DOWN_KEY, moveDownFrames,
+      PhaserCharacterAnimationCreator.MOVEMENT_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_LEFT_KEY, moveLeftFrames,
+      PhaserCharacterAnimationCreator.MOVEMENT_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.MOVE_RIGHT_KEY, moveRightFrames,
+      PhaserCharacterAnimationCreator.MOVEMENT_DURATION, this.animationManager, this.textureKey);
 
-    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_UP_KEY, attackUpFrames, attackFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_DOWN_KEY, attackDownFrames, attackFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_LEFT_KEY, attackLeftFrames, attackFrameRate, this.animationManager, this.textureKey);
-    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_RIGHT_KEY, attackRightFrames, attackFrameRate, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_UP_KEY, attackUpFrames,
+      PhaserCharacterAnimationCreator.ATTACK_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_DOWN_KEY, attackDownFrames,
+      PhaserCharacterAnimationCreator.ATTACK_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_LEFT_KEY, attackLeftFrames,
+      PhaserCharacterAnimationCreator.ATTACK_DURATION, this.animationManager, this.textureKey);
+    this.createAnimation(PhaserCharacterAnimationCreator.ATTACK_RIGHT_KEY, attackRightFrames,
+      PhaserCharacterAnimationCreator.ATTACK_DURATION, this.animationManager, this.textureKey);
   }
 }

@@ -14,11 +14,11 @@ export abstract class PhaserAnimationCreator {
 
   abstract createAnimations();
 
-  protected createAnimation(key: string, frames: number[], frameRate: number, animationManager: Phaser.Animations.AnimationManager, textureKey: string): void {
+  protected createAnimation(key: string, frames: number[], duration: number, animationManager: Phaser.Animations.AnimationManager, textureKey: string): void {
     animationManager.create({
       key,
       frames: animationManager.generateFrameNumbers(textureKey, {frames}),
-      frameRate,
+      duration,
       repeat: 0
     });
   }

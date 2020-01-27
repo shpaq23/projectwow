@@ -1,5 +1,6 @@
 import { PhaserCustomKeysManager } from '../utils/PhaserCustomKeysManager';
 import { PhaserCharacter } from '../character/PhaserCharacter';
+import { PhaserCharacterAnimationFramesGenerator } from '../utils/PhaserCharacterAnimationFramesGenerator';
 
 export class PhaserWorldScene extends Phaser.Scene {
 
@@ -28,7 +29,7 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
-    this.character = new PhaserCharacter(this, 100, 100, 'character', 0);
+    this.character = new PhaserCharacter(this, 100, 100, 'character', PhaserCharacterAnimationFramesGenerator.STAND_DOWN_FRAME);
     this.customKeysManager.addMovementKeys(this);
     // this.physics.add.collider(this.character, this.obstacles);
   }
@@ -46,9 +47,9 @@ export class PhaserWorldScene extends Phaser.Scene {
     } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.W)) {
       this.character.tryMoveUp();
     } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.S)) {
-
-      console.log('onDown key');
       this.character.tryMoveDown();
+    } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.SPACE)) {
+      this.character.attack();
     }
 
   }
