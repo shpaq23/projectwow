@@ -12,9 +12,9 @@ export class PhaserBootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('tilesMap', 'assets/phaser/tilesMap.png');
+    this.load.image('tilesMap', 'assets/phaser/tilesMap2.png');
 
-    this.load.tilemapTiledJSON('map', 'assets/phaser/worldmap.json');
+    this.load.tilemapTiledJSON('map', 'assets/phaser/worldmap2.json');
 
     this.load.spritesheet('character', 'assets/phaser/character.png', { frameWidth: 64, frameHeight: 64 });
 

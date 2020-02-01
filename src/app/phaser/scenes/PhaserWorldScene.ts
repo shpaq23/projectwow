@@ -29,9 +29,10 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
-    this.character = new PhaserCharacter(this, 100, 100, 'character', PhaserCharacterAnimationFramesGenerator.STAND_DOWN_FRAME);
+    this.character = new PhaserCharacter(this, 64 * 3 - 32, 64 * 3 - 32, 'character', PhaserCharacterAnimationFramesGenerator.STAND_DOWN_FRAME);
     this.customKeysManager.addMovementKeys(this);
-    // this.physics.add.collider(this.character, this.obstacles);
+    this.physics.add.collider(this.character, this.obstacles);
+    this.setCamera();
   }
 
   update(time: number, delta: number) {
@@ -55,8 +56,7 @@ export class PhaserWorldScene extends Phaser.Scene {
   }
 
   private setCamera(): void {
-    this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+    this.cameras.main.setBounds(0, 0, 640, 1472);
     this.cameras.main.startFollow(this.character);
-    this.cameras.main.setRoundPixels(true);
   }
 }

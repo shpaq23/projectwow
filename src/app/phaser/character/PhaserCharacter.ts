@@ -1,18 +1,20 @@
 import { PhaserCharacterDirection } from './PhaserCharacterDirection';
 import { PhaserCharacterAnimationCreator } from '../utils/animations/PhaserCharacterAnimationCreator';
 import { PhaserCharacterAnimationFramesGenerator } from '../utils/PhaserCharacterAnimationFramesGenerator';
+import { PhaserCharacterMovement } from './PhaserCharacterMovement';
 
 export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
 
-  private direction: PhaserCharacterDirection = PhaserCharacterDirection.DOWN;
 
-  private characterBody: Phaser.Physics.Arcade.Body;
+  isMoving = false;
 
-  private isMoving = false;
-  private moveAcceleration = 1;
-  private moveDistance = 64;
+  isAttacking = false;
 
-  private isAttacking = false;
+  direction: PhaserCharacterDirection = PhaserCharacterDirection.DOWN;
+
+  characterBody: Phaser.Physics.Arcade.Body;
+
+  private readonly characterMovement: PhaserCharacterMovement;
 
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | integer) {
@@ -21,66 +23,41 @@ export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     this.characterBody = this.body as Phaser.Physics.Arcade.Body;
     this.addAnimations();
+    this.characterMovement = new PhaserCharacterMovement(this, true);
   }
 
   tryMoveLeft(): void {
-    if (!this.isMoving && !this.isAttacking) {
-      if (this.direction === PhaserCharacterDirection.LEFT) {
-        this.isMoving = true;
-        this.scene.physics.moveTo(this, this.x - 1, this.y, this.moveDistance);
-        this.anims.play(PhaserCharacterAnimationCreator.MOVE_LEFT_KEY, true);
-        this.scene.time.addEvent({ callback: () => this.stopMovingCallback(),
-          delay: PhaserCharacterAnimationCreator.MOVEMENT_DURATION / this.moveAcceleration });
-      } else {
-        this.direction = PhaserCharacterDirection.LEFT;
-        this.stopAnimate();
-      }
-    }
+    this.characterMovement.tryMoveLeft();
   }
 
   tryMoveRight(): void {
-    if (!this.isMoving && !this.isAttacking) {
-      if (this.direction === PhaserCharacterDirection.RIGHT) {
-        this.isMoving = true;
-        this.scene.physics.moveTo(this, this.x + 1, this.y, this.moveDistance);
-        this.anims.play(PhaserCharacterAnimationCreator.MOVE_RIGHT_KEY, true);
-        this.scene.time.addEvent({ callback: () => this.stopMovingCallback(),
-          delay: PhaserCharacterAnimationCreator.MOVEMENT_DURATION / this.moveAcceleration });
-      } else {
-        this.direction = PhaserCharacterDirection.RIGHT;
-        this.stopAnimate();
-      }
-    }
+    this.characterMovement.tryMoveRight();
   }
 
   tryMoveUp(): void {
-    if (!this.isMoving && !this.isAttacking) {
-      if (this.direction === PhaserCharacterDirection.UP) {
-        this.isMoving = true;
-        this.scene.physics.moveTo(this, this.x, this.y - 1, this.moveDistance);
-        this.anims.play(PhaserCharacterAnimationCreator.MOVE_UP_KEY, true);
-        this.scene.time.addEvent({ callback: () => this.stopMovingCallback(),
-          delay: PhaserCharacterAnimationCreator.MOVEMENT_DURATION / this.moveAcceleration });
-      } else {
-        this.direction = PhaserCharacterDirection.UP;
-        this.stopAnimate();
-      }
-    }
+    this.characterMovement.tryMoveUp();
   }
 
   tryMoveDown(): void {
+    this.characterMovement.tryMoveDown();
+  }
+
+  attack(): void {
     if (!this.isMoving && !this.isAttacking) {
-      if (this.direction === PhaserCharacterDirection.DOWN) {
-        this.isMoving = true;
-        this.scene.physics.moveTo(this, this.x, this.y + 1, this.moveDistance);
-        this.anims.play(PhaserCharacterAnimationCreator.MOVE_DOWN_KEY, true);
-        this.scene.time.addEvent({ callback: () => this.stopMovingCallback(),
-          delay: PhaserCharacterAnimationCreator.MOVEMENT_DURATION / this.moveAcceleration });
-      } else {
-        this.direction = PhaserCharacterDirection.DOWN;
-        this.stopAnimate();
+      if (this.direction === PhaserCharacterDirection.UP) {
+        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_UP_KEY, true);
+      } else if (this.direction === PhaserCharacterDirection.LEFT) {
+        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_LEFT_KEY, true);
+      } else if (this.direction === PhaserCharacterDirection.DOWN) {
+        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_DOWN_KEY, true);
+      } else if (this.direction === PhaserCharacterDirection.RIGHT) {
+        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_RIGHT_KEY, true);
       }
+      this.isAttacking = true;
+      this.scene.time.addEvent({callback: () => this.stopAttackingCallback(), delay: PhaserCharacterAnimationCreator.ATTACK_DURATION});
     }
+
+
   }
 
   stopAnimate(): void {
@@ -96,22 +73,8 @@ export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  attack(): void {
-    if (!this.isMoving && !this.isAttacking) {
-      if (this.direction === PhaserCharacterDirection.UP) {
-        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_UP_KEY, true);
-      } else if (this.direction === PhaserCharacterDirection.LEFT) {
-        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_LEFT_KEY, true);
-      } else if (this.direction === PhaserCharacterDirection.DOWN) {
-        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_DOWN_KEY, true);
-      } else if (this.direction === PhaserCharacterDirection.RIGHT) {
-        this.anims.play(PhaserCharacterAnimationCreator.ATTACK_RIGHT_KEY, true);
-      }
-      this.isAttacking = true;
-      this.scene.time.addEvent({ callback: () => this.stopAttackingCallback(), delay: PhaserCharacterAnimationCreator.ATTACK_DURATION });
-    }
-
-
+  getScene(): Phaser.Scene {
+    return this.scene;
   }
 
   stopMove(): void {
@@ -120,12 +83,6 @@ export class PhaserCharacter extends Phaser.Physics.Arcade.Sprite {
 
   private addAnimations(): void {
     (new PhaserCharacterAnimationCreator(this.scene.anims, this.texture.key)).createAnimations();
-  }
-
-  private stopMovingCallback(): void {
-    this.characterBody.stop();
-    this.isMoving = false;
-    this.stopAnimate();
   }
 
   private stopAttackingCallback(): void {
