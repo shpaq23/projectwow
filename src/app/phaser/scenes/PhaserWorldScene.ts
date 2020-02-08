@@ -1,7 +1,6 @@
 import { PhaserCustomKeysManager } from '../utils/PhaserCustomKeysManager';
 import { PhaserCharacter } from '../character/PhaserCharacter';
-import { PhaserCharacterAnimationFramesGenerator } from '../utils/PhaserCharacterAnimationFramesGenerator';
-
+import { PhaserEnemy } from '../enemy/PhaserEnemy';
 export class PhaserWorldScene extends Phaser.Scene {
 
   public static SCENE_ID = 'WorldScene';
@@ -11,6 +10,7 @@ export class PhaserWorldScene extends Phaser.Scene {
   private grass: Phaser.Tilemaps.StaticTilemapLayer;
   private obstacles: Phaser.Tilemaps.StaticTilemapLayer;
   private character: PhaserCharacter;
+  private enemy: PhaserEnemy;
   private customKeysManager: PhaserCustomKeysManager;
 
   constructor() {
@@ -29,7 +29,8 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
-    this.character = new PhaserCharacter(this, 64 * 3 - 32, 64 * 3 - 32, 'character', PhaserCharacterAnimationFramesGenerator.STAND_DOWN_FRAME);
+    this.character = new PhaserCharacter(this);
+    // this.enemy = new PhaserEnemy(this, 64 * 14 - 32, 64 * 14 - 32, 'enemy', PhaserEnemyAnimation)
     this.customKeysManager.addMovementKeys(this);
     this.physics.add.collider(this.character, this.obstacles);
     this.setCamera();
@@ -50,7 +51,7 @@ export class PhaserWorldScene extends Phaser.Scene {
     } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.S)) {
       this.character.tryMoveDown();
     } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.SPACE)) {
-      this.character.attack();
+      this.character.tryAttack();
     }
 
   }

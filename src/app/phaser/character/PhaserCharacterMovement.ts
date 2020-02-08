@@ -1,6 +1,6 @@
 import { PhaserCharacter } from './PhaserCharacter';
-import { PhaserCharacterDirection } from './PhaserCharacterDirection';
-import { PhaserCharacterAnimationCreator } from '../utils/animations/PhaserCharacterAnimationCreator';
+import { PhaserSpriteDirection } from '../utils/sprite/PhaserSpriteDirection';
+import { PhaserCharacterAnimationCreator } from './PhaserCharacterAnimationCreator';
 
 export class PhaserCharacterMovement {
 
@@ -23,7 +23,7 @@ export class PhaserCharacterMovement {
 
   tryMoveLeft(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserCharacterDirection.LEFT) {
+      if (this.character.direction === PhaserSpriteDirection.LEFT) {
         this.character.isMoving = true;
         const startX = this.character.x;
         this.scene.physics.moveTo(this.character, this.character.x - 1, this.character.y, this.moveDistance);
@@ -39,7 +39,7 @@ export class PhaserCharacterMovement {
         });
         this.logCharacterPosition();
       } else {
-        this.character.direction = PhaserCharacterDirection.LEFT;
+        this.character.direction = PhaserSpriteDirection.LEFT;
         this.character.stopAnimate();
       }
     }
@@ -47,7 +47,7 @@ export class PhaserCharacterMovement {
 
   tryMoveRight(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserCharacterDirection.RIGHT) {
+      if (this.character.direction === PhaserSpriteDirection.RIGHT) {
         this.character.isMoving = true;
         const startX = this.character.x;
         this.scene.physics.moveTo(this.character, this.character.x + 1, this.character.y, this.moveDistance);
@@ -63,7 +63,7 @@ export class PhaserCharacterMovement {
         });
         this.logCharacterPosition();
       } else {
-        this.character.direction = PhaserCharacterDirection.RIGHT;
+        this.character.direction = PhaserSpriteDirection.RIGHT;
         this.character.stopAnimate();
       }
     }
@@ -71,7 +71,7 @@ export class PhaserCharacterMovement {
 
   tryMoveUp(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserCharacterDirection.UP) {
+      if (this.character.direction === PhaserSpriteDirection.UP) {
         this.character.isMoving = true;
         const startY = this.character.y;
         this.scene.physics.moveTo(this.character, this.character.x, this.character.y - 1, this.moveDistance);
@@ -87,7 +87,7 @@ export class PhaserCharacterMovement {
         });
         this.logCharacterPosition();
       } else {
-        this.character.direction = PhaserCharacterDirection.UP;
+        this.character.direction = PhaserSpriteDirection.UP;
         this.character.stopAnimate();
       }
     }
@@ -95,7 +95,7 @@ export class PhaserCharacterMovement {
 
   tryMoveDown(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserCharacterDirection.DOWN) {
+      if (this.character.direction === PhaserSpriteDirection.DOWN) {
         this.character.isMoving = true;
         const startY = this.character.y;
         this.scene.physics.moveTo(this.character, this.character.x, this.character.y + 1, this.moveDistance);
@@ -111,14 +111,14 @@ export class PhaserCharacterMovement {
         });
         this.logCharacterPosition();
       } else {
-        this.character.direction = PhaserCharacterDirection.DOWN;
+        this.character.direction = PhaserSpriteDirection.DOWN;
         this.character.stopAnimate();
       }
     }
   }
 
   private stopMoving(): void {
-    this.character.characterBody.stop();
+    this.character.spriteBody.stop();
     this.character.isMoving = false;
     this.character.stopAnimate();
   }

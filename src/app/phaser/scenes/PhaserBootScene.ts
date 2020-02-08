@@ -3,7 +3,7 @@ export class PhaserBootScene extends Phaser.Scene {
   public static SCENE_ID = 'BootScene';
 
   constructor() {
-    super({ key: PhaserBootScene.SCENE_ID });
+    super({key: PhaserBootScene.SCENE_ID});
   }
 
   create(): void {
@@ -16,7 +16,9 @@ export class PhaserBootScene extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('map', 'assets/phaser/worldmap2.json');
 
-    this.load.spritesheet('character', 'assets/phaser/character.png', { frameWidth: 64, frameHeight: 64 });
+    this.load.spritesheet('character', 'assets/phaser/character.png', {frameWidth: 64, frameHeight: 64});
+
+    this.load.spritesheet('enemy', 'assets/phaser/enemy.png', {frameWidth: 64, frameHeight: 64});
 
     console.log('BootScene Preload');
   }
