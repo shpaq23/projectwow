@@ -1,6 +1,7 @@
 import { PhaserCustomSprite } from '../utils/sprite/PhaserCustomSprite';
 import { PhaserCharacter } from '../character/PhaserCharacter';
 import { PhaserEnemyMovement } from './PhaserEnemyMovement';
+import { PhaserLPCAnimationFramesGenerator } from '../utils/animations/PhaserLPCAnimationFramesGenerator';
 
 export class PhaserEnemy extends PhaserCustomSprite {
 
@@ -9,8 +10,8 @@ export class PhaserEnemy extends PhaserCustomSprite {
   private readonly enemyMovement: PhaserEnemyMovement;
 
 
-  constructor(character: PhaserCharacter, scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
-    super(scene, x, y, texture, frame);
+  constructor(character: PhaserCharacter, scene: Phaser.Scene) {
+    super(scene, 64 * 14 - 32, 64 * 3 - 32, 'enemy', PhaserLPCAnimationFramesGenerator.STAND_DOWN_FRAME);
     this.character = character;
   }
 
