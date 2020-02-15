@@ -4,6 +4,7 @@ import { PhaserCharacterMovement } from './PhaserCharacterMovement';
 import { PhaserCharacterAttack } from './PhaserCharacterAttack';
 import { PhaserCustomSprite } from '../utils/sprite/PhaserCustomSprite';
 import { PhaserLPCAnimationFramesGenerator } from '../utils/animations/PhaserLPCAnimationFramesGenerator';
+import { PhaserEnemy } from '../enemy/PhaserEnemy';
 
 export class PhaserCharacter extends PhaserCustomSprite {
 
@@ -11,6 +12,8 @@ export class PhaserCharacter extends PhaserCustomSprite {
   private readonly characterMovement: PhaserCharacterMovement;
 
   private readonly characterAttack: PhaserCharacterAttack;
+
+  private enemies: Array<PhaserEnemy>;
 
 
   constructor(scene: Phaser.Scene) {
@@ -54,6 +57,23 @@ export class PhaserCharacter extends PhaserCustomSprite {
 
   createAnimations(): void {
     (new PhaserCharacterAnimationCreator(this.scene.anims, this.texture.key)).createAnimations();
+  }
+
+  collideEnemy(): PhaserEnemy {
+    const moveDistance = this.characterMovement.getMoveDistance();
+    if (this.direction === PhaserSpriteDirection.LEFT) {
+      return this.enemies.find(enemySprite => enemySprite.y === this.y && enemySprite.x + moveDistance === this.x);
+    } else if (this.direction === PhaserSpriteDirection.RIGHT) {
+      return this.enemies.find(enemySprite => enemySprite.y === this.y && enemySprite.x - moveDistance === this.x);
+    } else if (this.direction === PhaserSpriteDirection.DOWN) {
+      return this.enemies.find(enemySprite => enemySprite.x === this.x && enemySprite.y - moveDistance === this.y);
+    } else if (this.direction === PhaserSpriteDirection.UP) {
+      return this.enemies.find(enemySprite => enemySprite.x === this.x && enemySprite.y + moveDistance === this.y);
+    }
+  }
+
+  setEnemies(enemies: Array<PhaserEnemy>): void {
+    this.enemies = enemies;
   }
 
 }

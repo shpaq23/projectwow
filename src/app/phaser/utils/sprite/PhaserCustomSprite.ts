@@ -37,6 +37,7 @@ export abstract class PhaserCustomSprite extends Phaser.Physics.Arcade.Sprite {
   }
 
   stopMove(): void {
+    this.stopAnimate();
     this.spriteBody.setVelocity(0, 0);
   }
 

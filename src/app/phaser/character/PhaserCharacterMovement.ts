@@ -4,7 +4,7 @@ import { PhaserCharacterAnimationCreator } from './PhaserCharacterAnimationCreat
 
 export class PhaserCharacterMovement {
 
-  private moveAcceleration = 1;
+  private moveAcceleration = 2;
 
   private moveDistance = 64;
 
@@ -14,7 +14,6 @@ export class PhaserCharacterMovement {
 
   private readonly scene: Phaser.Scene;
 
-
   constructor(character: PhaserCharacter, withLoggers = false) {
     this.character = character;
     this.withLogger = withLoggers;
@@ -23,10 +22,10 @@ export class PhaserCharacterMovement {
 
   tryMoveLeft(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserSpriteDirection.LEFT) {
+      if (this.character.direction === PhaserSpriteDirection.LEFT && !this.character.collideEnemy()) {
         this.character.isMoving = true;
         const startX = this.character.x;
-        this.scene.physics.moveTo(this.character, this.character.x - 1, this.character.y, this.moveDistance);
+        this.scene.physics.moveTo(this.character, this.character.x - 1, this.character.y, this.moveDistance * this.moveAcceleration);
         this.character.anims.play(PhaserCharacterAnimationCreator.MOVE_LEFT_KEY, true);
         this.scene.time.addEvent({
           callback: () => {
@@ -47,10 +46,10 @@ export class PhaserCharacterMovement {
 
   tryMoveRight(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserSpriteDirection.RIGHT) {
+      if (this.character.direction === PhaserSpriteDirection.RIGHT && !this.character.collideEnemy()) {
         this.character.isMoving = true;
         const startX = this.character.x;
-        this.scene.physics.moveTo(this.character, this.character.x + 1, this.character.y, this.moveDistance);
+        this.scene.physics.moveTo(this.character, this.character.x + 1, this.character.y, this.moveDistance * this.moveAcceleration);
         this.character.anims.play(PhaserCharacterAnimationCreator.MOVE_RIGHT_KEY, true);
         this.scene.time.addEvent({
           callback: () => {
@@ -71,10 +70,10 @@ export class PhaserCharacterMovement {
 
   tryMoveUp(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserSpriteDirection.UP) {
+      if (this.character.direction === PhaserSpriteDirection.UP && !this.character.collideEnemy()) {
         this.character.isMoving = true;
         const startY = this.character.y;
-        this.scene.physics.moveTo(this.character, this.character.x, this.character.y - 1, this.moveDistance);
+        this.scene.physics.moveTo(this.character, this.character.x, this.character.y - 1, this.moveDistance * this.moveAcceleration);
         this.character.anims.play(PhaserCharacterAnimationCreator.MOVE_UP_KEY, true);
         this.scene.time.addEvent({
           callback: () => {
@@ -95,10 +94,10 @@ export class PhaserCharacterMovement {
 
   tryMoveDown(): void {
     if (!this.character.isMoving && !this.character.isAttacking) {
-      if (this.character.direction === PhaserSpriteDirection.DOWN) {
+      if (this.character.direction === PhaserSpriteDirection.DOWN && !this.character.collideEnemy()) {
         this.character.isMoving = true;
         const startY = this.character.y;
-        this.scene.physics.moveTo(this.character, this.character.x, this.character.y + 1, this.moveDistance);
+        this.scene.physics.moveTo(this.character, this.character.x, this.character.y + 1, this.moveDistance * this.moveAcceleration);
         this.character.anims.play(PhaserCharacterAnimationCreator.MOVE_DOWN_KEY, true);
         this.scene.time.addEvent({
           callback: () => {
@@ -116,6 +115,11 @@ export class PhaserCharacterMovement {
       }
     }
   }
+
+  getMoveDistance(): number {
+    return this.moveDistance;
+  }
+
 
   private stopMoving(): void {
     this.character.spriteBody.stop();

@@ -30,9 +30,10 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
     this.obstacles.setCollisionByExclusion([-1]);
     this.character = new PhaserCharacter(this);
-    this.enemy = new PhaserEnemy(this.character, this);
+    this.enemy = new PhaserEnemy(this);
+    this.character.setEnemies([this.enemy]);
     this.customKeysManager.addMovementKeys(this);
-    this.physics.add.collider(this.character, this.obstacles);
+    this.physics.add.collider(this.character, this.obstacles, () => this.character.stopMove());
     this.setCamera();
   }
 

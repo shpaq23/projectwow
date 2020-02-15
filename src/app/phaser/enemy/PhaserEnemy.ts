@@ -10,9 +10,8 @@ export class PhaserEnemy extends PhaserCustomSprite {
   private readonly enemyMovement: PhaserEnemyMovement;
 
 
-  constructor(character: PhaserCharacter, scene: Phaser.Scene) {
+  constructor(scene: Phaser.Scene) {
     super(scene, 64 * 14 - 32, 64 * 3 - 32, 'enemy', PhaserLPCAnimationFramesGenerator.STAND_DOWN_FRAME);
-    this.character = character;
   }
 
   createAnimations(): void {
@@ -36,5 +35,9 @@ export class PhaserEnemy extends PhaserCustomSprite {
   }
 
   tryMoveUp(): void {
+  }
+
+  setCharacter(character: PhaserCharacter): void {
+    this.character = character;
   }
 }
