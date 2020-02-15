@@ -32,6 +32,7 @@ export class PhaserWorldScene extends Phaser.Scene {
     this.character = new PhaserCharacter(this);
     this.enemy = new PhaserEnemy(this);
     this.character.setEnemies([this.enemy]);
+    this.enemy.setCharacter(this.character);
     this.customKeysManager.addMovementKeys(this);
     this.physics.add.collider(this.character, this.obstacles, () => this.character.stopMove());
     this.setCamera();
@@ -53,6 +54,10 @@ export class PhaserWorldScene extends Phaser.Scene {
       this.character.tryMoveDown();
     } else if (Phaser.Input.Keyboard.JustDown(this.customKeysManager.SPACE)) {
       this.character.tryAttack();
+    }
+
+    if (this.enemy.isCharacterInRange()) {
+      console.log('character in range');
     }
 
   }
