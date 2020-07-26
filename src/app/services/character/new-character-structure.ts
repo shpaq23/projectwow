@@ -23,7 +23,7 @@ export interface NewCharacterStructureInterface {
   torso: string[];
   legs: string[];
   shoes: string[];
-  weapons: string[];
+  weapon: string[];
 }
 
 export class NewCharacterStructure {
@@ -53,7 +53,7 @@ export class NewCharacterStructure {
       torso: [Torso.DEFAULT, Torso.BROWNSHIRT, Torso.MAROONSHIRT, Torso.TEALSHIRT, Torso.WHITESHIRT],
       legs: [Legs.DEFAULT, Legs.MAGENTAPANTS, Legs.REDPANTS, Legs.TEALPANTS, Legs.WHITEPANTS],
       shoes: [Shoes.DEFAULT, Shoes.BLACKSHOES, Shoes.BROWNSHOES, Shoes.MAROONSHOES],
-      weapons: [Weapon.DAGGER]
+      weapon: [Weapon.DAGGER]
     };
   }
 
