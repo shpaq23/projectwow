@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CharacterService } from '../../services/api/character.service';
+import { CharacterService } from '../../api/character.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,7 @@ import {
   GetNewCharacterSuccess
 } from '../actions/character.action';
 import { catchError, delay, map, mergeMap } from 'rxjs/operators';
-import { CharacterResponse } from '../../services/api/structure-responses/character.response';
+import { CharacterDto } from '../../api/dtos/character.dto';
 import { CharacterState } from '../state/character.state';
 
 @Injectable()
@@ -58,7 +58,7 @@ export class CharacterEffect {
     )));
 
 
-  private isCharacterResponse(characterResponse: any): characterResponse is CharacterResponse {
+  private isCharacterResponse(characterResponse: any): characterResponse is CharacterDto {
     return typeof characterResponse !== 'boolean';
   }
 

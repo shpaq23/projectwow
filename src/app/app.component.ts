@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnI
 import { Store } from '@ngrx/store';
 import { GlobalLoaderState } from './store/state/global-loader.state';
 import { getGlobalLoaderLoading } from './store/selectors/global-loader.selector';
-import { BaseComponent } from './pw/base-component';
+import { BaseComponent } from './utils/base-component';
 
 @Component({
   selector: 'pw-root',

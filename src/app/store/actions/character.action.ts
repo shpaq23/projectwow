@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Character } from '../../utils/character/Character';
+import { Character } from '../../pw/infrastructure/character/Character';
 
 export enum CharacterActionsTypes {
   GetCharacter = '[Character] Get Character',

@@ -1,7 +1,7 @@
-import {UserResponse} from '../../services/api/structure-responses/user.response';
+import {UserDto} from '../../api/dtos/user.dto';
 
 export interface UserState {
-  user: UserResponse;
+  user: UserDto;
   error: string;
   loading: boolean;
 }

@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPanelModule } from './pw/login-panel/login-panel.module';
+import { LoginPanelModule } from './pw/ui/login-panel/login-panel.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { CharacterModule } from './pw/game/character/character.module';
-import { UiModule } from './ui/ui.module';
-import { DungeonModule } from './pw/game/dungeon/dungeon.module';
-import { GameModule } from './pw/game/game.module';
-import { NewCharacterModule } from './pw/game/new-character/new-character.module';
+import { CharacterModule } from './pw/ui/game/character/character.module';
+import { GenericComponentsModule } from './generic-components/generic-components.module';
+import { DungeonModule } from './pw/ui/game/dungeon/dungeon.module';
+import { GameModule } from './pw/ui/game/game.module';
+import { NewCharacterModule } from './pw/ui/game/new-character/new-character.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { NewCharacterModule } from './pw/game/new-character/new-character.module
     GameModule,
     AppRoutingModule,
     HttpClientModule,
-    UiModule,
+    GenericComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

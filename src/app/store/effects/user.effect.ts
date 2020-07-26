@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../services/api/auth.service';
+import { AuthService } from '../../api/auth.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';

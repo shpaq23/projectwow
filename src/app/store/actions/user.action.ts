@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { LoginForm } from '../../pw/login-panel/login/login-panel.component';
-import {UserResponse} from '../../services/api/structure-responses/user.response';
+import { LoginForm } from '../../pw/ui/login-panel/login/login-panel.component';
+import {UserDto} from '../../api/dtos/user.dto';
 
 export enum UserActionsTypes {
   LoginUser = '[User] Login User',
@@ -24,7 +24,7 @@ export class LoginUser implements Action {
 export class LoginUserSuccess implements Action {
   public readonly type = UserActionsTypes.LoginUserSuccess;
 
-  constructor(public payload: UserResponse) { }
+  constructor(public payload: UserDto) { }
 }
 
 export class LoginUserFail implements Action {

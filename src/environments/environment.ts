@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://koksy-trojana.azurewebsites.net/api'
+  apiUrl: 'localhost:3000/api'
 };
 
 /*

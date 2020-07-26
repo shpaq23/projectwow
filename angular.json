@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "projectwow"
+    }
+  },
+  "defaultProject": "projectwow",
+  "cli": {
+    "analytics": "ee32e6fa-eccd-4b49-bee1-fc19df5c561b"
+  }
 }

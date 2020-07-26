@@ -1,4 +1,4 @@
-import { Character } from '../../utils/character/Character';
+import { Character } from '../../pw/infrastructure/character/Character';
 
 export interface CharacterState {
   character: Character;
