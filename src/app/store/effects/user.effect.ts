@@ -12,6 +12,7 @@ import {
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserState } from '../state/user.state';
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
 export class UserEffect {
@@ -30,7 +31,9 @@ export class UserEffect {
         localStorage.setItem('user', JSON.stringify(user));
         return new LoginUserSuccess(user);
       }),
-      catchError(err => of(new LoginUserFail(err)))
+      catchError((err: HttpErrorResponse) => {
+        return of(new LoginUserFail(err.error))
+      })
     )));
 
   @Effect()

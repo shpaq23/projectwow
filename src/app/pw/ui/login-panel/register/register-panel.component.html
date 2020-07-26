@@ -13,8 +13,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="pw-column-container-center pw-mb-5">
     <label class="pw-label pw-mb-1" for="login">Login</label>
-    <input placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" [class.invalid]="isLoginInvalid" class="pw-input"
-           formControlName="login" type="email" id="login" autocomplete="off">
+    <input #loginInput placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" [class.invalid]="isLoginInvalid" class="pw-input"
+           formControlName="login" type="email" id="login" autocomplete="off" autofocus>
   </div>
   <div formGroupName="passwordGroup">
     <div class="pw-column-container-center  pw-mb-5">

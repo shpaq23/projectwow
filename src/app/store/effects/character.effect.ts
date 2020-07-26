@@ -12,7 +12,7 @@ import {
   GetNewCharacterSuccess
 } from '../actions/character.action';
 import { catchError, delay, map, mergeMap } from 'rxjs/operators';
-import { CharacterDto } from '../../api/dtos/character.dto';
+import { CharacterDto } from '../../api/dtos/character/character.dto';
 import { CharacterState } from '../state/character.state';
 
 @Injectable()

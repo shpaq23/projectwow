@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RegisterForm } from '../pw/ui/login-panel/register/register-panel.component';
 import { Observable } from 'rxjs';
-import { LoginForm } from '../pw/ui/login-panel/login/login-panel.component';
-import { UserDto } from './dtos/user.dto';
+import { UserDto } from './dtos/user/user.dto';
+import { CreateUserDto } from "./dtos/user/create-user.dto";
+import { LoginUserDto } from "./dtos/user/login-user.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,12 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-  register(registerForm: RegisterForm): Observable<any> {
-    return this.httpClient.post(this.url + '/register', registerForm);
+  register(createUserDto: CreateUserDto): Observable<any> {
+    return this.httpClient.post(this.url + '/register', createUserDto);
   }
 
-  login(loginForm: LoginForm): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(this.url + '/login', loginForm);
+  login(loginUserDto: LoginUserDto): Observable<UserDto> {
+    return this.httpClient.post<UserDto>(this.url + '/login', loginUserDto);
   }
 
   logout() {

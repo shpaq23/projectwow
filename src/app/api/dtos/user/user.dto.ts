@@ -1,3 +1,3 @@
 export interface UserDto {
-  token: string;
+  accessToken: string;
 }

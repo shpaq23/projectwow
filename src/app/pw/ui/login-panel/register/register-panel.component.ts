@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FaIcon } from '../../../../generic-components/fa-icon.enum';
 import { Gravity } from '../../../../generic-components/gravity.enum';
 import { AuthService } from '../../../../api/auth.service';
+import { RegisterForm } from "../../../infrastructure/login-panel/register.form";
+import { UserDtoConverter } from "../../../utils/user-dto.converter";
+import { HttpErrorResponse } from "@angular/common/http";
 
-export interface RegisterForm {
-  login: string;
-  password: string;
-  creationCode: string;
-}
 
 @Component({
   selector: 'pw-register-panel',
   templateUrl: './register-panel.component.html',
-  styleUrls: ['./register-panel.component.scss']
+  styleUrls: ['./register-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterPanelComponent implements OnInit {
+
+  @ViewChild('loginInput', {read: ElementRef, static: true})
+  loginInput: ElementRef;
 
   form: FormGroup;
   loading = false;
@@ -25,35 +27,8 @@ export class RegisterPanelComponent implements OnInit {
   success = false;
   serverError = false;
 
-  constructor(private authService: AuthService) {
-  }
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      login: new FormControl('', {validators: [Validators.required, Validators.email]}),
-      passwordGroup: new FormGroup({
-        password: new FormControl('', {validators: [Validators.required, this.strongPasswordValidator]}),
-        repassword: new FormControl('', {validators: [Validators.required]}),
-      }, {validators: [this.passwordValidator]}),
-      creationCode: new FormControl('', {validators: [Validators.required]})
-    });
-  }
-
-  passwordValidator(formGroup: FormGroup) {
-    return (formGroup.get('password').value !== formGroup.get('repassword').value) ?
-      {differentPasswords: true} :
-      null;
-  }
-
-  strongPasswordValidator(formControl: FormControl) {
-    const hasNumber = /\d/.test(formControl.value);
-    const hasUpper = /[A-Z]/.test(formControl.value);
-    const hasLower = /[a-z]/.test(formControl.value);
-    const valid = hasNumber && hasUpper && hasLower && formControl.value.length > 8;
-    if (!valid) {
-      return {strongPassword: true};
-    }
-    return null;
+  constructor(private readonly authService: AuthService,
+              private readonly changeDetectorRef: ChangeDetectorRef) {
   }
 
   get isValid(): boolean {
@@ -92,6 +67,62 @@ export class RegisterPanelComponent implements OnInit {
     return !this.loading && this.isValid && !this.success;
   }
 
+  ngOnInit() {
+    this.form = new FormGroup({
+      login: new FormControl('', {validators: [Validators.required, Validators.email]}),
+      passwordGroup: new FormGroup({
+        password: new FormControl('', {validators: [Validators.required, this.strongPasswordValidator]}),
+        repassword: new FormControl('', {validators: [Validators.required]}),
+      }, {validators: [this.passwordValidator]}),
+      creationCode: new FormControl('', {validators: [Validators.required]})
+    });
+    this.setFocusOnLogin();
+  }
+
+  passwordValidator(formGroup: FormGroup) {
+    return (formGroup.get('password').value !== formGroup.get('repassword').value) ?
+      {differentPasswords: true} :
+      null;
+  }
+
+  strongPasswordValidator(formControl: FormControl) {
+    const hasNumber = /\d/.test(formControl.value);
+    // const hasUpper = /[A-Z]/.test(formControl.value);
+    // const hasLower = /[a-z]/.test(formControl.value);
+    // const valid = hasNumber && hasUpper && hasLower && formControl.value.length > 8;
+    const valid = hasNumber && formControl.value.length > 8;
+    if (!valid) {
+      return {strongPassword: true};
+    }
+    return null;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+    this.serverError = false;
+    this.loading = true;
+    this.form.disable();
+    console.log(this.formValue);
+    this.authService.register(UserDtoConverter.createUserDto(this.formValue))
+      .subscribe({
+        next: data => {
+          this.onSuccess();
+          this.changeDetectorRef.detectChanges();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.onFailure(err.error.message);
+          this.changeDetectorRef.detectChanges();
+        }
+      });
+  }
+
+  private setFocusOnLogin(): void {
+    this.loginInput.nativeElement.focus();
+  }
+
   private onSuccess() {
     this.loading = false;
     this.success = true;
@@ -104,26 +135,7 @@ export class RegisterPanelComponent implements OnInit {
     this.loading = false;
     this.serverError = err;
     this.form.enable();
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    this.serverError = false;
-    this.loading = true;
-    this.form.disable();
-    this.authService.register(this.formValue)
-      .subscribe({
-        next: data => {
-          this.onSuccess();
-          console.log(data);
-        },
-        error: err => {
-          this.onFailure(err);
-        }
-      });
+    this.setFocusOnLogin();
   }
 
 }

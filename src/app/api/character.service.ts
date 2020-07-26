@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError, timer } from 'rxjs';
 import { delay, mergeMap } from 'rxjs/operators';
 import { Character } from '../pw/infrastructure/character/Character';
-import { CharacterDto } from './dtos/character.dto';
+import { CharacterDto } from './dtos/character/character.dto';
 import { Ears } from '../pw/infrastructure/character/enums/ears.enum';
 import { Eyes } from '../pw/infrastructure/character/enums/eyes.enum';
 import { Nose } from '../pw/infrastructure/character/enums/nose.enum';
