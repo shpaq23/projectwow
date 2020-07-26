@@ -44,7 +44,6 @@ const declarations = [
     FontAwesomeModule,
     BrowserAnimationsModule
   ],
-  entryComponents: [TooltipComponent],
   providers: [TooltipService]
 })
 export class UiModule {
