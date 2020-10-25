@@ -3,7 +3,10 @@ import { MonoTypeOperatorFunction, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // TODO: Add Angular decorator.
-@Component({})
+@Component({
+  selector: 'pw-base-component',
+  template: ''
+})
 export abstract class BaseComponent implements OnDestroy {
 
   protected onDestroy$: Subject<any> = new Subject<any>();

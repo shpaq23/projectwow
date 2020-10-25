@@ -14,6 +14,7 @@ import { GenericComponentsModule } from './generic-components/generic-components
 import { DungeonModule } from './pw/ui/game/dungeon/dungeon.module';
 import { GameModule } from './pw/ui/game/game.module';
 import { NewCharacterModule } from './pw/ui/game/new-character/new-character.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NewCharacterModule } from './pw/ui/game/new-character/new-character.mod
     AppRoutingModule,
     HttpClientModule,
     GenericComponentsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
