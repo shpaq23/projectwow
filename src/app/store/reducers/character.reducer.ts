@@ -1,46 +1,48 @@
-import { CharacterState, initCharacterState } from '../state/character.state';
-import { CharacterActions, CharacterActionsTypes } from '../actions/character.action';
+import { CharacterActions, CharacterActionsTypes } from 'src/app/store/actions/character.action';
+import { CharacterState, initCharacterState } from 'src/app/store/state/character.state';
 
 export function characterReducer(state = initCharacterState, action: CharacterActions): CharacterState {
   switch (action.type) {
     case CharacterActionsTypes.GetCharacterSuccess:
       return {
-        ... state,
-        character: action.payload,
-        loaded: true,
-        newCharacter: false,
+        ...state,
         error: ''
       };
     case CharacterActionsTypes.GetCharacterFail:
       return {
-        ... state,
-        error: action.payload
+        ...state,
+        error: action.payload.message
       };
     case CharacterActionsTypes.GetNewCharacterSuccess:
       return {
-        ... state,
+        ...state,
         newCharacter: action.payload,
-        loaded: true,
         error: ''
+      };
+    case CharacterActionsTypes.GetNewCharacterFail:
+      return {
+        ...state,
+        error: action.payload.message
       };
     case CharacterActionsTypes.UpdateCharacter:
       return {
-        ... state,
+        ...state,
+        newCharacter: false,
         character: action.payload
       };
-    case CharacterActionsTypes.CreateNewCharacterSuccess:
+    case CharacterActionsTypes.CreateCharacterSuccess:
       return {
-        ... state,
+        ...state,
         error: ''
       };
-    case CharacterActionsTypes.CreateNewCharacterFail:
+    case CharacterActionsTypes.CreateCharacterFail:
       return {
-        ... state,
-        error: action.payload
+        ...state,
+        error: action.payload.message
       };
     case CharacterActionsTypes.ClearErrorMessage:
       return {
-        ... state,
+        ...state,
         error: ''
       };
     default:

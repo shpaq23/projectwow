@@ -1,4 +1,4 @@
-import {UserDto} from '../../api/dtos/user/user.dto';
+import {UserDto} from 'src/app/api/dtos/user/user.dto';
 
 export interface UserState {
   user: UserDto;

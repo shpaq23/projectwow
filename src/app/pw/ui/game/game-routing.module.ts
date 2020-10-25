@@ -1,28 +1,31 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {GameComponent} from './game.component';
-import {AuthGuard} from '../../../api/guards/auth.guard';
-import {CharacterComponent} from './character/character.component';
-import {CharacterResolver} from '../../../api/resolvers/character-resolver.service';
-import {NewCharacterComponent} from './new-character/new-character.component';
-import {DungeonComponent} from './dungeon/dungeon.component';
-import {CharacterGuard} from '../../../api/guards/character.guard';
-import {NoCharacterGuard} from '../../../api/guards/no-character.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/api/guards/login/auth.guard';
+import { CharacterGuard } from 'src/app/api/guards/character/character.guard';
+import { NewCharacterGuard } from 'src/app/api/guards/character/new-character.guard';
+import { CharacterResolver } from 'src/app/api/resolvers/character-resolver.service';
+import { CharacterComponent } from 'src/app/pw/ui/game/character/character.component';
+import { DungeonComponent } from 'src/app/pw/ui/game/dungeon/dungeon.component';
+import { GameComponent } from 'src/app/pw/ui/game/game.component';
+import { NewCharacterComponent } from 'src/app/pw/ui/game/new-character/new-character.component';
 
 
 const routes: Routes = [
   {
     path: 'game',
     component: GameComponent,
-    canActivate: [AuthGuard],
-    resolve: { character: CharacterResolver },
+    canActivate: [AuthGuard, CharacterGuard],
+    resolve: { newCharacter: CharacterResolver },
     children: [
-      { path: 'character', component: CharacterComponent, canActivate: [CharacterGuard] },
-      { path: 'dungeon', component: DungeonComponent, canActivate: [CharacterGuard] },
-      { path: 'new', component: NewCharacterComponent, canActivate: [NoCharacterGuard] },
+      { path: 'character', component: CharacterComponent },
+      { path: 'dungeon', component: DungeonComponent },
       { path: '', redirectTo: 'character', pathMatch: 'full' },
     ]
-
+  },
+  {
+    path: 'new-character',
+    component: NewCharacterComponent,
+    canActivate: [NewCharacterGuard]
   }
 ];
 

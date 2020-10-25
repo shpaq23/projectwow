@@ -2,33 +2,34 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { CharacterState } from '../../store/state/character.state';
-import { Actions, ofType } from '@ngrx/effects';
-import { CharacterActionsTypes, GetCharacter } from '../../store/actions/character.action';
 import { take } from 'rxjs/operators';
-import { getCharacterLoaded } from '../../store/selectors/character.selector';
-import { GlobalLoaderState } from '../../store/state/global-loader.state';
-import { StartLoading } from '../../store/actions/global-loader.action';
+import { GetCharacter } from 'src/app/store/actions/character.action';
+import { StartLoading } from 'src/app/store/actions/global-loader.action';
+import { getCharacter } from 'src/app/store/selectors/character.selector';
+import { CharacterState } from 'src/app/store/state/character.state';
+import { GlobalLoaderState } from 'src/app/store/state/global-loader.state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CharacterResolver implements Resolve<Actions | boolean> {
+export class CharacterResolver implements Resolve<boolean> {
 
-  private characterLoaded: boolean;
+  private characterFetched: boolean;
 
   constructor(private characterStore: Store<CharacterState>,
-              private globalLoaderStore: Store<GlobalLoaderState>,
-              private actions$: Actions) { }
+              private globalLoaderStore: Store<GlobalLoaderState>) {
+  }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Actions | boolean> {
-    this.characterStore.select(getCharacterLoaded).pipe(take(1)).subscribe(loaded => this.characterLoaded = loaded);
-    if (this.characterLoaded) {
-      return of(true);
-    } else {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    this.setCharacterFetched();
+    if (!this.characterFetched) {
       this.globalLoaderStore.dispatch(new StartLoading());
       this.characterStore.dispatch(new GetCharacter());
-      return this.actions$.pipe(take(1), ofType(CharacterActionsTypes.GetNewCharacterSuccess, CharacterActionsTypes.GetCharacterSuccess));
     }
+    return of(true);
+  }
+
+  private setCharacterFetched(): void {
+    this.characterStore.select(getCharacter).pipe(take(1)).subscribe(character => this.characterFetched = !!character);
   }
 }

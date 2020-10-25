@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CharacterComponent } from './character.component';
-import { StoreModule } from '@ngrx/store';
-import { characterReducer } from '../../../../store/reducers/character.reducer';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { CharacterEffect } from '../../../../store/effects/character.effect';
-import { GlobalLoaderEffect } from '../../../../store/effects/global-loader.effect';
-import { globalLoaderReducer } from '../../../../store/reducers/global-loader.reducer';
-import { GenericComponentsModule } from '../../../../generic-components/generic-components.module';
+import { StoreModule } from '@ngrx/store';
+import { CharacterUpdateEffect } from 'src/app/store/effects/character-update.effect';
+import { characterReducer } from 'src/app/store/reducers/character.reducer';
+import { GenericComponentsModule } from 'src/app/generic-components/generic-components.module';
+import { CharacterEffect } from 'src/app/store/effects/character.effect';
+import { GlobalLoaderEffect } from 'src/app/store/effects/global-loader.effect';
+import { globalLoaderReducer } from 'src/app/store/reducers/global-loader.reducer';
+import { CharacterComponent } from 'src/app/pw/ui/game/character/character.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { GenericComponentsModule } from '../../../../generic-components/generic-
     CommonModule,
     StoreModule.forFeature('character', characterReducer),
     StoreModule.forFeature('globalLoader', globalLoaderReducer),
-    EffectsModule.forFeature([CharacterEffect, GlobalLoaderEffect]),
+    EffectsModule.forFeature([CharacterEffect, CharacterUpdateEffect, GlobalLoaderEffect]),
     GenericComponentsModule
   ]
 })

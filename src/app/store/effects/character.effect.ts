@@ -1,69 +1,62 @@
 import { Injectable } from '@angular/core';
-import { CharacterService } from '../../api/character.service';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { CharacterService } from 'src/app/api/character.service';
 import {
-  CharacterActionsTypes, CreateNewCharacter, CreateNewCharacterFail, CreateNewCharacterSuccess,
-  GetCharacter,
+  CharacterActionsTypes,
+  CreateCharacter,
+  CreateCharacterFail,
+  CreateCharacterSuccess,
   GetCharacterFail,
   GetCharacterSuccess,
+  GetNewCharacterFail,
   GetNewCharacterSuccess
-} from '../actions/character.action';
-import { catchError, delay, map, mergeMap } from 'rxjs/operators';
-import { CharacterDto } from '../../api/dtos/character/character.dto';
-import { CharacterState } from '../state/character.state';
+} from 'src/app/store/actions/character.action';
+import { CharacterState } from 'src/app/store/state/character.state';
+
 
 @Injectable()
 export class CharacterEffect {
-  constructor(private characterService: CharacterService,
-              private characterStore: Store<CharacterState>,
-              private actions$: Actions,
-              private router: Router) { }
 
+  @Effect()
+  getNewCharacter: Observable<Action> = this.actions$.pipe(
+    ofType(CharacterActionsTypes.GetNewCharacter),
+    mergeMap(() => this.characterService.isNewCharacter().pipe(
+      map(isNewCharacter => new GetNewCharacterSuccess(isNewCharacter)),
+      catchError(err => of(new GetNewCharacterFail(err)))
+    ))
+  );
   @Effect()
   getCharacter: Observable<Action> = this.actions$.pipe(
     ofType(CharacterActionsTypes.GetCharacter),
-    map((action: GetCharacter) => action.withRedirection),
-    mergeMap((withRedirection) => this.characterService.getCharacter().pipe(
-      map(characterResponse => {
-        if (this.isCharacterResponse(characterResponse)) {
-          if (withRedirection) {
-            this.router.navigate(['/game/character']);
-          }
-          return new GetCharacterSuccess(this.characterService.createCharacterFromResponse(characterResponse));
-        }
-        if (this.isNewCharacterResponse(characterResponse)) {
-          this.router.navigate(['/game/new']);
-          return new GetNewCharacterSuccess(characterResponse);
-        }
-      }),
+    mergeMap(() => this.characterService.getCharacter().pipe(
+      map(response => new GetCharacterSuccess(response)),
       catchError(err => of(new GetCharacterFail(err)))
     )));
-
   @Effect()
-  createNewCharacter: Observable<Action> = this.actions$.pipe(
-    ofType(CharacterActionsTypes.CreateNewCharacter),
-    map((action: CreateNewCharacter) => action.payload),
-    mergeMap((payload) => this.characterService.createNewCharacter(payload.nickname).pipe(
-      map(response => {
-        // TODO: REMOVE AFTER REAL RESTAPI
-          this.characterService.afterNewCharacterCreate = true;
-          this.characterStore.dispatch(new GetCharacter(true));
-          return new CreateNewCharacterSuccess();
-        }
-      ),
-      catchError(err => of(new CreateNewCharacterFail(err)))
+  createCharacter: Observable<Action> = this.actions$.pipe(
+    ofType(CharacterActionsTypes.CreateCharacter),
+    map((action: CreateCharacter) => action.payload),
+    mergeMap(payload => this.characterService.createNewCharacter(payload).pipe(
+      map(response => new CreateCharacterSuccess(response)),
+      catchError(err => of(new CreateCharacterFail(err)))
     )));
+  @Effect({ dispatch: false })
+  redirectAfterCharacterCreation$ = this.actions$.pipe(
+    ofType(CharacterActionsTypes.CreateCharacterSuccess),
+    tap(() => {
+      console.log('wszedlem');
+      this.router.navigate(['/game'])
+    })
+  );
 
-
-  private isCharacterResponse(characterResponse: any): characterResponse is CharacterDto {
-    return typeof characterResponse !== 'boolean';
-  }
-
-  private isNewCharacterResponse(characterResponse: any): characterResponse is boolean {
-    return typeof characterResponse === 'boolean';
+  constructor(private characterService: CharacterService,
+              private characterStore: Store<CharacterState>,
+              private actions$: Actions,
+              private router: Router) {
   }
 
 }

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CharacterState } from '../state/character.state';
+import { CharacterState } from 'src/app/store/state/character.state';
 
 const getCharacterFeatureState = createFeatureSelector<CharacterState>('character');
 
@@ -11,11 +11,6 @@ export const getCharacter = createSelector(
 export const getCharacterError = createSelector(
   getCharacterFeatureState,
   state => state.error
-);
-
-export const getCharacterLoaded = createSelector(
-  getCharacterFeatureState,
-  state => state.loaded
 );
 
 export const getNewCharacter = createSelector(

@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { CharacterState } from '../../../../store/state/character.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FaIcon } from '../../../../generic-components/fa-icon.enum';
-import { ClearErrorMessage, CreateNewCharacter } from '../../../../store/actions/character.action';
-import { getCharacterError } from '../../../../store/selectors/character.selector';
-import { BaseComponent } from '../../../../utils/base-component';
+import { select, Store } from '@ngrx/store';
+import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
+import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
+import { Character } from 'src/app/pw/infrastructure/character/Character';
+import { ClearErrorMessage, CreateCharacter } from 'src/app/store/actions/character.action';
+import { getCharacterError } from 'src/app/store/selectors/character.selector';
+import { CharacterState } from 'src/app/store/state/character.state';
+import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
   selector: 'pw-new-character',
@@ -21,14 +23,11 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
   faIcon = FaIcon;
   serverError: string;
 
+  private character: Character;
+
   constructor(private characterStore: Store<CharacterState>,
               private changeDetectorRef: ChangeDetectorRef) {
     super();
-  }
-
-  ngOnInit(): void {
-    this.createForm();
-    this.subscribeForNewCharacterErrorResponse();
   }
 
   get isNicknameValid(): boolean {
@@ -43,6 +42,11 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
     return !this.submitted || this.form.valid;
   }
 
+  ngOnInit(): void {
+    this.createForm();
+    this.subscribeForNewCharacterErrorResponse();
+  }
+
   onSubmit(): void {
     this.submitted = true;
     if (this.form.invalid) {
@@ -50,8 +54,14 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
     }
     this.form.disable();
     this.loading = true;
+    const createCharacterDto: CreateCharacterDto = { look: this.character.getLook(), nickname: this.formValue.nickname };
+    // TODO: poprawic clear error na error zeby byl obiektem i za kazdym rzem robic nowy.
     this.characterStore.dispatch(new ClearErrorMessage());
-    this.characterStore.dispatch(new CreateNewCharacter(this.formValue));
+    this.characterStore.dispatch(new CreateCharacter(createCharacterDto));
+  }
+
+  setCharacter(character: Character): void {
+    this.character = character;
   }
 
   private subscribeForNewCharacterErrorResponse(): void {
@@ -69,8 +79,8 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
 
   private createForm(): void {
     this.form = new FormGroup({
-      nickname: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]})
-    }, {updateOn: 'change'});
+      nickname: new FormControl('', { validators: [Validators.required, Validators.minLength(4)] })
+    }, { updateOn: 'change' });
   }
 
 }

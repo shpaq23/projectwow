@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
-import { UserDto } from './dtos/user/user.dto';
-import { CreateUserDto } from "./dtos/user/create-user.dto";
-import { LoginUserDto } from "./dtos/user/login-user.dto";
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { CreateUserDto } from 'src/app/api/dtos/user/create-user.dto';
+import { LoginUserDto } from 'src/app/api/dtos/user/login-user.dto';
+import { UserDto } from 'src/app/api/dtos/user/user.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,8 @@ export class AuthService {
   }
 
   login(loginUserDto: LoginUserDto): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(this.url + '/login', loginUserDto);
+    // return this.httpClient.post<UserDto>(this.url + '/login', loginUserDto);
+    return of({accessToken: 'asdasdada'});
   }
 
   logout() {

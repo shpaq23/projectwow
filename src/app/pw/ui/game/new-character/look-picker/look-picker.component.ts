@@ -1,22 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Sex } from '../../../../infrastructure/character/enums/sex.enum';
-import { Skin } from '../../../../infrastructure/character/enums/skin.enum';
-import { Nose } from '../../../../infrastructure/character/enums/nose.enum';
-import { Eyes } from '../../../../infrastructure/character/enums/eyes.enum';
-import { Ears } from '../../../../infrastructure/character/enums/ears.enum';
-import { MaleHair } from '../../../../infrastructure/character/enums/male-hair.enum';
-import { FemaleHair } from '../../../../infrastructure/character/enums/female-hair.enum';
-import { HairColor } from '../../../../infrastructure/character/enums/hair-color.enum';
-import { Torso } from '../../../../infrastructure/character/enums/torso.enum';
-import { Legs } from '../../../../infrastructure/character/enums/legs.enum';
-import { Shoes } from '../../../../infrastructure/character/enums/shoes.enum';
-import { Weapon } from '../../../../infrastructure/character/enums/weapon.enum';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Character } from 'src/app/pw/infrastructure/character/Character';
+import { CharacterLook } from 'src/app/pw/infrastructure/character/character-look';
+import { Ears } from 'src/app/pw/infrastructure/character/enums/ears.enum';
+import { Eyes } from 'src/app/pw/infrastructure/character/enums/eyes.enum';
+import { FemaleHair } from 'src/app/pw/infrastructure/character/enums/female-hair.enum';
+import { HairColor } from 'src/app/pw/infrastructure/character/enums/hair-color.enum';
+import { Legs } from 'src/app/pw/infrastructure/character/enums/legs.enum';
+import { MaleHair } from 'src/app/pw/infrastructure/character/enums/male-hair.enum';
+import { Nose } from 'src/app/pw/infrastructure/character/enums/nose.enum';
+import { Sex } from 'src/app/pw/infrastructure/character/enums/sex.enum';
+import { Shoes } from 'src/app/pw/infrastructure/character/enums/shoes.enum';
+import { Skin } from 'src/app/pw/infrastructure/character/enums/skin.enum';
+import { Torso } from 'src/app/pw/infrastructure/character/enums/torso.enum';
+import { Weapon } from 'src/app/pw/infrastructure/character/enums/weapon.enum';
 import { NewCharacterStructure, NewCharacterStructureInterface } from '../new-character-structure';
-import { CharacterLook } from '../../../../infrastructure/character/character-look';
-import { Character } from '../../../../infrastructure/character/Character';
-import { UpdateCharacter } from '../../../../../store/actions/character.action';
-import { Store } from '@ngrx/store';
-import { CharacterState } from '../../../../../store/state/character.state';
 
 @Component({
   selector: 'pw-look-picker',
@@ -25,6 +22,11 @@ import { CharacterState } from '../../../../../store/state/character.state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LookPickerComponent implements OnInit {
+
+  @Output()
+  characterChanged = new EventEmitter<Character>();
+
+  character: Character;
 
   newCharacterStructure: NewCharacterStructureInterface;
 
@@ -40,7 +42,8 @@ export class LookPickerComponent implements OnInit {
   selectedShoes: Shoes;
   selectedWeapon: Weapon = Weapon.DAGGER;
 
-  constructor(private characterStore: Store<CharacterState>) { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.newCharacterStructure = NewCharacterStructure.getStructure();
@@ -134,8 +137,8 @@ export class LookPickerComponent implements OnInit {
       shoes: this.selectedShoes,
       weapon: this.selectedWeapon
     };
-    const character = new Character(look);
-    this.characterStore.dispatch(new UpdateCharacter(character));
+    this.character = new Character(look);
+    this.characterChanged.emit(this.character);
   }
 
 }

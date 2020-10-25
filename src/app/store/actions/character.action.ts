@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
-import { Character } from '../../pw/infrastructure/character/Character';
+import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
+import { FailureDto } from 'src/app/api/dtos/failure.dto';
+import { Character } from 'src/app/pw/infrastructure/character/Character';
 
 export enum CharacterActionsTypes {
   GetCharacter = '[Character] Get Character',
@@ -8,19 +10,20 @@ export enum CharacterActionsTypes {
 
   GetNewCharacter = '[Character] Get New Character',
   GetNewCharacterSuccess = '[Character] Get New Character Success',
+  GetNewCharacterFail = '[Character] Get New Character Fail',
 
   UpdateCharacter = '[Character] Update Character',
 
-  CreateNewCharacter = '[Character] Create New Character',
-  CreateNewCharacterSuccess = '[Character] Create New Character Success',
-  CreateNewCharacterFail = '[Character] Create New Character Fail',
+  CreateCharacter = '[Character] Create Character',
+  CreateCharacterSuccess = '[Character] Create Character Success',
+  CreateCharacterFail = '[Character] Create Character Fail',
 
   ClearErrorMessage = '[Character] Clear Error Message'
 }
 
 export class GetCharacter implements Action {
   public readonly type = CharacterActionsTypes.GetCharacter;
-  constructor(public withRedirection: boolean = false) { }
+  constructor() { }
 }
 
 export class GetCharacterSuccess implements Action {
@@ -30,7 +33,7 @@ export class GetCharacterSuccess implements Action {
 
 export class GetCharacterFail implements Action {
   public readonly type = CharacterActionsTypes.GetCharacterFail;
-  constructor(public payload: string) { }
+  constructor(public payload: FailureDto) { }
 }
 
 export class GetNewCharacter implements Action {
@@ -43,24 +46,29 @@ export class GetNewCharacterSuccess implements Action {
   constructor(public payload: boolean) { }
 }
 
+export class GetNewCharacterFail implements Action {
+  public readonly type = CharacterActionsTypes.GetNewCharacterFail;
+  constructor(public payload: FailureDto) { }
+}
+
 export class UpdateCharacter implements Action {
   public readonly type = CharacterActionsTypes.UpdateCharacter;
   constructor(public payload: Character) { }
 }
 
-export class CreateNewCharacter implements Action {
-  public readonly type = CharacterActionsTypes.CreateNewCharacter;
-  constructor(public payload: {nickname: string}) { }
+export class CreateCharacter implements Action {
+  public readonly type = CharacterActionsTypes.CreateCharacter;
+  constructor(public payload: CreateCharacterDto) { }
 }
 
-export class CreateNewCharacterSuccess implements Action {
-  public readonly type = CharacterActionsTypes.CreateNewCharacterSuccess;
-  constructor() { }
+export class CreateCharacterSuccess implements Action {
+  public readonly type = CharacterActionsTypes.CreateCharacterSuccess;
+  constructor(public payload: Character) { }
 }
 
-export class CreateNewCharacterFail implements Action {
-  public readonly type = CharacterActionsTypes.CreateNewCharacterFail;
-  constructor(public payload: string) { }
+export class CreateCharacterFail implements Action {
+  public readonly type = CharacterActionsTypes.CreateCharacterFail;
+  constructor(public payload: FailureDto) { }
 }
 
 export class ClearErrorMessage implements Action {
@@ -69,5 +77,5 @@ export class ClearErrorMessage implements Action {
 }
 
 export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail |
-  GetNewCharacter | GetNewCharacterSuccess | UpdateCharacter | CreateNewCharacter |
-  CreateNewCharacterSuccess | CreateNewCharacterFail | ClearErrorMessage;
+  GetNewCharacter | GetNewCharacterSuccess | GetNewCharacterFail | UpdateCharacter | CreateCharacter |
+  CreateCharacterSuccess | CreateCharacterFail | ClearErrorMessage;

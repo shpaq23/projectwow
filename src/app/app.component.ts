@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GlobalLoaderState } from './store/state/global-loader.state';
-import { getGlobalLoaderLoading } from './store/selectors/global-loader.selector';
-import { BaseComponent } from './utils/base-component';
+import { getGlobalLoaderLoading } from 'src/app/store/selectors/global-loader.selector';
+import { GlobalLoaderState } from 'src/app/store/state/global-loader.state';
+import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
   selector: 'pw-root',
@@ -25,10 +25,10 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.globalLoaderStore.select(getGlobalLoaderLoading)
       .pipe(this.takeUntilDestroy())
       .subscribe(
-      loading => {
-        this.loader = loading;
-        this.changeDetectorRef.detectChanges();
-      });
+        loading => {
+          this.loader = loading;
+          this.changeDetectorRef.detectChanges();
+        });
   }
 
 

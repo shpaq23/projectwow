@@ -1,5 +1,5 @@
 <h2>New character creator</h2>
-<pw-look-picker></pw-look-picker>
+<pw-look-picker (characterChanged)="setCharacter($event)"></pw-look-picker>
 <div class="pw-row-container-center form-container pw-mt-8">
   <div *ngIf="(!loading && !isValid) || serverError" class="errors pw-column-container-center pw-bottom-vertical">
     <span *ngIf="form.get('nickname').hasError('required')">Nickname is required</span>
@@ -17,7 +17,7 @@
                [spinLeft]="loading"
                [spinRight]="loading"
                [faIconLeft]="loading && faIcon.cog"
-               [faIconRight]="loading && faIcon.cog">Log in
+               [faIconRight]="loading && faIcon.cog">Create character
     </pw-button>
   </form>
 </div>

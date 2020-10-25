@@ -1,15 +1,13 @@
-import { Character } from '../../pw/infrastructure/character/Character';
+import { Character } from 'src/app/pw/infrastructure/character/Character';
 
 export interface CharacterState {
   character: Character;
   newCharacter: boolean;
   error: string;
-  loaded: boolean;
 }
 
 export const initCharacterState: CharacterState = {
   character: null,
-  newCharacter: false,
-  error: '',
-  loaded: false
+  newCharacter: null,
+  error: null
 };

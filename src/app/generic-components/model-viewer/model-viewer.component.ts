@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit, SimpleChange, SimpleChanges
+} from '@angular/core';
 import { CharacterState } from '../../store/state/character.state';
 import { Store } from '@ngrx/store';
 import { CharacterAssetsService } from '../../pw/ui/game/character/character-assets.service';
@@ -14,30 +22,26 @@ import { FaIcon } from '../fa-icon.enum';
   styleUrls: ['./model-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModelViewerComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ModelViewerComponent implements OnChanges {
 
-  @Input() height = 256;
+  @Input()
+  character: Character;
+
+  @Input()
+  height = 256;
 
   sources: { src: string; loaded: boolean; }[] = [];
 
   loading = true;
 
-  constructor(private characterStore: Store<CharacterState>,
-              private changeDetectorRef: ChangeDetectorRef,
+  constructor(private changeDetectorRef: ChangeDetectorRef,
               private characterAssetsService: CharacterAssetsService) {
-    super();
   }
 
-  ngOnInit() {
-    this.characterStore.select(getCharacter)
-      .pipe(this.takeUntilDestroy())
-      .subscribe((character: Character) => {
-        if (character) {
-          this.setSources(character);
-          this.changeDetectorRef.detectChanges();
-        }
-      });
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.character && changes.character.currentValue) {
+      this.setSources(this.character);
+    }
   }
 
   private setSources(character: Character): void {

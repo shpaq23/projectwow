@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
-import {GenericComponentsModule} from '../../../generic-components/generic-components.module';
+import {GenericComponentsModule} from 'src/app/generic-components/generic-components.module';
 
 
 @NgModule({

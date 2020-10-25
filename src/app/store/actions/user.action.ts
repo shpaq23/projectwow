@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
-import {UserDto} from '../../api/dtos/user/user.dto';
-import { LoginUserDto } from "../../api/dtos/user/login-user.dto";
-import { FailureDto } from "../../api/dtos/failure.dto";
+import {UserDto} from 'src/app/api/dtos/user/user.dto';
+import { LoginUserDto } from 'src/app/api/dtos/user/login-user.dto';
+import { FailureDto } from 'src/app/api/dtos/failure.dto';
 
 export enum UserActionsTypes {
   LoginUser = '[User] Login User',
@@ -18,19 +18,16 @@ export enum UserActionsTypes {
 
 export class LoginUser implements Action {
   public readonly type = UserActionsTypes.LoginUser;
-
   constructor(public payload: LoginUserDto) { }
 }
 
 export class LoginUserSuccess implements Action {
   public readonly type = UserActionsTypes.LoginUserSuccess;
-
   constructor(public payload: UserDto) { }
 }
 
 export class LoginUserFail implements Action {
   public readonly type = UserActionsTypes.LoginUserFail;
-
   constructor(public payload: FailureDto) { }
 }
 
