@@ -1,7 +1,9 @@
-import { OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MonoTypeOperatorFunction, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+// TODO: Add Angular decorator.
+@Component({})
 export abstract class BaseComponent implements OnDestroy {
 
   protected onDestroy$: Subject<any> = new Subject<any>();
