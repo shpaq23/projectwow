@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable, of, throwError, timer } from 'rxjs';
+import { delay, map, mergeMap } from 'rxjs/operators';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
 import { environment } from '../../environments/environment';
 import { Character } from '../pw/infrastructure/character/Character';
@@ -25,7 +25,7 @@ import { CharacterDto } from './dtos/character/character.dto';
 export class CharacterService {
 
   private url = environment.apiUrl + '/character';
-  private delay = 500;
+  private delay = 3500;
 
   constructor(private httpClient: HttpClient) {
 

@@ -48,7 +48,6 @@ export class CharacterEffect {
   redirectAfterCharacterCreation$ = this.actions$.pipe(
     ofType(CharacterActionsTypes.CreateCharacterSuccess),
     tap(() => {
-      console.log('wszedlem');
       this.router.navigate(['/game'])
     })
   );

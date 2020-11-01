@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { MonoTypeOperatorFunction, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-// TODO: Add Angular decorator.
 @Component({
   selector: 'pw-base-component',
   template: ''

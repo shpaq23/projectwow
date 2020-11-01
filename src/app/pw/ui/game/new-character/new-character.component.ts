@@ -55,8 +55,6 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
     this.form.disable();
     this.loading = true;
     const createCharacterDto: CreateCharacterDto = { look: this.character.getLook(), nickname: this.formValue.nickname };
-    // TODO: poprawic clear error na error zeby byl obiektem i za kazdym rzem robic nowy.
-    this.characterStore.dispatch(new ClearErrorMessage());
     this.characterStore.dispatch(new CreateCharacter(createCharacterDto));
   }
 
@@ -69,7 +67,7 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
       .pipe(this.takeUntilDestroy())
       .subscribe(error => {
         if (this.submitted && error) {
-          this.serverError = error;
+          this.serverError = error.message;
           this.form.enable();
           this.loading = false;
           this.changeDetectorRef.detectChanges();

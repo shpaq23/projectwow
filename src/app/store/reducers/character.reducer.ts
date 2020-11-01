@@ -6,23 +6,23 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
     case CharacterActionsTypes.GetCharacterSuccess:
       return {
         ...state,
-        error: ''
+        error: { message: '' }
       };
     case CharacterActionsTypes.GetCharacterFail:
       return {
         ...state,
-        error: action.payload.message
+        error: { message: action.payload.message }
       };
     case CharacterActionsTypes.GetNewCharacterSuccess:
       return {
         ...state,
         newCharacter: action.payload,
-        error: ''
+        error: { message: '' }
       };
     case CharacterActionsTypes.GetNewCharacterFail:
       return {
         ...state,
-        error: action.payload.message
+        error: { message: action.payload.message }
       };
     case CharacterActionsTypes.UpdateCharacter:
       return {
@@ -33,17 +33,17 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
     case CharacterActionsTypes.CreateCharacterSuccess:
       return {
         ...state,
-        error: ''
+        error: { message: '' }
       };
     case CharacterActionsTypes.CreateCharacterFail:
       return {
         ...state,
-        error: action.payload.message
+        error: { message: action.payload.message }
       };
     case CharacterActionsTypes.ClearErrorMessage:
       return {
         ...state,
-        error: ''
+        error: { message: '' }
       };
     default:
       return state;

@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'new-character',
     component: NewCharacterComponent,
-    canActivate: [NewCharacterGuard]
+    canActivate: [AuthGuard, NewCharacterGuard]
   }
 ];
 
