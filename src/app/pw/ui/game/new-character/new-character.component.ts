@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
 import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
-import { ClearErrorMessage, CreateCharacter } from 'src/app/store/actions/character.action';
+import { CreateCharacter } from 'src/app/store/actions/character.action';
 import { getCharacterError } from 'src/app/store/selectors/character.selector';
 import { CharacterState } from 'src/app/store/state/character.state';
 import { BaseComponent } from 'src/app/utils/base-component';
@@ -54,7 +54,7 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
     }
     this.form.disable();
     this.loading = true;
-    const createCharacterDto: CreateCharacterDto = { look: this.character.getLook(), nickname: this.formValue.nickname };
+    const createCharacterDto: CreateCharacterDto = { nickname: this.formValue.nickname };
     this.characterStore.dispatch(new CreateCharacter(createCharacterDto));
   }
 

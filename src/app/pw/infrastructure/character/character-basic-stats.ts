@@ -1,5 +1,5 @@
 export interface CharacterBasicStats {
-  health: number
+  health: number;
   mana: number;
   agility: number;
   intellect: number;

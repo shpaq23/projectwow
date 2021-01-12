@@ -8,7 +8,7 @@ import { StartLoading, StopLoading } from '../actions/global-loader.action';
 
 const startLoaderActions = [
   // CharacterActionsTypes.GetCharacter,
-  // CharacterActionsTypes.GetNewCharacter
+  CharacterActionsTypes.GetNewCharacter,
   CharacterActionsTypes.CreateCharacter
 ];
 const stopLoaderActions = [

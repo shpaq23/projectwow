@@ -1,22 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError, timer } from 'rxjs';
-import { delay, map, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
-import { environment } from '../../environments/environment';
-import { Character } from '../pw/infrastructure/character/Character';
-import { Ears } from '../pw/infrastructure/character/enums/ears.enum';
-import { Eyes } from '../pw/infrastructure/character/enums/eyes.enum';
-import { HairColor } from '../pw/infrastructure/character/enums/hair-color.enum';
-import { Legs } from '../pw/infrastructure/character/enums/legs.enum';
-import { MaleHair } from '../pw/infrastructure/character/enums/male-hair.enum';
-import { Nose } from '../pw/infrastructure/character/enums/nose.enum';
-import { Sex } from '../pw/infrastructure/character/enums/sex.enum';
-import { Shoes } from '../pw/infrastructure/character/enums/shoes.enum';
-import { Skin } from '../pw/infrastructure/character/enums/skin.enum';
-import { Torso } from '../pw/infrastructure/character/enums/torso.enum';
-import { Weapon } from '../pw/infrastructure/character/enums/weapon.enum';
-import { CharacterDto } from './dtos/character/character.dto';
+import { environment } from 'src/environments/environment';
+import { Character } from 'src/app/pw/infrastructure/character/Character';
 
 
 @Injectable({
@@ -41,34 +29,18 @@ export class CharacterService {
     // } else {
     //   return of(true).pipe(delay(this.delay));
     // }
-    return of(fakeCharacterResponse).pipe(
+    return of(null).pipe(
       delay(this.delay),
-      map(response => new Character(response.look))
+      map(response => new Character())
     );
   }
 
   createNewCharacter(createCharacterDto: CreateCharacterDto): Observable<Character> {
-    return of(fakeCharacterResponse).pipe(
+    return of(null).pipe(
       delay(this.delay),
-      map((response => new Character(response.look)))
+      map((response => new Character()))
     );
     // return timer(this.delay).pipe(mergeMap(() => throwError({ message: 'Nickname already used' })));
   }
 
 }
-
-const fakeCharacterResponse: CharacterDto = {
-  look: {
-    ears: Ears.DEFAULT,
-    eyes: Eyes.DEFAULT,
-    nose: Nose.DEFAULT,
-    sex: Sex.MALE,
-    skin: Skin.TANNED,
-    hair: MaleHair.DEFAULT,
-    hairColor: HairColor.BLONDE,
-    torso: Torso.DEFAULT,
-    legs: Legs.DEFAULT,
-    shoes: Shoes.DEFAULT,
-    weapon: Weapon.DAGGER
-  }
-};
