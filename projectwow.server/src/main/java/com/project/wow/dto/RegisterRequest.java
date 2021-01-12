@@ -1,11 +1,17 @@
 package com.project.wow.dto;
 
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
-public class LoginRequest {
+@Getter
+@Setter
+public class RegisterRequest {
 
   @NonNull
   private String userName;
+  @NonNull
+  private String email;
   @NonNull
   private String password;
 
@@ -15,6 +21,14 @@ public class LoginRequest {
 
   public void setUserName(String userName) {
     this.userName = userName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassword() {
