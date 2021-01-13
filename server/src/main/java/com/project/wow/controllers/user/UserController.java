@@ -24,7 +24,7 @@ public class UserController {
     this.userService = userService;
   }
 
-  @GetMapping("/hello")
+  @GetMapping("/auth/hello")
   public String hello() {
     return "Hello world spring";
   }
