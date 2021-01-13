@@ -9,9 +9,9 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { FaIcon } from '../fa-icon.enum';
+import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
 import { Subject } from 'rxjs';
-import { BaseComponent } from '../../utils/base-component';
+import { BaseComponent } from 'src/app/utils/base-component';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({

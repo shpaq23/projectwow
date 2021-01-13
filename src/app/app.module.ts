@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthTokenInterceptor } from 'src/app/api/interceptors/auth-token.interceptor';
+import { GenericComponentsModule } from 'src/app/generic-components/generic-components.module';
+import { CharacterModule } from 'src/app/pw/ui/game/character/character.module';
+import { DungeonModule } from 'src/app/pw/ui/game/dungeon/dungeon.module';
+import { GameModule } from 'src/app/pw/ui/game/game.module';
+import { NewCharacterModule } from 'src/app/pw/ui/game/new-character/new-character.module';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPanelModule } from './pw/ui/login-panel/login-panel.module';
-import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { CharacterModule } from './pw/ui/game/character/character.module';
-import { GenericComponentsModule } from './generic-components/generic-components.module';
-import { DungeonModule } from './pw/ui/game/dungeon/dungeon.module';
-import { GameModule } from './pw/ui/game/game.module';
-import { NewCharacterModule } from './pw/ui/game/new-character/new-character.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     GenericComponentsModule,
     FontAwesomeModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
