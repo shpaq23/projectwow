@@ -8,14 +8,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FaIcon } from '../../../../generic-components/fa-icon.enum';
 import { select, Store } from '@ngrx/store';
-import { UserState } from '../../../../store/state/user.state';
-import { getLoggedUserError, getLoggedUserLoading } from '../../../../store/selectors/user.selector';
-import { LoginUser } from '../../../../store/actions/user.action';
-import { BaseComponent } from '../../../../utils/base-component';
-import { LoginForm } from "../../../infrastructure/login-panel/login-form";
-import { UserDtoConverter } from "../../../utils/user-dto.converter";
+import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
+import { LoginUser } from 'src/app/store/actions/user.action';
+import { getLoggedUserError, getLoggedUserLoading } from 'src/app/store/selectors/user.selector';
+import { UserState } from 'src/app/store/state/user.state';
+import { BaseComponent } from 'src/app/utils/base-component';
+import { LoginForm } from 'src/app/pw/infrastructure/login-panel/login-form';
+import { UserDtoConverter } from 'src/app/pw/utils/user-dto.converter';
 
 @Component({
   selector: 'pw-login-panel',
@@ -25,7 +25,7 @@ import { UserDtoConverter } from "../../../utils/user-dto.converter";
 })
 export class LoginPanelComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  @ViewChild('loginInput', {read: ElementRef, static: true})
+  @ViewChild('loginInput', { read: ElementRef, static: true })
   loginInput: ElementRef;
 
   form: FormGroup;
@@ -57,9 +57,9 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
 
   ngOnInit() {
     this.form = new FormGroup({
-      login: new FormControl('', {validators: [Validators.required, Validators.email]}),
-      password: new FormControl('', {validators: [Validators.required]})
-    }, {updateOn: 'change'});
+      login: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      password: new FormControl('', { validators: [Validators.required] })
+    }, { updateOn: 'change' });
 
     this.setFocusOnLogin();
     this.subscribeForLoginResponseError();
