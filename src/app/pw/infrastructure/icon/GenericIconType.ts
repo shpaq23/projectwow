@@ -1,4 +1,4 @@
-export interface GenericIconType<T> {
-  url: string;
-  date: T;
+export abstract class GenericIconType<T> {
+  abstract readonly url: string;
+  abstract readonly data: T;
 }

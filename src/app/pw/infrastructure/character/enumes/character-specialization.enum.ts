@@ -1,4 +1,4 @@
-export enum CharacterSpecialization {
+export enum CharacterSpecializationEnum {
   DRUID = 'druid',
   HUNTER = 'hunter',
   MAGE = 'mage',

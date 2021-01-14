@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FaIcon } from '../../../../generic-components/fa-icon.enum';
-import { Gravity } from '../../../../generic-components/gravity.enum';
-import { AuthService } from '../../../../api/auth.service';
-import { RegisterForm } from "../../../infrastructure/login-panel/register.form";
-import { UserDtoConverter } from "../../../utils/user-dto.converter";
-import { HttpErrorResponse } from "@angular/common/http";
+import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
+import { Gravity } from 'src/app/generic-components/gravity.enum';
+import { AuthService } from 'src/app/api/auth.service';
+import { RegisterForm } from 'src/app/pw/infrastructure/login-panel/register.form';
+import { UserDtoConverter } from 'src/app/pw/utils/user-dto.converter';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -108,7 +108,7 @@ export class RegisterPanelComponent implements OnInit {
     console.log(this.formValue);
     this.authService.register(UserDtoConverter.createUserDto(this.formValue))
       .subscribe({
-        next: data => {
+        next: () => {
           this.onSuccess();
           this.changeDetectorRef.detectChanges();
         },

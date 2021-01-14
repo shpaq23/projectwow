@@ -1,4 +1,4 @@
-export enum CharacterRace {
+export enum CharacterRaceEnum {
   ORC = 'orc',
   TAUREN = 'tauren',
   UNDEAD = 'undead',
