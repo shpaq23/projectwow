@@ -1,12 +1,15 @@
 package com.project.wow.controllers.user;
 
 import com.project.wow.dao.entity.User;
+import com.project.wow.dao.entity.UserDetails;
 import com.project.wow.dto.LoginRequest;
 import com.project.wow.dto.RegisterRequest;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.UserRepository;
 import com.project.wow.service.UserService;
+import com.project.wow.utils.mappers.UserMapper;
 import lombok.NonNull;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,8 @@ public class UserController {
 
   public UserRepository userRepository;
   public UserService userService;
+
+  private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
   @Autowired
   public UserController(UserRepository userRepository, UserService userService) {
@@ -31,8 +36,8 @@ public class UserController {
 
   //TODO change with no auth
   @GetMapping("/auth/user/{id}")
-  public User getUser(@PathVariable("id") Long id) {
-    return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, User.class));
+  public UserDetails getUser(@PathVariable("id") Long id) {
+    return userMapper.toDetailsDTO(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, User.class)));
   }
 
   @PostMapping("/auth/register")

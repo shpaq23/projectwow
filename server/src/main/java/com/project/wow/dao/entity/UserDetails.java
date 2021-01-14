@@ -1,36 +1,16 @@
 package com.project.wow.dao.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "USERS")
-public class User {
+public class UserDetails {
 
-  @Id
-  @GeneratedValue
   private Long id;
-
   private String userName;
-
   private String email;
-
-  private String password;
-
+  private String role;
   private Timestamp lastLogin;
 
-  public Timestamp getLastLogin() {
-    return lastLogin;
-  }
-
-  public void setLastLogin(Timestamp lastLogin) {
-    this.lastLogin = lastLogin;
-  }
+  public UserDetails(){}
 
   public Long getId() {
     return id;
@@ -56,11 +36,19 @@ public class User {
     this.email = email;
   }
 
-  public String getPassword() {
-    return password;
+  public String getRole() {
+    return role;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public void setRole(String role) {
+    this.role = role;
+  }
+
+  public Timestamp getLastLogin() {
+    return lastLogin;
+  }
+
+  public void setLastLogin(Timestamp lastLogin) {
+    this.lastLogin = lastLogin;
   }
 }

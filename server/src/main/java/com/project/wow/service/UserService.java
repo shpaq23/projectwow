@@ -8,6 +8,7 @@ import com.project.wow.security.jwt.JwtUtils;
 import com.project.wow.utils.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.sql.Timestamp;
 
 
 @Service
@@ -45,6 +46,7 @@ public class UserService {
       user.setUserName(request.getUserName());
       user.setEmail(request.getEmail());
       user.setPassword(webSecurityConfig.passwordEncoder().encode(request.getPassword()));
+      user.setLastLogin(new Timestamp(System.currentTimeMillis()));
       userRepository.save(user);
       return true;
     }
