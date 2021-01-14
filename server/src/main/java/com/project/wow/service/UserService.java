@@ -52,7 +52,7 @@ public class UserService {
 
   public String login(User user) {
 
-    user = userRepository.findByUserName(user.getUserName());
+    user = userRepository.findUserByEmail(user.getUserName());
 
     if (user == null) {
       //TODO check login and password

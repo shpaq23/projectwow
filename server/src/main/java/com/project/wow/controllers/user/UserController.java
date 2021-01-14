@@ -40,7 +40,7 @@ public class UserController {
   public String login(@RequestBody @NonNull LoginRequest loginRequest) {
 
     User u = new User();
-    u.setUserName(loginRequest.getUserName());
+    u.setEmail(loginRequest.getEmail());
     u.setPassword(loginRequest.getPassword());
     String token = userService.login(u);
 
