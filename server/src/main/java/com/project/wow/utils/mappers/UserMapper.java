@@ -12,4 +12,6 @@ public interface UserMapper {
   User sourceToDestination(RegisterRequest request);
 
   UserDetails toDetailsDTO(User user);
+
+  User toEntityFromRequest(RegisterRequest request);
 }

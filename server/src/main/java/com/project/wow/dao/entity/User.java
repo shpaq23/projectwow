@@ -22,14 +22,24 @@ public class User {
 
   private String password;
 
-  private Timestamp lastLogin;
+  private Timestamp lastSuccessfulLogin;
 
-  public Timestamp getLastLogin() {
-    return lastLogin;
+  private Timestamp lastFailedLogin;
+
+  public Timestamp getLastFailedLogin() {
+    return lastFailedLogin;
   }
 
-  public void setLastLogin(Timestamp lastLogin) {
-    this.lastLogin = lastLogin;
+  public void setLastFailedLogin(Timestamp lastFailedLogin) {
+    this.lastFailedLogin = lastFailedLogin;
+  }
+
+  public Timestamp getLastSuccessfulLogin() {
+    return lastSuccessfulLogin;
+  }
+
+  public void setLastSuccessfulLogin(Timestamp lastLogin) {
+    this.lastSuccessfulLogin = lastLogin;
   }
 
   public Long getId() {

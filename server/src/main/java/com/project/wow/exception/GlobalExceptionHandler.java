@@ -12,9 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
-  @ExceptionHandler(EntityNotFoundException.class)
-  public ResponseEntity<Object> entityNotFoundHandler(EntityNotFoundException ex, WebRequest webRequest) {
-    return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
+  @ExceptionHandler(ApiException.class)
+  public ResponseEntity<Object> apiException(ApiException ex, WebRequest webRequest) {
+    return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, webRequest);
   }
 
 
