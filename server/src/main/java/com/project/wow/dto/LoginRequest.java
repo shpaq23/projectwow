@@ -5,16 +5,16 @@ import lombok.NonNull;
 public class LoginRequest {
 
   @NonNull
-  private String userName;
+  private String email;
   @NonNull
   private String password;
 
-  public String getUserName() {
-    return userName;
+  public String getEmail() {
+    return email;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassword() {
