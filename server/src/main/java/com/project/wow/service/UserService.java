@@ -5,7 +5,9 @@ import com.project.wow.dao.entity.User;
 import com.project.wow.dto.LoginRequest;
 import com.project.wow.dto.RegisterRequest;
 import com.project.wow.enums.ErrorCodes;
-import com.project.wow.exception.ApiException;
+import com.project.wow.exception.EntityAlreadyExists;
+import com.project.wow.exception.InvalidLoginOrPasswordEception;
+import com.project.wow.exception.InvalidRequestException;
 import com.project.wow.repository.UserRepository;
 import com.project.wow.security.jwt.JwtUtils;
 import com.project.wow.utils.EmailValidator;
@@ -46,11 +48,11 @@ public class UserService {
 
     public boolean registerUser(RegisterRequest request) {
         if (!emailValidator.validateEmail(request.getEmail())) {
-            throw new ApiException("Given email is not valid: " + request.getEmail(), ErrorCodes.INVALID_EMAIL);
+            throw new InvalidRequestException("Given email is not valid: " + request.getEmail());
         }
         User user;
         if ((user = userRepository.findUserByEmail(request.getEmail())) != null) {
-            throw new ApiException("User with id: " + user.getId() + " already exisits", ErrorCodes.USER_ALREADY_EXISTS);
+            throw new EntityAlreadyExists("User with id: " + user.getId() + " already exisits", User.class);
         } else {
             user = userMapper.toEntityFromRequest(request);
             user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -59,15 +61,15 @@ public class UserService {
         }
     }
 
-    @Transactional(dontRollbackOn = ApiException.class)
+    @Transactional(dontRollbackOn = InvalidLoginOrPasswordEception.class)
     public String login(LoginRequest request) {
         User user = userRepository.findUserByEmail(request.getEmail());
         if (user == null) {
-            throw new ApiException("Invalid login or password", ErrorCodes.INVALID_LOGIN_OR_PASSWORD);
+            throw new InvalidLoginOrPasswordEception("Invalid login or password", User.class);
         }
         if (!checkUserAndPassword(request.getPassword(), user)) {
             user.setLastFailedLogin(new Timestamp(System.currentTimeMillis()));
-            throw new ApiException("Invalid login or password", ErrorCodes.INVALID_LOGIN_OR_PASSWORD);
+            throw new InvalidLoginOrPasswordEception("Invalid login or password", User.class);
         } else {
             user.setLastSuccessfulLogin(new Timestamp(System.currentTimeMillis()));
             return jwtUtils.createToken(user);
