@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'game',
     component: GameComponent,
     canActivate: [AuthGuard, CharacterGuard],
-    resolve: { newCharacter: CharacterResolver },
+    resolve: { character: CharacterResolver },
     children: [
       { path: 'character', component: CharacterComponent },
       { path: 'dungeon', component: DungeonComponent },

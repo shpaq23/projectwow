@@ -29,6 +29,7 @@ export class CharacterEffect {
       catchError(err => of(new GetNewCharacterFail(err)))
     ))
   );
+
   @Effect()
   getCharacter: Observable<Action> = this.actions$.pipe(
     ofType(CharacterActionsTypes.GetCharacter),
@@ -36,6 +37,7 @@ export class CharacterEffect {
       map(response => new GetCharacterSuccess(response)),
       catchError(err => of(new GetCharacterFail(err)))
     )));
+
   @Effect()
   createCharacter: Observable<Action> = this.actions$.pipe(
     ofType(CharacterActionsTypes.CreateCharacter),
@@ -44,11 +46,12 @@ export class CharacterEffect {
       map(response => new CreateCharacterSuccess(response)),
       catchError(err => of(new CreateCharacterFail(err)))
     )));
+
   @Effect({ dispatch: false })
   redirectAfterCharacterCreation$ = this.actions$.pipe(
     ofType(CharacterActionsTypes.CreateCharacterSuccess),
     tap(() => {
-      this.router.navigate(['/game'])
+      this.router.navigate(['/game']);
     })
   );
 
