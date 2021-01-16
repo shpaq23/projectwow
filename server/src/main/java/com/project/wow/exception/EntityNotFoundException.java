@@ -1,7 +1,6 @@
 package com.project.wow.exception;
 
 
-import com.project.wow.enums.ErrorCodes;
 
 public class EntityNotFoundException extends RuntimeException {
 

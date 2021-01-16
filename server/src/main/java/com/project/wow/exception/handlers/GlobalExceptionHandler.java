@@ -1,9 +1,11 @@
 package com.project.wow.exception.handlers;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.project.wow.exception.EntityAlreadyExists;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.exception.InvalidLoginOrPasswordEception;
 import com.project.wow.exception.InvalidRequestException;
+import jdk.nashorn.internal.parser.Token;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,11 +36,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
-
-
-
-
-
+    @ExceptionHandler(TokenExpiredException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(TokenExpiredException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
 
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {

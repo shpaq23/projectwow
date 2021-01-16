@@ -1,11 +1,10 @@
 package com.project.wow.controllers.user;
 
 import com.project.wow.dao.entity.User;
-import com.project.wow.dao.entity.UserDetails;
+import com.project.wow.dao.UserDetails;
 import com.project.wow.dto.LoginRequest;
 import com.project.wow.dto.RegisterRequest;
 import com.project.wow.dto.TokenDetails;
-import com.project.wow.enums.ErrorCodes;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.UserRepository;
 import com.project.wow.service.UserService;
@@ -17,12 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
-    public UserRepository userRepository;
-    public UserService userService;
+    public final UserRepository userRepository;
+    public final UserService userService;
 
-    private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     @Autowired
     public UserController(UserRepository userRepository, UserService userService) {
@@ -30,30 +30,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/auth/hello")
+    @GetMapping("/hello")
     public String hello() {
         return "Hello world spring";
     }
 
-
-    //TODO change with no auth
-    @GetMapping("/auth/user/{id}")
+    @GetMapping("/user/{id}")
     public UserDetails getUser(@PathVariable("id") Long id) {
         return userMapper
                 .toDetailsDTO(userRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException("User with id " + id + "not found", User.class)));
-    }
-
-    @PostMapping("/auth/register")
-    public boolean register(@RequestBody @NonNull RegisterRequest request) {
-        return userService.registerUser(request);
-    }
-
-
-    @PostMapping("/auth/login")
-    public TokenDetails login(@RequestBody @NonNull LoginRequest loginRequest) {
-        String token = userService.login(loginRequest);
-        return new TokenDetails(token);
     }
 
 
