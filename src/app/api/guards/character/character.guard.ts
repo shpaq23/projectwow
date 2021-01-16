@@ -13,7 +13,7 @@ export class CharacterGuard extends CanActivateCharacterGuard {
   constructor(characterStore: Store<CharacterState>,
               router: Router,
               actions$: Actions) {
-    super(characterStore, router, actions$)
+    super(characterStore, router, actions$);
   }
 
   resolveCanActivate(isNewCharacter: boolean): boolean | UrlTree {

@@ -27,7 +27,7 @@ export class CharacterService {
   }
 
   isNewCharacter(): Observable<boolean> {
-    return of(true).pipe(delay(this.delay));
+    return of(false).pipe(delay(this.delay));
   }
 
   getCharacter(): Observable<Character> {
