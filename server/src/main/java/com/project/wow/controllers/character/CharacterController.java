@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/characters")
 public class CharacterController {
@@ -23,15 +25,9 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
-    @GetMapping("/character/{id}")
-    public Character getCharacter(@PathVariable("id") Long id) {
-        return characterRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Character not found", Character.class));
-    }
-
-    @PostMapping("/{username}/character")
-    public ResponseEntity<Character> createCharacter(@PathVariable("username") String username, @RequestParam CharacterRequest request) {
-        return new ResponseEntity<>(characterService.create(username,request), HttpStatus.CREATED);
+    @GetMapping
+    public List<Character> getCharacterList() {
+        return characterRepository.findAll();
     }
 
 }

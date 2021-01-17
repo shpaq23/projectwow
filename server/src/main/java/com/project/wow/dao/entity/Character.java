@@ -20,12 +20,13 @@ public class Character {
 
     private String specialization;
 
-    @OneToOne(mappedBy = "character")
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
     private User owner;
 
 
-    @OneToOne()
-    @JoinColumn(name = "CHARACTERSTATS_ID", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "CHARACTERSTATS_ID")
     private CharacterStats characterStats;
 
 

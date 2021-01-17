@@ -16,7 +16,8 @@ public class CharacterStats {
     private int stamina;
     private int spirit;
 
-    @OneToOne(mappedBy = "characterStats")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "CHARACTER_ID")
     private Character character;
 
     public CharacterStats() {

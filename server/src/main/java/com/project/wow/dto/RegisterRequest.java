@@ -11,19 +11,9 @@ import javax.validation.constraints.NotNull;
 public class RegisterRequest {
 
   @NotNull
-  private String userName;
-  @NotNull
   private String email;
   @NotNull
   private String password;
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
 
   public String getEmail() {
     return email;

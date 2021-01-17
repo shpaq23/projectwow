@@ -26,8 +26,8 @@ public class CharacterService {
         this.userRepository = userRepository;
     }
 
-    public Character create(String username, CharacterRequest request) {
-        User user = userRepository.findByUserName(username);
+    public Character create(String email, CharacterRequest request) {
+        User user = userRepository.findUserByEmail(email);
         if (user.getCharacter() == null) {
             Character character = characterMapper.toEntity(request);
             if (characterRepository.existsById(character.getId())) {

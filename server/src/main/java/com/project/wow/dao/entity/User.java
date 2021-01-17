@@ -7,9 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "USER")
 public class User {
 
@@ -17,7 +14,6 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    private String userName;
 
     private String email;
 
@@ -30,9 +26,11 @@ public class User {
     private Role role;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "CHARACTER_ID", referencedColumnName = "id")
+    @JoinColumn(name = "CHARACTER_ID")
     private Character character;
 
+
+    public User() {};
 
     public Role getRole() {
         return role;
@@ -72,14 +70,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getEmail() {
