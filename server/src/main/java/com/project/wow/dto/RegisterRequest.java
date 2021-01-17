@@ -4,15 +4,17 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 public class RegisterRequest {
 
-  @NonNull
+  @NotNull
   private String userName;
-  @NonNull
+  @NotNull
   private String email;
-  @NonNull
+  @NotNull
   private String password;
 
   public String getUserName() {

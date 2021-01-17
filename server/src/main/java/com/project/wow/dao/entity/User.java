@@ -1,5 +1,6 @@
 package com.project.wow.dao.entity;
 
+import com.project.wow.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,68 +10,91 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "USERS")
+@Table(name = "USER")
 public class User {
 
-  @Id
-  @GeneratedValue
-  private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-  private String userName;
+    private String userName;
 
-  private String email;
+    private String email;
 
-  private String password;
+    private String password;
 
-  private Timestamp lastSuccessfulLogin;
+    private Timestamp lastSuccessfulLogin;
 
-  private Timestamp lastFailedLogin;
+    private Timestamp lastFailedLogin;
 
-  public Timestamp getLastFailedLogin() {
-    return lastFailedLogin;
-  }
+    private Role role;
 
-  public void setLastFailedLogin(Timestamp lastFailedLogin) {
-    this.lastFailedLogin = lastFailedLogin;
-  }
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "CHARACTER_ID", referencedColumnName = "id")
+    private Character character;
 
-  public Timestamp getLastSuccessfulLogin() {
-    return lastSuccessfulLogin;
-  }
 
-  public void setLastSuccessfulLogin(Timestamp lastLogin) {
-    this.lastSuccessfulLogin = lastLogin;
-  }
+    public Role getRole() {
+        return role;
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public Character getCharacter() {
+        return character;
+    }
 
-  public String getUserName() {
-    return userName;
-  }
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public Timestamp getLastFailedLogin() {
+        return lastFailedLogin;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setLastFailedLogin(Timestamp lastFailedLogin) {
+        this.lastFailedLogin = lastFailedLogin;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public Timestamp getLastSuccessfulLogin() {
+        return lastSuccessfulLogin;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setLastSuccessfulLogin(Timestamp lastLogin) {
+        this.lastSuccessfulLogin = lastLogin;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
