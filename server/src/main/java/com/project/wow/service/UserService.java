@@ -3,7 +3,7 @@ package com.project.wow.service;
 import com.project.wow.dao.entity.User;
 import com.project.wow.dto.LoginRequest;
 import com.project.wow.dto.RegisterRequest;
-import com.project.wow.exception.EntityAlreadyExists;
+import com.project.wow.exception.EntityAlreadyExistsException;
 import com.project.wow.exception.InvalidLoginOrPasswordEception;
 import com.project.wow.exception.InvalidRequestException;
 import com.project.wow.repository.UserRepository;
@@ -47,7 +47,7 @@ public class UserService {
         }
         User user;
         if ((user = userRepository.findUserByEmail(request.getEmail())) != null) {
-            throw new EntityAlreadyExists("User with given email: " + user.getEmail() + " already exists", User.class);
+            throw new EntityAlreadyExistsException("User with given email: " + user.getEmail() + " already exists", User.class);
         } else {
             user = userMapper.toEntityFromRequest(request);
             user.setPassword(passwordEncoder.encode(request.getPassword()));

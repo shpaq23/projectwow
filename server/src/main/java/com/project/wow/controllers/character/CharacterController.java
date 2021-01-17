@@ -1,14 +1,14 @@
 package com.project.wow.controllers.character;
 
 import com.project.wow.dao.entity.Character;
+import com.project.wow.dto.CharacterRequest;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.CharacterRepository;
 import com.project.wow.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/characters")
@@ -29,5 +29,9 @@ public class CharacterController {
                 .orElseThrow(() -> new EntityNotFoundException("Character not found", Character.class));
     }
 
+    @PostMapping("/{username}/character")
+    public ResponseEntity<Character> createCharacter(@PathVariable("username") String username, @RequestParam CharacterRequest request) {
+        return new ResponseEntity<>(characterService.create(username,request), HttpStatus.CREATED);
+    }
 
 }
