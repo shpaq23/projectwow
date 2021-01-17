@@ -1,8 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { getNewCharacter } from 'src/app/store/selectors/character.selector';
-import { CharacterState } from 'src/app/store/state/character.state';
-import { BaseComponent } from 'src/app/utils/base-component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'pw-game',
@@ -10,28 +6,9 @@ import { BaseComponent } from 'src/app/utils/base-component';
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameComponent extends BaseComponent implements OnInit {
+export class GameComponent {
 
-  newCharacter = false;
-
-  constructor(private characterStore: Store<CharacterState>,
-              private changeDetectorRef: ChangeDetectorRef) {
-    super();
+  constructor() {
   }
-
-  ngOnInit() {
-    this.setCharacterLoaded();
-  }
-
-  private setCharacterLoaded(): void {
-    this.characterStore
-      .select(getNewCharacter)
-      .pipe(this.takeUntilDestroy())
-      .subscribe(character => {
-        this.newCharacter = character;
-        this.changeDetectorRef.detectChanges();
-      });
-  }
-
 
 }

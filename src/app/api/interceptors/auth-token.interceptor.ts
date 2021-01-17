@@ -32,7 +32,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
       select(getLoggedUser),
       take(1)
     ).subscribe(user => {
-      this.token = user.accessToken;
+      this.token = user && user.accessToken;
     });
   }
 }

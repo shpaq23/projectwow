@@ -13,7 +13,7 @@ export const getCharacterError = createSelector(
   state => state.error
 );
 
-export const getNewCharacter = createSelector(
+export const getIsNewCharacter = createSelector(
   getCharacterFeatureState,
-  state => state.newCharacter
+  state => state.isNewCharacter
 );

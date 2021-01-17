@@ -5,6 +5,7 @@ import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { CharacterService } from 'src/app/api/character.service';
+import { FailureDto } from 'src/app/api/dtos/failure.dto';
 import {
   CharacterActionsTypes,
   CreateCharacter,
@@ -12,8 +13,7 @@ import {
   CreateCharacterSuccess,
   GetCharacterFail,
   GetCharacterSuccess,
-  GetNewCharacterFail,
-  GetNewCharacterSuccess
+  SetIsNewCharacter
 } from 'src/app/store/actions/character.action';
 import { CharacterState } from 'src/app/store/state/character.state';
 
@@ -22,20 +22,16 @@ import { CharacterState } from 'src/app/store/state/character.state';
 export class CharacterEffect {
 
   @Effect()
-  getNewCharacter: Observable<Action> = this.actions$.pipe(
-    ofType(CharacterActionsTypes.GetNewCharacter),
-    mergeMap(() => this.characterService.isNewCharacter().pipe(
-      map(isNewCharacter => new GetNewCharacterSuccess(isNewCharacter)),
-      catchError(err => of(new GetNewCharacterFail(err)))
-    ))
-  );
-
-  @Effect()
   getCharacter: Observable<Action> = this.actions$.pipe(
     ofType(CharacterActionsTypes.GetCharacter),
     mergeMap(() => this.characterService.getCharacter().pipe(
       map(response => new GetCharacterSuccess(response)),
-      catchError(err => of(new GetCharacterFail(err)))
+      catchError((err: FailureDto) => {
+        if (err.code === 422) {
+          this.characterStore.dispatch(new SetIsNewCharacter(true));
+        }
+        return of(new GetCharacterFail(err));
+      })
     )));
 
   @Effect()

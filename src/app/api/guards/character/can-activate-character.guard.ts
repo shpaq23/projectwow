@@ -2,9 +2,9 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { CharacterActionsTypes, GetNewCharacter, GetNewCharacterSuccess } from 'src/app/store/actions/character.action';
-import { getNewCharacter } from 'src/app/store/selectors/character.selector';
+import { concatMap, map, take } from 'rxjs/operators';
+import { CharacterActionsTypes, GetCharacter } from 'src/app/store/actions/character.action';
+import { getIsNewCharacter } from 'src/app/store/selectors/character.selector';
 import { CharacterState } from 'src/app/store/state/character.state';
 
 export abstract class CanActivateCharacterGuard implements CanActivate {
@@ -21,19 +21,24 @@ export abstract class CanActivateCharacterGuard implements CanActivate {
     if (this.isNewCharacter !== null) {
       return this.resolveCanActivate(this.isNewCharacter);
     } else {
-      this.characterStore.dispatch(new GetNewCharacter());
+      this.characterStore.dispatch(new GetCharacter());
       return this.actions$
         .pipe(
           take(1),
-          ofType(CharacterActionsTypes.GetNewCharacterSuccess),
-          map((action: GetNewCharacterSuccess) => this.resolveCanActivate(action.payload))
+          ofType(CharacterActionsTypes.GetCharacterFail, CharacterActionsTypes.GetCharacterSuccess),
+          concatMap(() => this.getIsNewCharacter$()),
+          map((isNewCharacter: boolean) => this.resolveCanActivate(isNewCharacter))
         );
     }
   }
 
+  abstract resolveCanActivate(isNewCharacter: boolean): boolean | UrlTree;
+
   private setIsNewCharacter(): void {
-    this.characterStore.select(getNewCharacter).pipe(take(1)).subscribe(value => this.isNewCharacter = value);
+    this.getIsNewCharacter$().subscribe(value => this.isNewCharacter = value);
   }
 
-  abstract resolveCanActivate(isNewCharacter: boolean): boolean | UrlTree;
+  private getIsNewCharacter$(): Observable<boolean> {
+    return this.characterStore.select(getIsNewCharacter).pipe(take(1));
+  }
 }

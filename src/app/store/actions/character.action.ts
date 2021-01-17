@@ -8,9 +8,7 @@ export enum CharacterActionsTypes {
   GetCharacterSuccess = '[Character] Get Character Success',
   GetCharacterFail = '[Character] Get Character Fail',
 
-  GetNewCharacter = '[Character] Get New Character',
-  GetNewCharacterSuccess = '[Character] Get New Character Success',
-  GetNewCharacterFail = '[Character] Get New Character Fail',
+  SetIsNewCharacter = '[Character] Set New Character',
 
   UpdateCharacter = '[Character] Update Character',
 
@@ -19,6 +17,12 @@ export enum CharacterActionsTypes {
   CreateCharacterFail = '[Character] Create Character Fail',
 
   ClearErrorMessage = '[Character] Clear Error Message'
+}
+
+export class SetIsNewCharacter implements Action {
+  public readonly type = CharacterActionsTypes.SetIsNewCharacter;
+  constructor(public payload: boolean) {
+  }
 }
 
 export class GetCharacter implements Action {
@@ -33,21 +37,6 @@ export class GetCharacterSuccess implements Action {
 
 export class GetCharacterFail implements Action {
   public readonly type = CharacterActionsTypes.GetCharacterFail;
-  constructor(public payload: FailureDto) { }
-}
-
-export class GetNewCharacter implements Action {
-  public readonly type = CharacterActionsTypes.GetNewCharacter;
-  constructor() { }
-}
-
-export class GetNewCharacterSuccess implements Action {
-  public readonly type = CharacterActionsTypes.GetNewCharacterSuccess;
-  constructor(public payload: boolean) { }
-}
-
-export class GetNewCharacterFail implements Action {
-  public readonly type = CharacterActionsTypes.GetNewCharacterFail;
   constructor(public payload: FailureDto) { }
 }
 
@@ -76,6 +65,6 @@ export class ClearErrorMessage implements Action {
   constructor() { }
 }
 
-export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail |
-  GetNewCharacter | GetNewCharacterSuccess | GetNewCharacterFail | UpdateCharacter | CreateCharacter |
-  CreateCharacterSuccess | CreateCharacterFail | ClearErrorMessage;
+export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail
+  | UpdateCharacter | CreateCharacter | CreateCharacterSuccess |
+  CreateCharacterFail | ClearErrorMessage | SetIsNewCharacter;

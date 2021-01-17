@@ -7,16 +7,14 @@ import { CharacterActionsTypes } from '../actions/character.action';
 import { StartLoading, StopLoading } from '../actions/global-loader.action';
 
 const startLoaderActions = [
-  // CharacterActionsTypes.GetCharacter,
-  CharacterActionsTypes.GetNewCharacter,
-  CharacterActionsTypes.CreateCharacter
+  CharacterActionsTypes.GetCharacter,
+  // CharacterActionsTypes.CreateCharacter
 ];
 const stopLoaderActions = [
   CharacterActionsTypes.GetCharacterFail,
   CharacterActionsTypes.GetCharacterSuccess,
-  CharacterActionsTypes.GetNewCharacterSuccess,
-  CharacterActionsTypes.CreateCharacterSuccess,
-  CharacterActionsTypes.CreateCharacterFail,
+  // CharacterActionsTypes.CreateCharacterSuccess,
+  // CharacterActionsTypes.CreateCharacterFail,
 ];
 
 @Injectable()

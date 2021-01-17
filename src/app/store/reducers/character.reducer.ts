@@ -6,6 +6,8 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
     case CharacterActionsTypes.GetCharacterSuccess:
       return {
         ...state,
+        isNewCharacter: false,
+        character: action.payload,
         error: { message: '' }
       };
     case CharacterActionsTypes.GetCharacterFail:
@@ -13,21 +15,17 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
         ...state,
         error: { message: action.payload.message }
       };
-    case CharacterActionsTypes.GetNewCharacterSuccess:
+
+    case CharacterActionsTypes.SetIsNewCharacter:
       return {
         ...state,
-        newCharacter: action.payload,
-        error: { message: '' }
+        isNewCharacter: action.payload
       };
-    case CharacterActionsTypes.GetNewCharacterFail:
-      return {
-        ...state,
-        error: { message: action.payload.message }
-      };
+
     case CharacterActionsTypes.UpdateCharacter:
       return {
         ...state,
-        newCharacter: false,
+        isNewCharacter: false,
         character: action.payload
       };
     case CharacterActionsTypes.CreateCharacterSuccess:

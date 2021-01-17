@@ -26,10 +26,6 @@ export class CharacterService {
 
   }
 
-  isNewCharacter(): Observable<boolean> {
-    return of(false).pipe(delay(this.delay));
-  }
-
   getCharacter(): Observable<Character> {
     // if (this.afterNewCharacterCreate) {
     //   return of(fakeCharacterResponse).pipe(delay(this.delay));
@@ -40,6 +36,9 @@ export class CharacterService {
       delay(this.delay),
       map(response => fakeCharacter)
     );
+
+    // return timer(this.delay).pipe(mergeMap(() => throwError({ message: 'Nickname already used', code: 422 })));
+
   }
 
   createNewCharacter(createCharacterDto: CreateCharacterDto): Observable<Character> {

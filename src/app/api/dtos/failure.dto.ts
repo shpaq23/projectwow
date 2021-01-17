@@ -1,4 +1,4 @@
 export interface FailureDto {
-  code: string;
+  code: number;
   message: string;
 }
