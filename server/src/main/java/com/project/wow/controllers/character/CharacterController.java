@@ -30,4 +30,15 @@ public class CharacterController {
         return characterRepository.findAll();
     }
 
+    @GetMapping("/character/{id}")
+    public Character getCharacter(@PathVariable("id") Long id) {
+        return characterRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Character not found", Character.class));
+    }
+
+    @PostMapping("/character")
+    public ResponseEntity<Character> createCharacter(@RequestBody CharacterRequest request) {
+        return new ResponseEntity<>(characterService.create(request), HttpStatus.CREATED);
+    }
+
 }

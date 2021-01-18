@@ -10,7 +10,10 @@ import com.project.wow.repository.UserRepository;
 import com.project.wow.utils.mappers.CharacterMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
 
 @Service
 public class CharacterService {
@@ -26,14 +29,18 @@ public class CharacterService {
         this.userRepository = userRepository;
     }
 
-    public Character create(String email, CharacterRequest request) {
-        User user = userRepository.findUserByEmail(email);
+    public Character create(CharacterRequest request) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user.getCharacter() == null) {
             Character character = characterMapper.toEntity(request);
-            if (characterRepository.existsById(character.getId())) {
+            if (!characterRepository.findAllByNickname(character.getNickname()).isEmpty()) {
                 throw new EntityAlreadyExistsException(Character.class);
             } else {
-                return characterRepository.save(character);
+                //TODO mapper character i user w nim
+                user.setCharacter(character);
+                character = characterRepository.save(character);
+                userRepository.save(user);
+                return character;
             }
         } else {
             throw new CannotCreateCharacterException("User already has a character");

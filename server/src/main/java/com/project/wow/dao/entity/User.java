@@ -1,10 +1,10 @@
 package com.project.wow.dao.entity;
 
 import com.project.wow.enums.Role;
-import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "USER")
@@ -25,12 +25,26 @@ public class User {
 
     private Role role;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     @JoinColumn(name = "CHARACTER_ID")
     private Character character;
 
 
-    public User() {};
+    public void setCharacter(Character character) {
+        if (sameAsFormer(character))
+            return;
+        Character oldAccount = this.character;
+        this.character = character;
+        if (oldAccount!=null)
+            oldAccount.setUser(null);
+        if (character!=null)
+            character.setUser(this);
+    }
+    private boolean sameAsFormer(Character newCharacter) {
+        return Objects.equals(character, newCharacter);
+    }
+    public User() {
+    }
 
     public Role getRole() {
         return role;
@@ -44,9 +58,9 @@ public class User {
         return character;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
+//    public void setCharacter(Character character) {
+//        this.character = character;
+//    }
 
     public Timestamp getLastFailedLogin() {
         return lastFailedLogin;

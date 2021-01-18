@@ -1,11 +1,13 @@
 package com.project.wow.dto;
 
-import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class CharacterRequest {
+
+    @NotNull
+    private String nickname;
 
     @Min(value = 0)
     private int health;
@@ -18,6 +20,14 @@ public class CharacterRequest {
 
     @NotNull
     private String specialization;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public int getHealth() {
         return health;
@@ -35,21 +45,19 @@ public class CharacterRequest {
         this.mana = mana;
     }
 
-    @NonNull
     public String getRace() {
         return race;
     }
 
-    public void setRace(@NonNull String race) {
+    public void setRace(String race) {
         this.race = race;
     }
 
-    @NonNull
     public String getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(@NonNull String specialization) {
+    public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
 }
