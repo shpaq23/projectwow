@@ -1,7 +1,7 @@
 package com.project.wow.controllers.character;
 
 import com.project.wow.dao.entity.Character;
-import com.project.wow.dto.CharacterRequest;
+import com.project.wow.dto.character.CharacterRequest;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.CharacterRepository;
 import com.project.wow.service.CharacterService;

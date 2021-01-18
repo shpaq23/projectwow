@@ -14,7 +14,6 @@ public class User {
     @GeneratedValue
     private Long id;
 
-
     private String email;
 
     private String password;
@@ -57,10 +56,6 @@ public class User {
     public Character getCharacter() {
         return character;
     }
-
-//    public void setCharacter(Character character) {
-//        this.character = character;
-//    }
 
     public Timestamp getLastFailedLogin() {
         return lastFailedLogin;
