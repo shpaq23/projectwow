@@ -61,7 +61,9 @@ public class CharacterService {
     private boolean validateCharacterParams(CharacterRequest request) {
         if (request.getSex().equals(CharacterSex.MALE)) {
             return checkParamsForMan(request);
-        } else return checkParamsForFemale(request);
+        } else if (request.getSex().equals(CharacterSex.FEMALE)) {
+            return checkParamsForFemale(request);
+        } else throw new InvalidRequestException("There is no such sex for character");
     }
 
     private boolean checkParamsForMan(CharacterRequest request) {
@@ -74,12 +76,12 @@ public class CharacterService {
         if (request.getCharacterClothes().getFemaleClothes() != null) {
             return false;
         }
-        if(!request.getCharacterHair().getFemaleHair().isEmpty()){
+        if (!request.getCharacterHair().getFemaleHair().isEmpty()) {
             return false;
         }
         //TODO rest parameters
 
-        else{
+        else {
             return true;
         }
     }
@@ -97,15 +99,9 @@ public class CharacterService {
         if (request.getCharacterClothes().getMaleClothes() != null) {
             return false;
         }
-        if(!request.getCharacterHair().getMaleHair().isEmpty()){
+        if (!request.getCharacterHair().getMaleHair().isEmpty()) {
             return false;
-        }
-
-
-
-
-
-        else{
+        } else {
             return true;
         }
 

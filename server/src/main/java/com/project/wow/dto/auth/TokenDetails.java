@@ -1,4 +1,4 @@
-package com.project.wow.dto;
+package com.project.wow.dto.auth;
 
 public class TokenDetails {
 

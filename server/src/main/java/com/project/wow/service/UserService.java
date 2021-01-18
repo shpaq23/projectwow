@@ -1,8 +1,8 @@
 package com.project.wow.service;
 
 import com.project.wow.dao.entity.User;
-import com.project.wow.dto.LoginRequest;
-import com.project.wow.dto.RegisterRequest;
+import com.project.wow.dto.auth.LoginRequest;
+import com.project.wow.dto.auth.RegisterRequest;
 import com.project.wow.exception.EntityAlreadyExistsException;
 import com.project.wow.exception.InvalidLoginOrPasswordEception;
 import com.project.wow.exception.InvalidRequestException;
@@ -13,6 +13,8 @@ import com.project.wow.utils.EmailValidator;
 import com.project.wow.utils.mappers.UserMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +49,7 @@ public class UserService {
     }
 
 
-    public boolean registerUser(RegisterRequest request) {
+    public ResponseEntity<HttpStatus> registerUser(RegisterRequest request) {
         if (!emailValidator.validateEmail(request.getEmail())) {
             throw new InvalidRequestException("Given email is not valid: " + request.getEmail());
         }
@@ -58,7 +60,7 @@ public class UserService {
             user = userMapper.toEntityFromRequest(request);
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             userRepository.save(user);
-            return true;
+            return ResponseEntity.accepted().build();
         }
     }
 
