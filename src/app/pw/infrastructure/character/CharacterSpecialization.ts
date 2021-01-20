@@ -1,4 +1,4 @@
-import { CharacterSpecializationEnum } from 'src/app/pw/infrastructure/character/enumes/character-specialization.enum';
+import { CharacterSpecializationEnum } from 'src/app/pw/infrastructure/character/enums/character-specialization.enum';
 import { GenericIconType } from 'src/app/pw/infrastructure/icon/GenericIconType';
 
 export class CharacterSpecialization extends GenericIconType<CharacterSpecializationEnum> {

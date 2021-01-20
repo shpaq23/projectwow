@@ -8,9 +8,9 @@ import { CharacterGender } from 'src/app/pw/infrastructure/character/CharacterGe
 import { CharacterRace } from 'src/app/pw/infrastructure/character/CharacterRace';
 import { CharacterSpecialization } from 'src/app/pw/infrastructure/character/CharacterSpecialization';
 import { CharacterStats } from 'src/app/pw/infrastructure/character/CharacterStats';
-import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enumes/character-gender.enum';
-import { CharacterRaceEnum } from 'src/app/pw/infrastructure/character/enumes/character-race.enum';
-import { CharacterSpecializationEnum } from 'src/app/pw/infrastructure/character/enumes/character-specialization.enum';
+import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
+import { CharacterRaceEnum } from 'src/app/pw/infrastructure/character/enums/character-race.enum';
+import { CharacterSpecializationEnum } from 'src/app/pw/infrastructure/character/enums/character-specialization.enum';
 import { environment } from 'src/environments/environment';
 
 

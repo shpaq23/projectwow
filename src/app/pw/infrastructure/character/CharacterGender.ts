@@ -1,4 +1,4 @@
-import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enumes/character-gender.enum';
+import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
 import { GenericIconType } from 'src/app/pw/infrastructure/icon/GenericIconType';
 
 export class CharacterGender extends GenericIconType<CharacterGenderEnum> {
