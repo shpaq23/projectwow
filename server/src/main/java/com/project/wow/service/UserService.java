@@ -1,12 +1,9 @@
 package com.project.wow.service;
 
-import com.project.wow.dao.entity.Character;
 import com.project.wow.dao.entity.User;
-import com.project.wow.dto.CharacterRequest;
-import com.project.wow.dto.LoginRequest;
-import com.project.wow.dto.RegisterRequest;
+import com.project.wow.dto.auth.LoginRequest;
+import com.project.wow.dto.auth.RegisterRequest;
 import com.project.wow.exception.EntityAlreadyExistsException;
-import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.exception.InvalidLoginOrPasswordEception;
 import com.project.wow.exception.InvalidRequestException;
 import com.project.wow.repository.CharacterRepository;
@@ -20,10 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
@@ -56,7 +49,7 @@ public class UserService {
     }
 
 
-    public boolean registerUser(RegisterRequest request) {
+    public ResponseEntity<HttpStatus> registerUser(RegisterRequest request) {
         if (!emailValidator.validateEmail(request.getEmail())) {
             throw new InvalidRequestException("Given email is not valid: " + request.getEmail());
         }
@@ -67,7 +60,7 @@ public class UserService {
             user = userMapper.toEntityFromRequest(request);
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             userRepository.save(user);
-            return true;
+            return ResponseEntity.accepted().build();
         }
     }
 
@@ -87,16 +80,7 @@ public class UserService {
     }
 
 
-    @GetMapping("/{userMail}/character/{id}")
-    public Character getCharacter(@PathVariable("id") Long id) {
-        return characterRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Character not found", Character.class));
-    }
 
-    @PostMapping("/{userMail}/character")
-    public ResponseEntity<Character> createCharacter(@PathVariable("username") String userMail, @RequestParam CharacterRequest request) {
-        return new ResponseEntity<>(characterService.create(userMail, request), HttpStatus.CREATED);
-    }
 
 
     private boolean checkUserAndPassword(String password, User user) {

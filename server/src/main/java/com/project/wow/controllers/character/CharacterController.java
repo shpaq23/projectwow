@@ -1,7 +1,7 @@
 package com.project.wow.controllers.character;
 
 import com.project.wow.dao.entity.Character;
-import com.project.wow.dto.CharacterRequest;
+import com.project.wow.dto.character.CharacterRequest;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.CharacterRepository;
 import com.project.wow.service.CharacterService;
@@ -28,6 +28,17 @@ public class CharacterController {
     @GetMapping
     public List<Character> getCharacterList() {
         return characterRepository.findAll();
+    }
+
+    @GetMapping("/character/{id}")
+    public Character getCharacter(@PathVariable("id") Long id) {
+        return characterRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Character not found", Character.class));
+    }
+
+    @PostMapping("/character")
+    public ResponseEntity<Character> createCharacter(@RequestBody CharacterRequest request) {
+        return new ResponseEntity<>(characterService.create(request), HttpStatus.CREATED);
     }
 
 }

@@ -1,10 +1,7 @@
 package com.project.wow.controllers.user;
 
 import com.project.wow.dao.entity.User;
-import com.project.wow.dao.UserDetails;
-import com.project.wow.dto.LoginRequest;
-import com.project.wow.dto.RegisterRequest;
-import com.project.wow.dto.TokenDetails;
+import com.project.wow.dto.user.UserDetails;
 import com.project.wow.exception.EntityNotFoundException;
 import com.project.wow.repository.UserRepository;
 import com.project.wow.service.UserService;

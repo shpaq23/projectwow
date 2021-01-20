@@ -34,7 +34,7 @@ public class JwtUtils {
         .withClaim("id", user.getId())
         .sign(algorithm);
     } catch (JWTCreationException exception) {
-      System.out.println("could not create token");
+      logger.error("Cannot create token");
       return null;
     }
 
@@ -49,7 +49,7 @@ public class JwtUtils {
       DecodedJWT jwt = verifier.verify(token);
       return jwt.getSubject();
     } catch (JWTVerificationException exception) {
-      System.out.println("Error while parsing JWT");
+      logger.error("Error while parsing JWT");
       return null;
     }
   }
@@ -63,7 +63,7 @@ public class JwtUtils {
       DecodedJWT jwt = verifier.verify(token);
       return true;
     } catch (JWTVerificationException exception) {
-      System.out.println("Error while parsing token");
+      logger.error("Error while parsing token");
     }
     return false;
   }

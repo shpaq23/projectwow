@@ -1,12 +1,18 @@
-package com.project.wow.dto;
+package com.project.wow.dto.auth;
 
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
-public class LoginRequest {
+import javax.validation.constraints.NotNull;
 
-  @NonNull
+@Getter
+@Setter
+public class RegisterRequest {
+
+  @NotNull
   private String email;
-  @NonNull
+  @NotNull
   private String password;
 
   public String getEmail() {

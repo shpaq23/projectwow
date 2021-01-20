@@ -1,6 +1,9 @@
 package com.project.wow.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Character {
@@ -16,13 +19,13 @@ public class Character {
     //todo change to enum
     private String race;
 
-    private String gender;
+    private String nickname;
 
     private String specialization;
 
-    @OneToOne
-    @JoinColumn(name = "USER_ID")
-    private User owner;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private User user;
 
 
     @OneToOne
@@ -30,7 +33,16 @@ public class Character {
     private CharacterStats characterStats;
 
 
-    public Character(){};
+    public Character() {
+    }
+
+    public void setUser(User owner) {
+        this.user = owner;
+    }
+
+    private boolean sameAsFormer(User newOwner) {
+        return Objects.equals(user, newOwner);
+    }
 
     public CharacterStats getCharacterStats() {
         return characterStats;
@@ -64,12 +76,12 @@ public class Character {
         this.race = race;
     }
 
-    public String getGender() {
-        return gender;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setNickname(String gender) {
+        this.nickname = gender;
     }
 
     public String getSpecialization() {
@@ -80,13 +92,10 @@ public class Character {
         this.specialization = specjalization;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 
     public void setId(Long id) {
         this.id = id;

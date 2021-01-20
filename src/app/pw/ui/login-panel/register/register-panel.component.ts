@@ -71,7 +71,7 @@ export class RegisterPanelComponent implements OnInit {
     this.form = new FormGroup({
       login: new FormControl('', {validators: [Validators.required, Validators.email]}),
       passwordGroup: new FormGroup({
-        password: new FormControl('', {validators: [Validators.required, this.strongPasswordValidator]}),
+        password: new FormControl('', {validators: [Validators.required]}),
         repassword: new FormControl('', {validators: [Validators.required]}),
       }, {validators: [this.passwordValidator]}),
       creationCode: new FormControl('', {validators: [Validators.required]})

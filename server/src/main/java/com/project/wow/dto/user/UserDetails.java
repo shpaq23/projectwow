@@ -1,4 +1,4 @@
-package com.project.wow.dao;
+package com.project.wow.dto.user;
 
 import java.sql.Timestamp;
 

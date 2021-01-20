@@ -1,5 +1,7 @@
 package com.project.wow.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,8 +18,8 @@ public class CharacterStats {
     private int stamina;
     private int spirit;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "CHARACTER_ID")
     private Character character;
 
     public CharacterStats() {
