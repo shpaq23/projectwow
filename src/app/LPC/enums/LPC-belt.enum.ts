@@ -1,4 +1,4 @@
-export enum MaleBeltEnum {
+export enum LPCBeltEnum {
   LEATHER = 'LEATHER',
   CLOTH = 'CLOTH'
 }

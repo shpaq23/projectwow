@@ -1,7 +1,11 @@
+import { LPCLook } from 'src/app/LPC/LPCLook';
+import { CharacterEquipment } from 'src/app/pw/infrastructure/character/CharacterEquipment';
 import { CharacterGender } from 'src/app/pw/infrastructure/character/CharacterGender';
+import { CharacterLook } from 'src/app/pw/infrastructure/character/CharacterLook';
 import { CharacterRace } from 'src/app/pw/infrastructure/character/CharacterRace';
 import { CharacterSpecialization } from 'src/app/pw/infrastructure/character/CharacterSpecialization';
 import { CharacterStats } from 'src/app/pw/infrastructure/character/CharacterStats';
+import { CharacterLPCConverter } from 'src/app/pw/infrastructure/character/utils/CharacterLPCConverter';
 
 export class Character {
 
@@ -9,8 +13,10 @@ export class Character {
               private readonly mana: number,
               private readonly race: CharacterRace,
               private readonly gender: CharacterGender,
+              private readonly look: CharacterLook,
               private readonly specialization: CharacterSpecialization,
-              private readonly basicStats: CharacterStats) {
+              private readonly basicStats: CharacterStats,
+              private readonly equipment: CharacterEquipment) {
   }
 
   getHealth(): number {
@@ -35,6 +41,18 @@ export class Character {
 
   getBasicStats(): CharacterStats {
     return this.basicStats;
+  }
+
+  getEquipment(): CharacterEquipment {
+    return this.equipment;
+  }
+
+  getLook(): CharacterLook {
+    return this.look;
+  }
+
+  getLPCLook(): LPCLook {
+    return CharacterLPCConverter.fromCharacter(this);
   }
 
 }

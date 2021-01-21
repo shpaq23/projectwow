@@ -1,20 +1,30 @@
-import { LPCRace } from 'src/app/LPC/types/LPC-race.type';
+import {
+  LPCBelt,
+  LPCBoots, LPCChest,
+  LPCEars,
+  LPCEyes,
+  LPCHair,
+  LPCHairColor, LPCHands, LPCHead,
+  LPCLegs,
+  LPCRace, LPCShoulders, LPCSpecial, LPCWeapon
+} from 'src/app/LPC/types/LPC-types.type';
 
 export abstract class LPCLook {
 
   protected constructor(protected race: LPCRace,
-                        protected ears: any,
-                        protected eyes: any,
-                        protected hair: any,
-                        protected boots: any,
-                        protected legs: any,
-                        protected belt: any,
-                        protected chest: any,
-                        protected head: any,
-                        protected shoulders: any,
-                        protected hands: any,
-                        protected weapon: any,
-                        protected special: any) {
+                        protected ears: LPCEars,
+                        protected eyes: LPCEyes,
+                        protected hair: LPCHair,
+                        protected hairColor: LPCHairColor,
+                        protected boots: LPCBoots,
+                        protected legs: LPCLegs,
+                        protected belt: LPCBelt,
+                        protected chest: LPCChest,
+                        protected head: LPCHead,
+                        protected shoulders: LPCShoulders,
+                        protected hands: LPCHands,
+                        protected weapon: LPCWeapon,
+                        protected special: LPCSpecial) {
   }
 
   abstract getRaceUrl(): string;
@@ -24,6 +34,8 @@ export abstract class LPCLook {
   abstract getEyesUrl(): string;
 
   abstract getHairUrl(): string;
+
+  abstract getHairColor(): string;
 
   abstract getBootsUrl(): string;
 

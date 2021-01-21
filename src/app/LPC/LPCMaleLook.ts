@@ -1,10 +1,36 @@
-import { MaleRaceEnum } from 'src/app/LPC/enums/male/male-race.enum';
+import { LPCBeltEnum } from 'src/app/LPC/enums/LPC-belt.enum';
+import { LPCBootsEnum } from 'src/app/LPC/enums/LPC-boots.enum';
+import { LPCEarsEnum } from 'src/app/LPC/enums/LPC-ears.enum';
+import { LPCEyesEnum } from 'src/app/LPC/enums/LPC-eyes.enum';
+import { LPCHairColorEnum } from 'src/app/LPC/enums/LPC-hair-color.enum';
+import { LPCHandsEnum } from 'src/app/LPC/enums/LPC-hands.enum';
+import { LPCHeadEnum } from 'src/app/LPC/enums/LPC-head.enum';
+import { LPCLegsEnum } from 'src/app/LPC/enums/LPC-legs.enum';
+import { LPCShouldersEnum } from 'src/app/LPC/enums/LPC-shoulders.enum';
+import { LPCMaleChestEnum } from 'src/app/LPC/enums/male/LPC-male-chest.enum';
+import { LPCMaleHairEnum } from 'src/app/LPC/enums/male/LPC-male-hair.enum';
+import { LPCMaleRaceEnum } from 'src/app/LPC/enums/male/LPC-male-race.enum';
+import { LPCMaleSpecialEnum } from 'src/app/LPC/enums/male/LPC-male-special.enum';
+import { LPCMaleWeaponEnum } from 'src/app/LPC/enums/male/LPC-male-weapon.enum';
 import { LPCLook } from 'src/app/LPC/LPCLook';
 
 export class LPCMaleLook extends LPCLook {
 
-  constructor(race: MaleRaceEnum) {
-    super(race);
+  constructor(race: LPCMaleRaceEnum,
+              ears: LPCEarsEnum,
+              eyes: LPCEyesEnum,
+              hair: LPCMaleHairEnum,
+              hairColor: LPCHairColorEnum,
+              boots: LPCBootsEnum,
+              legs: LPCLegsEnum,
+              belt: LPCBeltEnum,
+              chest: LPCMaleChestEnum,
+              head: LPCHeadEnum,
+              shoulders: LPCShouldersEnum,
+              hands: LPCHandsEnum,
+              weapon: LPCMaleWeaponEnum,
+              special: LPCMaleSpecialEnum) {
+    super(race, ears, eyes, hair, hairColor, boots, legs, belt, chest, head, shoulders, hands, weapon, special);
   }
 
   getBeltUrl(): string {
@@ -28,6 +54,10 @@ export class LPCMaleLook extends LPCLook {
   }
 
   getHairUrl(): string {
+    return '';
+  }
+
+  getHairColor(): string {
     return '';
   }
 
@@ -58,6 +88,5 @@ export class LPCMaleLook extends LPCLook {
   getWeaponUrl(): string {
     return '';
   }
-
 
 }

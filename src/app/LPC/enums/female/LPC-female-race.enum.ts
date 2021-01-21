@@ -1,4 +1,4 @@
-export enum MaleRaceEnum {
+export enum LPCFemaleRaceEnum {
   DARK = 'DARK',
   DARK2 = 'DARK2',
   DARK_ELF = 'DARK_ELF',
@@ -7,6 +7,5 @@ export enum MaleRaceEnum {
   ORC = 'ORC',
   RED_ORC = 'RED_ORC',
   TANNED = 'TANNED',
-  TANNED2 = 'TANNED2',
-  SKELETON = 'SKELETON',
+  TANNED2 = 'TANNED2'
 }

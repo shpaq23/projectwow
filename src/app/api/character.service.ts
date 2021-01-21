@@ -51,11 +51,13 @@ export class CharacterService {
 
 }
 
-const fakeCharacter: Character = new Character(
-  100,
-  100,
-  new CharacterRace(CharacterRaceEnum.HUMAN, ''),
-  new CharacterGender(CharacterGenderEnum.MALE, ''),
-  new CharacterSpecialization(CharacterSpecializationEnum.WARRIOR, ''),
-  new CharacterStats(20, 20, 20, 20, 20)
-);
+// const fakeCharacter: Character = new Character(
+//   100,
+//   100,
+//   new CharacterRace(CharacterRaceEnum.HUMAN, ''),
+//   new CharacterGender(CharacterGenderEnum.MALE, ''),
+//   new CharacterSpecialization(CharacterSpecializationEnum.WARRIOR, ''),
+//   new CharacterStats(20, 20, 20, 20, 20)
+// );
+const fakeCharacter: Character = null;
+

@@ -1,0 +1,10 @@
+export enum LPCMaleWeaponEnum {
+  ARROW_SKELETON = 'ARROW_SKELETON',
+  ARROW = 'ARROW',
+  BOW_SKELETON = 'BOW_SKELETON',
+  BOW = 'BOW',
+  DAGGER = 'DAGGER',
+  QUIVER = 'QUIVER',
+  SPEAR = 'SPEAR',
+  WOOD_WAND = 'WOOD_WAND'
+}

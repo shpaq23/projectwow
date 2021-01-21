@@ -1,0 +1,4 @@
+export enum LPCEarsEnum {
+  ELVEN_DARK_ELF = 'ELVEN_DARK_ELF',
+  ELVEN_DARK_ELF2 = 'ELVEN_DARK_ELF2'
+}
