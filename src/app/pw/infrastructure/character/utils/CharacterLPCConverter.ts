@@ -1,9 +1,7 @@
-import { LPCFemaleChestEnum } from 'src/app/LPC/enums/female/LPC-female-chest.enum';
 import { LPCFemaleHairEnum } from 'src/app/LPC/enums/female/LPC-female-hair.enum';
 import { LPCFemaleRaceEnum } from 'src/app/LPC/enums/female/LPC-female-race.enum';
 import { LPCFemaleSpecialEnum } from 'src/app/LPC/enums/female/LPC-female-special.enum';
 import { LPCFemaleWeaponEnum } from 'src/app/LPC/enums/female/LPC-female-weapon.enum';
-import { LPCMaleChestEnum } from 'src/app/LPC/enums/male/LPC-male-chest.enum';
 import { LPCMaleHairEnum } from 'src/app/LPC/enums/male/LPC-male-hair.enum';
 import { LPCMaleRaceEnum } from 'src/app/LPC/enums/male/LPC-male-race.enum';
 import { LPCMaleSpecialEnum } from 'src/app/LPC/enums/male/LPC-male-special.enum';
@@ -11,7 +9,15 @@ import { LPCMaleWeaponEnum } from 'src/app/LPC/enums/male/LPC-male-weapon.enum';
 import { LPCFemaleLook } from 'src/app/LPC/LPCFemaleLook';
 import { LPCLook } from 'src/app/LPC/LPCLook';
 import { LPCMaleLook } from 'src/app/LPC/LPCMaleLook';
-import { LPCBelt, LPCBoots, LPCHands, LPCHead, LPCLegs, LPCShoulders } from 'src/app/LPC/types/LPC-types.type';
+import {
+  LPCBelt,
+  LPCBoots,
+  LPCChest,
+  LPCHands,
+  LPCHead,
+  LPCLegs,
+  LPCShoulders
+} from 'src/app/LPC/types/LPC-types.type';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
 import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
 import { CharacterItem } from 'src/app/pw/infrastructure/character/items/CharacterItem';
@@ -30,7 +36,7 @@ export class CharacterLPCConverter {
         getItemOrNull(character.getEquipment().boots) as LPCBoots,
         getItemOrNull(character.getEquipment().legs) as LPCLegs,
         getItemOrNull(character.getEquipment().belt) as LPCBelt,
-        getItemOrNull(character.getEquipment().chest) as LPCMaleChestEnum,
+        getItemOrNull(character.getEquipment().chest) as LPCChest,
         getItemOrNull(character.getEquipment().head) as LPCHead,
         getItemOrNull(character.getEquipment().shoulders) as LPCShoulders,
         getItemOrNull(character.getEquipment().hands) as LPCHands,
@@ -47,7 +53,7 @@ export class CharacterLPCConverter {
         getItemOrNull(character.getEquipment().boots) as LPCBoots,
         getItemOrNull(character.getEquipment().legs) as LPCLegs,
         getItemOrNull(character.getEquipment().belt) as LPCBelt,
-        getItemOrNull(character.getEquipment().chest) as LPCFemaleChestEnum,
+        getItemOrNull(character.getEquipment().chest) as LPCChest,
         getItemOrNull(character.getEquipment().head) as LPCHead,
         getItemOrNull(character.getEquipment().shoulders) as LPCShoulders,
         getItemOrNull(character.getEquipment().hands) as LPCHands,

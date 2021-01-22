@@ -1,10 +1,10 @@
-import { LPCFemaleChestEnum } from 'src/app/LPC/enums/female/LPC-female-chest.enum';
 import { LPCFemaleHairEnum } from 'src/app/LPC/enums/female/LPC-female-hair.enum';
 import { LPCFemaleRaceEnum } from 'src/app/LPC/enums/female/LPC-female-race.enum';
 import { LPCFemaleSpecialEnum } from 'src/app/LPC/enums/female/LPC-female-special.enum';
 import { LPCFemaleWeaponEnum } from 'src/app/LPC/enums/female/LPC-female-weapon.enum';
 import { LPCBeltEnum } from 'src/app/LPC/enums/LPC-belt.enum';
 import { LPCBootsEnum } from 'src/app/LPC/enums/LPC-boots.enum';
+import { LPCChestEnum } from 'src/app/LPC/enums/LPC-chest.enum';
 import { LPCEarsEnum } from 'src/app/LPC/enums/LPC-ears.enum';
 import { LPCEyesEnum } from 'src/app/LPC/enums/LPC-eyes.enum';
 import { LPCHairColorEnum } from 'src/app/LPC/enums/LPC-hair-color.enum';
@@ -24,7 +24,7 @@ export class LPCFemaleLook extends LPCLook {
               boots: LPCBootsEnum,
               legs: LPCLegsEnum,
               belt: LPCBeltEnum,
-              chest: LPCFemaleChestEnum,
+              chest: LPCChestEnum,
               head: LPCHeadEnum,
               shoulders: LPCShouldersEnum,
               hands: LPCHandsEnum,

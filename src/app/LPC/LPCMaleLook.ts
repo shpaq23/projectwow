@@ -1,5 +1,6 @@
 import { LPCBeltEnum } from 'src/app/LPC/enums/LPC-belt.enum';
 import { LPCBootsEnum } from 'src/app/LPC/enums/LPC-boots.enum';
+import { LPCChestEnum } from 'src/app/LPC/enums/LPC-chest.enum';
 import { LPCEarsEnum } from 'src/app/LPC/enums/LPC-ears.enum';
 import { LPCEyesEnum } from 'src/app/LPC/enums/LPC-eyes.enum';
 import { LPCHairColorEnum } from 'src/app/LPC/enums/LPC-hair-color.enum';
@@ -7,7 +8,6 @@ import { LPCHandsEnum } from 'src/app/LPC/enums/LPC-hands.enum';
 import { LPCHeadEnum } from 'src/app/LPC/enums/LPC-head.enum';
 import { LPCLegsEnum } from 'src/app/LPC/enums/LPC-legs.enum';
 import { LPCShouldersEnum } from 'src/app/LPC/enums/LPC-shoulders.enum';
-import { LPCMaleChestEnum } from 'src/app/LPC/enums/male/LPC-male-chest.enum';
 import { LPCMaleHairEnum } from 'src/app/LPC/enums/male/LPC-male-hair.enum';
 import { LPCMaleRaceEnum } from 'src/app/LPC/enums/male/LPC-male-race.enum';
 import { LPCMaleSpecialEnum } from 'src/app/LPC/enums/male/LPC-male-special.enum';
@@ -24,7 +24,7 @@ export class LPCMaleLook extends LPCLook {
               boots: LPCBootsEnum,
               legs: LPCLegsEnum,
               belt: LPCBeltEnum,
-              chest: LPCMaleChestEnum,
+              chest: LPCChestEnum,
               head: LPCHeadEnum,
               shoulders: LPCShouldersEnum,
               hands: LPCHandsEnum,
