@@ -1,11 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/api/auth.service';
 import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
 import { Gravity } from 'src/app/generic-components/gravity.enum';
-import { AuthService } from 'src/app/api/auth.service';
 import { RegisterForm } from 'src/app/pw/infrastructure/login-panel/register.form';
-import { UserDtoConverter } from 'src/app/pw/utils/user-dto.converter';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UserDtoConverter } from 'src/app/pw/ui/login-panel/user-dto.converter';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterPanelComponent implements OnInit {
 
-  @ViewChild('loginInput', {read: ElementRef, static: true})
+  @ViewChild('loginInput', { read: ElementRef, static: true })
   loginInput: ElementRef;
 
   form: FormGroup;
@@ -69,19 +69,19 @@ export class RegisterPanelComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      login: new FormControl('', {validators: [Validators.required, Validators.email]}),
+      login: new FormControl('', { validators: [Validators.required, Validators.email] }),
       passwordGroup: new FormGroup({
-        password: new FormControl('', {validators: [Validators.required]}),
-        repassword: new FormControl('', {validators: [Validators.required]}),
-      }, {validators: [this.passwordValidator]}),
-      creationCode: new FormControl('', {validators: [Validators.required]})
+        password: new FormControl('', { validators: [Validators.required] }),
+        repassword: new FormControl('', { validators: [Validators.required] }),
+      }, { validators: [this.passwordValidator] }),
+      creationCode: new FormControl('', { validators: [Validators.required] })
     });
     this.setFocusOnLogin();
   }
 
   passwordValidator(formGroup: FormGroup) {
     return (formGroup.get('password').value !== formGroup.get('repassword').value) ?
-      {differentPasswords: true} :
+      { differentPasswords: true } :
       null;
   }
 
@@ -92,7 +92,7 @@ export class RegisterPanelComponent implements OnInit {
     // const valid = hasNumber && hasUpper && hasLower && formControl.value.length > 8;
     const valid = hasNumber && formControl.value.length > 8;
     if (!valid) {
-      return {strongPassword: true};
+      return { strongPassword: true };
     }
     return null;
   }

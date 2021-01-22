@@ -6,5 +6,9 @@ export class CharacterGender extends GenericIconType<CharacterGenderEnum> {
               public readonly url: string) {
     super();
   }
+
+  getDisplayName(): string {
+    return this.data.toLowerCase();
+  }
 }
 

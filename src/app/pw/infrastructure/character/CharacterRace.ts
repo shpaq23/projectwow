@@ -6,4 +6,8 @@ export class CharacterRace extends GenericIconType<CharacterRaceEnum> {
               public readonly url: string) {
     super();
   }
+
+  getDisplayName(): string {
+    return this.data.toLowerCase();
+  }
 }

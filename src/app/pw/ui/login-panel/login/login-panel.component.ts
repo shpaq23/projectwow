@@ -15,7 +15,7 @@ import { getLoggedUserError, getLoggedUserLoading } from 'src/app/store/selector
 import { UserState } from 'src/app/store/state/user.state';
 import { BaseComponent } from 'src/app/utils/base-component';
 import { LoginForm } from 'src/app/pw/infrastructure/login-panel/login-form';
-import { UserDtoConverter } from 'src/app/pw/utils/user-dto.converter';
+import { UserDtoConverter } from 'src/app/pw/ui/login-panel/user-dto.converter';
 
 @Component({
   selector: 'pw-login-panel',

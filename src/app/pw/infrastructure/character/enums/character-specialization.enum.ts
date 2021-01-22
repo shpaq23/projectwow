@@ -1,12 +1,6 @@
 export enum CharacterSpecializationEnum {
-  DRUID = 'druid',
-  HUNTER = 'hunter',
-  MAGE = 'mage',
-  PALADIN = 'paladin',
-  PRIEST = 'priest',
-  ROGUE = 'rogue',
-  SHAMAN = 'shaman',
-  WARLOCK = 'warlock',
-  WARRIOR = 'warrior'
+  WARRIOR = 'WARRIOR',
+  MAGE = 'MAGE',
+  RANGER = 'RANGER'
 }
 

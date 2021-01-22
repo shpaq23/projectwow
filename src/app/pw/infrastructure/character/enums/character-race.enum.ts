@@ -1,11 +1,6 @@
 export enum CharacterRaceEnum {
-  ORC = 'orc',
-  TAUREN = 'tauren',
-  UNDEAD = 'undead',
-  TROLL = 'troll',
-
-  HUMAN = 'human',
-  DWARF = 'dwarf',
-  NIGHT_ELF = 'night elf',
-  GNOME = 'gnome'
+  HUMAN = 'HUMAN',
+  DARK_ELF = 'DARK_ELF',
+  ORC = 'ORC',
+  SKELETON = 'SKELETON'
 }

@@ -6,4 +6,8 @@ export class CharacterSpecialization extends GenericIconType<CharacterSpecializa
               public readonly url: string) {
     super();
   }
+
+  getDisplayName(): string {
+    return this.data.toLowerCase();
+  }
 }
