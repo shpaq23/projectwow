@@ -1,11 +1,8 @@
 import { LPCFemaleHairEnum } from 'src/app/LPC/enums/female/LPC-female-hair.enum';
-import { LPCFemaleRaceEnum } from 'src/app/LPC/enums/female/LPC-female-race.enum';
 import { LPCFemaleSpecialEnum } from 'src/app/LPC/enums/female/LPC-female-special.enum';
-import { LPCFemaleWeaponEnum } from 'src/app/LPC/enums/female/LPC-female-weapon.enum';
+import { LPCRaceEnum } from 'src/app/LPC/enums/LPC-race.enum';
 import { LPCMaleHairEnum } from 'src/app/LPC/enums/male/LPC-male-hair.enum';
-import { LPCMaleRaceEnum } from 'src/app/LPC/enums/male/LPC-male-race.enum';
 import { LPCMaleSpecialEnum } from 'src/app/LPC/enums/male/LPC-male-special.enum';
-import { LPCMaleWeaponEnum } from 'src/app/LPC/enums/male/LPC-male-weapon.enum';
 import { LPCFemaleLook } from 'src/app/LPC/LPCFemaleLook';
 import { LPCLook } from 'src/app/LPC/LPCLook';
 import { LPCMaleLook } from 'src/app/LPC/LPCMaleLook';
@@ -16,7 +13,9 @@ import {
   LPCHands,
   LPCHead,
   LPCLegs,
-  LPCShoulders
+  LPCRace,
+  LPCShoulders,
+  LPCWeapon
 } from 'src/app/LPC/types/LPC-types.type';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
 import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
@@ -28,8 +27,7 @@ export class CharacterLPCConverter {
     const getItemOrNull = (item: CharacterItem): CharacterItemLook => item ? item.look : null;
     if (character.getGender().data === CharacterGenderEnum.MALE) {
       return new LPCMaleLook(
-        character.getLook().race as LPCMaleRaceEnum,
-        character.getLook().ears,
+        character.getLook().race as LPCRace,
         character.getLook().eyes,
         character.getLook().hair as LPCMaleHairEnum,
         character.getLook().hairColor,
@@ -40,13 +38,12 @@ export class CharacterLPCConverter {
         getItemOrNull(character.getEquipment().head) as LPCHead,
         getItemOrNull(character.getEquipment().shoulders) as LPCShoulders,
         getItemOrNull(character.getEquipment().hands) as LPCHands,
-        getItemOrNull(character.getEquipment().weapon) as LPCMaleWeaponEnum,
+        getItemOrNull(character.getEquipment().weapon) as LPCWeapon,
         getItemOrNull(character.getEquipment().special) as LPCMaleSpecialEnum
       );
     } else {
       return new LPCFemaleLook(
-        character.getLook().race as LPCFemaleRaceEnum,
-        character.getLook().ears,
+        character.getLook().race as LPCRaceEnum,
         character.getLook().eyes,
         character.getLook().hair as LPCFemaleHairEnum,
         character.getLook().hairColor,
@@ -57,7 +54,7 @@ export class CharacterLPCConverter {
         getItemOrNull(character.getEquipment().head) as LPCHead,
         getItemOrNull(character.getEquipment().shoulders) as LPCShoulders,
         getItemOrNull(character.getEquipment().hands) as LPCHands,
-        getItemOrNull(character.getEquipment().weapon) as LPCFemaleWeaponEnum,
+        getItemOrNull(character.getEquipment().weapon) as LPCWeapon,
         getItemOrNull(character.getEquipment().special) as LPCFemaleSpecialEnum
       );
     }

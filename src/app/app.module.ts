@@ -16,10 +16,12 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPanelModule } from './pw/ui/login-panel/login-panel.module';
+import { TescomponentComponent } from './pw/tescomponent/tescomponent.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TescomponentComponent
   ],
   imports: [
     BrowserModule,
