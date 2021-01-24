@@ -7,7 +7,17 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 
-.idea/
-
-.idea/workspace.xml
-
+/server/.idea
+/libraries/
+/sonarlint/
+/sonarlint/issuestore
+/.idea/workspace.xml/
+/.name
+/compiler.xml
+/dataSources.xml
+/modules.xml
+/encodings.xml
+/jarRepositories.xml
+/misc.xml
+/uiDesigner.xml
+/vcs.xml
