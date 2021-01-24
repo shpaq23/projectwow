@@ -68,9 +68,7 @@ public class CharacterService {
     private boolean checkParamsForMan(CharacterRequest request) {
         if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getEars().equals(CharacterEars.BIG_EARS)) {
             return false;
-        } else if (request.getCharacterClothes().getFemaleClothes() != null) {
-            return false;
-        } else if (!EnumUtils.isValidEnum(MaleHairType.class, request.getCharacterHair())) {
+        } else if (!EnumUtils.isValidEnum(MaleHairType.class, request.getHair())) {
             return false;
         } else return EnumUtils.isValidEnum(MaleSpecial.class, request.getSpecial());
     }
@@ -80,8 +78,6 @@ public class CharacterService {
             return false;
         } else if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getEars().equals(CharacterEars.BIG_EARS)) {
             return false;
-        } else if (request.getCharacterClothes().getMaleClothes() != null) {
-            return false;
-        } else return EnumUtils.isValidEnum(FemaleClothes.class, request.getCharacterHair());
+        } else return EnumUtils.isValidEnum(FemaleClothes.class, request.getHair());
     }
 }

@@ -24,13 +24,21 @@ public class CharacterRequest {
 
     private CharacterLegs legs;
 
-    private CharacterClothes characterClothes;
+//    private CharacterClothes characterClothes;
 
     private CharacterMail characterMail;
 
-    private String characterHairType;
+    private String hair;
 
     private String special;
+
+    public String getHair() {
+        return hair;
+    }
+
+    public void setHair(String hair) {
+        this.hair = hair;
+    }
 
     public String getSpecial() {
         return special;
@@ -40,13 +48,6 @@ public class CharacterRequest {
         this.special = special;
     }
 
-    public String getCharacterHair() {
-        return characterHairType;
-    }
-
-    public void setCharacterHair(String characterHairType) {
-        this.characterHairType = characterHairType;
-    }
 
     public CharacterMail getCharacterMail() {
         return characterMail;
@@ -56,13 +57,13 @@ public class CharacterRequest {
         this.characterMail = characterMail;
     }
 
-    public CharacterClothes getCharacterClothes() {
-        return characterClothes;
-    }
-
-    public void setCharacterClothes(CharacterClothes characterClothes) {
-        this.characterClothes = characterClothes;
-    }
+//    public CharacterClothes getCharacterClothes() {
+//        return characterClothes;
+//    }
+//
+//    public void setCharacterClothes(CharacterClothes characterClothes) {
+//        this.characterClothes = characterClothes;
+//    }
 
     public CharacterLegs getLegs() {
         return legs;

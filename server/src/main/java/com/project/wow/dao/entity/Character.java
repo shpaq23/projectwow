@@ -19,6 +19,7 @@ public class Character {
 
     private int mana;
 
+    @Enumerated(EnumType.STRING)
     private CharacterRace race;
 
     private String specialization;
