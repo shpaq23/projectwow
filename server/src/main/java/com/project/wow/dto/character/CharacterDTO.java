@@ -4,6 +4,7 @@ import com.project.wow.dao.entity.CharacterStats;
 import com.project.wow.dto.character.equipment.CharacterRace;
 
 public class CharacterDTO {
+    private Long id;
     private String nickname;
     private int health;
     private int mana;
@@ -12,6 +13,14 @@ public class CharacterDTO {
     private String ownerMail;
     private CharacterStats characterStats;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNickname() {
         return nickname;
