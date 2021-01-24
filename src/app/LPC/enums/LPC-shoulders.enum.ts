@@ -1,5 +1,0 @@
-export enum LPCShouldersEnum {
-  GOLD_ARMS = 'GOLD_ARMS',
-  LEATHER_ARMS = 'LEATHER_ARMS',
-  PLATE_ARMS = 'PLATE_ARMS'
-}

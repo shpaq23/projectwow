@@ -1,4 +1,0 @@
-export enum LPCHandsEnum {
-  GOLDEN_GLOVES = 'GOLDEN_GLOVES',
-  METAL_GLOVES = 'METAL_GLOVES'
-}

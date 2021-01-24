@@ -4,11 +4,12 @@
 /dist
 /tmp
 /out-tsc
+/server/target/
 # Only exists if Bazel was run
 /bazel-out
 
 # dependencies
-/node_modules
+/ui/node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -44,4 +45,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-/server/target/
