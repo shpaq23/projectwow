@@ -1,0 +1,29 @@
+<div *ngIf="(!loading && !isValid) || serverError" class="errors pw-column-container-center pw-bottom-vertical">
+  <span *ngIf="form.get('login').hasError('required')">Login is required</span>
+  <span *ngIf="form.get('login').hasError('email')">Invalid Login</span>
+  <span *ngIf="form.get('password').hasError('required')">Password is required</span>
+  <span *ngIf="serverError">{{serverError}}</span>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="pw-column-container-center pw-mb-5">
+    <label class="pw-label pw-mb-1" for="login">Login</label>
+    <input #loginInput placeholder="E-mail" (keyup.enter)="!loading && onSubmit()" [class.invalid]="isLoginInvalid" class="pw-input"
+           formControlName="login" type="email" id="login" autocomplete="off">
+  </div>
+  <div class="pw-column-container-center  pw-mb-5">
+    <label class="pw-label pw-mb-1" for="password">Password</label>
+    <input (keyup.enter)="!loading && isValid && onSubmit()" [class.invalid]="isPasswordInvalid" class="pw-input"
+           formControlName="password" type="password" id="password" autocomplete="off">
+  </div>
+  <pw-button (click)="!loading && isValid && onSubmit()"
+             [disabled]="!isValid || loading"
+             [spinLeft]="loading"
+             [spinRight]="loading"
+             [faIconLeft]="loading && faIcon.cog"
+             [faIconRight]="loading && faIcon.cog">Log in
+  </pw-button>
+
+  <pw-button class="pw-mt-2" [faIconRight]="faIcon.arrowRight" [disabled]="loading" routerLink="/register">Go to
+    Registration
+  </pw-button>
+</form>

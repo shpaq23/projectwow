@@ -1,0 +1,54 @@
+@import "styles/mixins";
+@import "styles/variables";
+@import "styles/layout";
+
+body {
+  @include wowFont;
+  height: 100vh;
+  //overflow: hidden;
+  display: flex;
+  min-width: 1366px;
+  //background-color: black;
+  background: url('/assets/background.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.pw-label {
+  @include fontYellow;
+  font-weight: bold;
+}
+
+input.pw-input {
+  border-radius: 8px;
+  border: 1px solid $inputBorderColor;
+  box-sizing: border-box;
+  outline: none;
+  padding: 4px 8px;
+  font-family: inherit;
+  background-color: $inputBackgroundColor;
+  color: $inputTextColor;
+  text-align: center;
+  width: 100%;
+  max-width: 240px;
+
+  &.invalid {
+    border-color: $redError;
+  }
+
+  &:disabled {
+    @include cursorNotAllowed;
+    background-color: $inputDisabledBackgroundColor;
+  }
+
+  &::placeholder {
+    color: $inputPlaceholderColor;
+  }
+}
+
+@font-face {
+  font-family: wowfont;
+  src: url('/assets/wowfont.ttf');
+}

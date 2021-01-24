@@ -1,0 +1,10 @@
+export enum LPCHairColorEnum {
+  BLONDE = 'BLONDE',
+  BLUE = 'BLUE',
+  BRUNETTE = 'BRUNETTE',
+  GREEN = 'GREEN',
+  PINK = 'PINK',
+  RAVEN = 'RAVEN',
+  REDHEAD = 'REDHEAD',
+  WHITE_BLOND = 'WHITE_BLOND'
+}
