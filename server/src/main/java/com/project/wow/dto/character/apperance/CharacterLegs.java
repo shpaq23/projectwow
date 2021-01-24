@@ -1,10 +1,10 @@
 package com.project.wow.dto.character.apperance;
 
 public enum CharacterLegs {
-    MAGENTA,
-    RED,
-    TEAL,
-    WHITE,
-    ROBE_SKIRT, //male only
-    SARA_LEGGINGS //female only
+    GOLDEN_PANTS,
+    MAGENTA_PANTS,
+    RED_PANTS,
+    TEAL_PANTS,
+    METAL_PANTS,
+    WHITE_PANTS,
 }

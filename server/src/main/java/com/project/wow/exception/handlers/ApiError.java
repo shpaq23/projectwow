@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.CUSTOM, property = "error", visible = true)
 @JsonTypeIdResolver(LowerCaseClassNameResolver.class)
-public class ApiError{
+public class ApiError {
 
     private HttpStatus status;
     private LocalDateTime timestamp;
     private String message;
     private String type;
+    private int code;
 
     private ApiError() {
         timestamp = LocalDateTime.now();
@@ -23,18 +24,21 @@ public class ApiError{
     public ApiError(HttpStatus status) {
         this();
         this.status = status;
+        this.code = status.value();
     }
 
     public ApiError(HttpStatus status, Throwable ex) {
         this();
         this.status = status;
         this.message = "Unexpected error";
+        this.code = status.value();
     }
 
     public ApiError(HttpStatus status, String message) {
         this();
         this.status = status;
         this.message = message;
+        this.code = status.value();
     }
 
     public ApiError(HttpStatus status, String message, String type) {
@@ -42,12 +46,22 @@ public class ApiError{
         this.status = status;
         this.message = message;
         this.type = type;
+        this.code = status.value();
     }
 
     public ApiError(HttpStatus status, String message, Throwable ex) {
         this();
         this.status = status;
         this.message = message;
+        this.code = status.value();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public HttpStatus getStatus() {

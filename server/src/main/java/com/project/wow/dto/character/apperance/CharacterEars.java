@@ -1,6 +1,6 @@
 package com.project.wow.dto.character.apperance;
 
-public enum CharacterNose {
+public enum CharacterEars {
     BIG_EARS,
     ELVEN_EARS //elf only
 }

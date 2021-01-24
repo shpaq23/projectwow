@@ -3,9 +3,7 @@ package com.project.wow.service;
 import com.project.wow.dao.entity.Character;
 import com.project.wow.dao.entity.User;
 import com.project.wow.dto.character.*;
-import com.project.wow.dto.character.apperance.CharacterLegs;
-import com.project.wow.dto.character.apperance.CharacterNose;
-import com.project.wow.dto.character.apperance.CharacterSex;
+import com.project.wow.dto.character.apperance.*;
 import com.project.wow.dto.character.equipment.CharacterRace;
 import com.project.wow.exception.CannotCreateCharacterException;
 import com.project.wow.exception.EntityAlreadyExistsException;
@@ -17,6 +15,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.EnumUtils;
+
 
 @Service
 public class CharacterService {
@@ -32,7 +32,7 @@ public class CharacterService {
         this.userRepository = userRepository;
     }
 
-    public Character create(CharacterRequest request) {
+    public CharacterDTO create(CharacterRequest request) {
         User user = getCurrentUser();
         if (user.getCharacter() == null) {
             if (validateCharacterParams(request)) {
@@ -40,11 +40,10 @@ public class CharacterService {
                 if (!characterRepository.findAllByNickname(character.getNickname()).isEmpty()) {
                     throw new EntityAlreadyExistsException(Character.class);
                 } else {
-                    //TODO mapper character i user w nim
                     user.setCharacter(character);
                     character = characterRepository.save(character);
                     userRepository.save(user);
-                    return character;
+                    return characterMapper.toDetailsDTO(character);
                 }
             } else {
                 throw new InvalidRequestException("Cannot create character with given params!");
@@ -59,54 +58,30 @@ public class CharacterService {
     }
 
     private boolean validateCharacterParams(CharacterRequest request) {
-        if (request.getSex().equals(CharacterSex.MALE)) {
+        if (request.getGender().equals(CharacterSex.MALE)) {
             return checkParamsForMan(request);
-        } else if (request.getSex().equals(CharacterSex.FEMALE)) {
+        } else if (request.getGender().equals(CharacterSex.FEMALE)) {
             return checkParamsForFemale(request);
         } else throw new InvalidRequestException("There is no such sex for character");
     }
 
     private boolean checkParamsForMan(CharacterRequest request) {
-        if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getNose().equals(CharacterNose.BIG_EARS)) {
+        if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getEars().equals(CharacterEars.BIG_EARS)) {
             return false;
-        }
-        if (request.getLegs().equals(CharacterLegs.SARA_LEGGINGS)) {
+        } else if (request.getCharacterClothes().getFemaleClothes() != null) {
             return false;
-        }
-        if (request.getCharacterClothes().getFemaleClothes() != null) {
+        } else if (!EnumUtils.isValidEnum(MaleHairType.class, request.getCharacterHair())) {
             return false;
-        }
-        if (!request.getCharacterHair().getFemaleHair().isEmpty()) {
-            return false;
-        }
-        //TODO rest parameters
-
-        else {
-            return true;
-        }
+        } else return EnumUtils.isValidEnum(MaleSpecial.class, request.getSpecial());
     }
 
     private boolean checkParamsForFemale(CharacterRequest request) {
         if (request.getRace().equals(CharacterRace.SKELETON)) {
             return false;
-        }
-        if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getNose().equals(CharacterNose.BIG_EARS)) {
+        } else if (request.getRace().equals(CharacterRace.DARK_ELF) && request.getEars().equals(CharacterEars.BIG_EARS)) {
             return false;
-        }
-        if (request.getLegs().equals(CharacterLegs.ROBE_SKIRT)) {
+        } else if (request.getCharacterClothes().getMaleClothes() != null) {
             return false;
-        }
-        if (request.getCharacterClothes().getMaleClothes() != null) {
-            return false;
-        }
-        if (!request.getCharacterHair().getMaleHair().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
-
-
+        } else return EnumUtils.isValidEnum(FemaleClothes.class, request.getCharacterHair());
     }
-
-
 }

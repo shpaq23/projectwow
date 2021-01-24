@@ -1,6 +1,7 @@
 package com.project.wow.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.wow.dto.character.equipment.CharacterRace;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,14 +13,13 @@ public class Character {
     @GeneratedValue
     private Long id;
 
+    private String nickname;
+
     private int health;
 
     private int mana;
 
-    //todo change to enum
-    private String race;
-
-    private String nickname;
+    private CharacterRace race;
 
     private String specialization;
 
@@ -68,11 +68,11 @@ public class Character {
         this.mana = mana;
     }
 
-    public String getRace() {
+    public CharacterRace getRace() {
         return race;
     }
 
-    public void setRace(String race) {
+    public void setRace(CharacterRace race) {
         this.race = race;
     }
 

@@ -6,26 +6,21 @@ import com.project.wow.dto.character.equipment.CharacterRace;
 
 public class CharacterRequest {
 
-//    @NotNull
     private String nickname;
 
-//    @Min(value = 0)
     private int health;
 
-//    @Min(value = 0)
     private int mana;
 
-//    @NotNull
     private String specialization;
 
-    //    @NotNull
     private CharacterRace race;
 
-    private CharacterSex sex;
+    private CharacterSex gender;
 
     private CharacterEyesColor eyesColor;
 
-    private CharacterNose nose;
+    private CharacterEars ears;
 
     private CharacterLegs legs;
 
@@ -33,15 +28,24 @@ public class CharacterRequest {
 
     private CharacterMail characterMail;
 
-    private CharacterHair characterHair;
+    private String characterHairType;
 
+    private String special;
 
-    public CharacterHair getCharacterHair() {
-        return characterHair;
+    public String getSpecial() {
+        return special;
     }
 
-    public void setCharacterHair(CharacterHair characterHair) {
-        this.characterHair = characterHair;
+    public void setSpecial(String special) {
+        this.special = special;
+    }
+
+    public String getCharacterHair() {
+        return characterHairType;
+    }
+
+    public void setCharacterHair(String characterHairType) {
+        this.characterHairType = characterHairType;
     }
 
     public CharacterMail getCharacterMail() {
@@ -68,12 +72,12 @@ public class CharacterRequest {
         this.legs = legs;
     }
 
-    public CharacterNose getNose() {
-        return nose;
+    public CharacterEars getEars() {
+        return ears;
     }
 
-    public void setNose(CharacterNose nose) {
-        this.nose = nose;
+    public void setEars(CharacterEars ears) {
+        this.ears = ears;
     }
 
     public String getNickname() {
@@ -116,12 +120,12 @@ public class CharacterRequest {
         this.race = race;
     }
 
-    public CharacterSex getSex() {
-        return sex;
+    public CharacterSex getGender() {
+        return gender;
     }
 
-    public void setSex(CharacterSex sex) {
-        this.sex = sex;
+    public void setGender(CharacterSex gender) {
+        this.gender = gender;
     }
 
     public CharacterEyesColor getEyesColor() {
