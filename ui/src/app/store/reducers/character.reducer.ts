@@ -6,7 +6,7 @@ export function characterReducer(state = initCharacterState, action: CharacterAc
     case CharacterActionsTypes.GetCharacterSuccess:
       return {
         ...state,
-        isNewCharacter: false,
+        isNewCharacter: true,
         character: action.payload,
         error: { message: '' }
       };

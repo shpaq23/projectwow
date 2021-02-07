@@ -4,13 +4,6 @@ import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
-import { CharacterGender } from 'src/app/pw/infrastructure/character/CharacterGender';
-import { CharacterRace } from 'src/app/pw/infrastructure/character/CharacterRace';
-import { CharacterSpecialization } from 'src/app/pw/infrastructure/character/CharacterSpecialization';
-import { CharacterStats } from 'src/app/pw/infrastructure/character/CharacterStats';
-import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
-import { CharacterRaceEnum } from 'src/app/pw/infrastructure/character/enums/character-race.enum';
-import { CharacterSpecializationEnum } from 'src/app/pw/infrastructure/character/enums/character-specialization.enum';
 import { environment } from 'src/environments/environment';
 
 

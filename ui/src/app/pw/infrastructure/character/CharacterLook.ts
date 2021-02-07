@@ -1,4 +1,4 @@
-import { LPCEars, LPCEyes, LPCHair, LPCHairColor, LPCRace } from 'src/app/LPC/types/LPC-types.type';
+import { LPCEyes, LPCHair, LPCHairColor, LPCRace } from 'src/app/LPC/types/LPC-types.type';
 
 export class CharacterLook {
   constructor(public readonly race: LPCRace,

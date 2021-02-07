@@ -6,59 +6,50 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
-  SimpleChanges
+  Output
 } from '@angular/core';
-import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
 import { Subject } from 'rxjs';
-import { BaseComponent } from 'src/app/utils/base-component';
 import { debounceTime } from 'rxjs/operators';
+import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
+import { Option } from 'src/app/generic-components/Option';
+import { BaseComponent } from 'src/app/utils/base-component';
+import { NgChanges } from 'src/app/utils/NgChanges';
 
 @Component({
-  selector: 'pw-arrow-list-selector',
+  selector: 'pw-arrow-list-selector[list]',
   templateUrl: './arrow-list-selector.component.html',
   styleUrls: ['./arrow-list-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArrowListSelectorComponent extends BaseComponent implements OnInit, OnChanges {
 
-  @Input() list: string[];
+  @Input() list: Array<Option>;
 
   @Input() listName: string;
 
-  @Input() selected: string;
+  @Input() selected: Option;
 
-  @Output() selectedItemEmitter = new EventEmitter<string>();
+  @Output() selectedItemEmitter = new EventEmitter<Option>();
 
   chevronLeft = FaIcon.chevronLeft;
 
   chevronRight = FaIcon.chevronRight;
 
-  canSelectNext: boolean;
+  selectedItem: Option;
 
-  canSelectPrevious: boolean;
-
-  selectedItem: string;
-
-  private debouncer: Subject<string> = new Subject<string>();
+  private debouncer: Subject<Option> = new Subject<Option>();
 
   constructor(private changeDetectionRef: ChangeDetectorRef) {
     super();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: NgChanges<ArrowListSelectorComponent>): void {
 
-    if (changes.list) {
+    if ((changes.list && changes.list.currentValue) || (changes.selected && changes.selected)) {
       this.selectedItem = this.list[0];
-      this.setCanSelectNext();
-      this.setCanSelectPrevious();
-    }
-
-    if (changes.selected) {
-      this.selectedItem = this.selected;
-      this.setCanSelectNext();
-      this.setCanSelectPrevious();
-      this.changeDetectionRef.detectChanges();
+      if (this.selected) {
+        this.selectedItem = this.selected;
+      }
     }
   }
 
@@ -73,34 +64,33 @@ export class ArrowListSelectorComponent extends BaseComponent implements OnInit,
   }
 
   selectNextItem(): void {
-    const currentIndex = this.list.findIndex(value => value === this.selectedItem);
+    const currentIndex = this.list.findIndex(option => option.displayValue === this.selectedItem.displayValue);
     this.selectedItem = this.list[currentIndex + 1];
     this.afterItemSelection();
   }
 
   selectPreviousItem(): void {
-    const currentIndex = this.list.findIndex(value => value === this.selectedItem);
+    const currentIndex = this.list.findIndex(option => option.displayValue === this.selectedItem.displayValue);
     this.selectedItem = this.list[currentIndex - 1];
     this.afterItemSelection();
+  }
+
+  get canSelectNext(): boolean {
+    const currentIndex = this.list.findIndex(option => option.displayValue === this.selectedItem.displayValue);
+    return this.list[currentIndex + 1] !== undefined;
+  }
+
+  get canSelectPrevious(): boolean {
+    const currentIndex = this.list.findIndex(option => option.displayValue === this.selectedItem.displayValue);
+    return this.list[currentIndex - 1] !== undefined;
   }
 
   private emitSelected(): void {
     this.debouncer.next(this.selectedItem);
   }
 
-  private setCanSelectNext(): void {
-    const currentIndex = this.list.findIndex(value => value === this.selectedItem);
-    this.canSelectNext = this.list[currentIndex + 1] !== undefined;
-  }
-
-  private setCanSelectPrevious(): void {
-    const currentIndex = this.list.findIndex(value => value === this.selectedItem);
-    this.canSelectPrevious = this.list[currentIndex - 1] !== undefined;
-  }
 
   private afterItemSelection(): void {
-    this.setCanSelectNext();
-    this.setCanSelectPrevious();
     this.emitSelected();
     this.changeDetectionRef.detectChanges();
   }
