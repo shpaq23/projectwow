@@ -1,36 +1,37 @@
+import { Action, createReducer, on } from '@ngrx/store';
+import { loginUser, loginUserFail, loginUserSuccess, logoutUserSuccess } from 'src/app/store/actions/user.action';
 import { initUserState, UserState } from 'src/app/store/state/user.state';
-import { UserActions, UserActionsTypes } from 'src/app/store/actions/user.action';
 
-export function userReducer(state = initUserState, action: UserActions): UserState {
-  switch (action.type) {
-    case UserActionsTypes.LoginUserSuccess:
-      return {
-        ...state,
-        user: action.payload,
-        error: ''
-      };
-    case UserActionsTypes.LoginUserFail:
-      return {
-        ...state,
-        error: action.payload.message
-      };
-    case UserActionsTypes.LogoutUserSuccess:
-      return {
-        ...state,
-        user: null,
-        error: ''
-      };
-    case UserActionsTypes.StartLoadingUser:
-      return {
-        ...state,
-        loading: true
-      };
-    case UserActionsTypes.StopLoadingUser:
-      return {
-        ...state,
-        loading: false
-      };
-    default:
-      return state;
-  }
+export const userFeatureKey = 'logged-user';
+
+const reducer = createReducer(
+  initUserState,
+  on(loginUserSuccess,
+    (state, { payload }) => ({
+      ...state,
+      user: payload,
+      error: null,
+      loading: false
+    })),
+  on(loginUserFail,
+    (state, { payload }) => ({
+      ...state,
+      error: payload,
+      loading: false
+    })),
+  on(logoutUserSuccess,
+    () => ({
+      user: null,
+      error: null,
+      loading: false
+    })),
+  on(loginUser,
+    (state) => ({
+      ...state,
+      loading: true
+    }))
+);
+
+export function userReducer(state, action: Action): UserState {
+  return reducer(state, action);
 }

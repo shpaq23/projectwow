@@ -1,19 +1,19 @@
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { concatMap, map, take } from 'rxjs/operators';
-import { CharacterActionsTypes, GetCharacter } from 'src/app/store/actions/character.action';
-import { getIsNewCharacter } from 'src/app/store/selectors/character.selector';
-import { CharacterState } from 'src/app/store/state/character.state';
+import { getCharacterFailure, getCharacterSuccess } from 'src/app/store/actions/character.action';
+import { CharacterCommands } from 'src/app/store/commands/character.commands';
+import { CharacterRepository } from 'src/app/store/repositories/character.repository';
 
 export abstract class CanActivateCharacterGuard implements CanActivate {
 
   private isNewCharacter: boolean;
 
-  protected constructor(protected characterStore: Store<CharacterState>,
-                        protected router: Router,
-                        protected actions$: Actions) {
+  protected constructor(protected readonly characterCommandsService: CharacterCommands,
+                        protected readonly characterRepository: CharacterRepository,
+                        protected readonly router: Router,
+                        protected readonly actions$: Actions) {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | UrlTree | boolean {
@@ -21,11 +21,11 @@ export abstract class CanActivateCharacterGuard implements CanActivate {
     if (this.isNewCharacter !== null) {
       return this.resolveCanActivate(this.isNewCharacter);
     } else {
-      this.characterStore.dispatch(new GetCharacter());
+      this.characterCommandsService.getCharacter();
       return this.actions$
         .pipe(
           take(1),
-          ofType(CharacterActionsTypes.GetCharacterFail, CharacterActionsTypes.GetCharacterSuccess),
+          ofType(getCharacterFailure, getCharacterSuccess),
           concatMap(() => this.getIsNewCharacter$()),
           map((isNewCharacter: boolean) => this.resolveCanActivate(isNewCharacter))
         );
@@ -39,6 +39,6 @@ export abstract class CanActivateCharacterGuard implements CanActivate {
   }
 
   private getIsNewCharacter$(): Observable<boolean> {
-    return this.characterStore.select(getIsNewCharacter).pipe(take(1));
+    return this.characterRepository.selectIsNewCharacter().pipe(take(1));
   }
 }

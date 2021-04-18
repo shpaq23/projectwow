@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
 import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
 import { Option } from 'src/app/generic-components/Option';
@@ -9,9 +8,8 @@ import { Character } from 'src/app/pw/infrastructure/character/Character';
 import { CharacterGenderEnum } from 'src/app/pw/infrastructure/character/enums/character-gender.enum';
 import { CharacterRaceEnum } from 'src/app/pw/infrastructure/character/enums/character-race.enum';
 import { NewCharacterService } from 'src/app/pw/ui/game/new-character/new-character.service';
-import { CreateCharacter } from 'src/app/store/actions/character.action';
-import { getCharacterError } from 'src/app/store/selectors/character.selector';
-import { CharacterState } from 'src/app/store/state/character.state';
+import { CharacterCommands } from 'src/app/store/commands/character.commands';
+import { CharacterRepository } from 'src/app/store/repositories/character.repository';
 import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
@@ -37,7 +35,8 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
   private selectedHairColor: LPCHairColor;
   private selectedEyes: LPCEyes;
 
-  constructor(private readonly characterStore: Store<CharacterState>,
+  constructor(private readonly characterRepository: CharacterRepository,
+              private readonly characterCommands: CharacterCommands,
               private readonly changeDetectorRef: ChangeDetectorRef,
               private readonly newCharacterService: NewCharacterService) {
     super();
@@ -68,7 +67,7 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
     this.form.disable();
     this.loading = true;
     const createCharacterDto: CreateCharacterDto = { nickname: this.formValue.nickname };
-    this.characterStore.dispatch(new CreateCharacter(createCharacterDto));
+    this.characterCommands.createCharacter(createCharacterDto);
   }
 
   setCharacterGender(gender: Option<CharacterGenderEnum>): void {
@@ -114,7 +113,7 @@ export class NewCharacterComponent extends BaseComponent implements OnInit {
   }
 
   private subscribeForNewCharacterErrorResponse(): void {
-    this.characterStore.pipe(select(getCharacterError))
+    this.characterRepository.selectCharacterError()
       .pipe(this.takeUntilDestroy())
       .subscribe(error => {
         if (this.submitted && error) {

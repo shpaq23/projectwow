@@ -8,14 +8,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
 import { FaIcon } from 'src/app/generic-components/fa-icon.enum';
-import { LoginUser } from 'src/app/store/actions/user.action';
-import { getLoggedUserError, getLoggedUserLoading } from 'src/app/store/selectors/user.selector';
-import { UserState } from 'src/app/store/state/user.state';
-import { BaseComponent } from 'src/app/utils/base-component';
 import { LoginForm } from 'src/app/pw/infrastructure/login-panel/login-form';
 import { UserDtoConverter } from 'src/app/pw/ui/login-panel/user-dto.converter';
+import { UserCommands } from 'src/app/store/commands/user.commands';
+import { UserRepository } from 'src/app/store/repositories/user.repository';
+import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
   selector: 'pw-login-panel',
@@ -34,7 +32,8 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
   faIcon = FaIcon;
   serverError: string;
 
-  constructor(private readonly userStore: Store<UserState>,
+  constructor(private readonly userRepository: UserRepository,
+              private readonly userCommands: UserCommands,
               private readonly changeDetectorRef: ChangeDetectorRef) {
     super();
   }
@@ -73,7 +72,7 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
       return;
     }
     this.form.disable();
-    this.userStore.dispatch(new LoginUser(UserDtoConverter.loginUserDto(this.formValue)));
+    this.userCommands.loginUser(UserDtoConverter.loginUserDto(this.formValue));
   }
 
   private setFocusOnLogin(): void {
@@ -81,18 +80,18 @@ export class LoginPanelComponent extends BaseComponent implements OnInit, OnDest
   }
 
   private subscribeForLoginResponseError(): void {
-    this.userStore.pipe(select(getLoggedUserError))
+    this.userRepository.getUserError()
       .pipe(this.takeUntilDestroy())
       .subscribe(error => {
         if (this.submitted) {
-          this.serverError = error;
+          this.serverError = error.message;
           this.changeDetectorRef.detectChanges();
         }
       });
   }
 
   private subscribeForLoginLoading(): void {
-    this.userStore.pipe(select(getLoggedUserLoading))
+    this.userRepository.getUserLoading()
       .pipe(this.takeUntilDestroy())
       .subscribe(loading => {
           this.loading = loading;

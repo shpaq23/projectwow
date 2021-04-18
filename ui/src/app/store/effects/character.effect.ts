@@ -1,60 +1,60 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { CharacterService } from 'src/app/api/character.service';
 import { FailureDto } from 'src/app/api/dtos/failure.dto';
 import {
-  CharacterActionsTypes,
-  CreateCharacter,
-  CreateCharacterFail,
-  CreateCharacterSuccess,
-  GetCharacterFail,
-  GetCharacterSuccess,
-  SetIsNewCharacter
+  createCharacter,
+  createCharacterFailure,
+  createCharacterSuccess,
+  getCharacter,
+  getCharacterFailure,
+  getCharacterSuccess
 } from 'src/app/store/actions/character.action';
-import { CharacterState } from 'src/app/store/state/character.state';
+import { CharacterCommands } from 'src/app/store/commands/character.commands';
 
 
 @Injectable()
 export class CharacterEffect {
 
-  @Effect()
-  getCharacter: Observable<Action> = this.actions$.pipe(
-    ofType(CharacterActionsTypes.GetCharacter),
-    mergeMap(() => this.characterService.getCharacter().pipe(
-      map(response => new GetCharacterSuccess(response)),
-      catchError((err: FailureDto) => {
-        if (err.code === 422) {
-          this.characterStore.dispatch(new SetIsNewCharacter(true));
-        }
-        return of(new GetCharacterFail(err));
-      })
-    )));
-
-  @Effect()
-  createCharacter: Observable<Action> = this.actions$.pipe(
-    ofType(CharacterActionsTypes.CreateCharacter),
-    map((action: CreateCharacter) => action.payload),
-    mergeMap(payload => this.characterService.createNewCharacter(payload).pipe(
-      map(response => new CreateCharacterSuccess(response)),
-      catchError(err => of(new CreateCharacterFail(err)))
-    )));
-
-  @Effect({ dispatch: false })
-  redirectAfterCharacterCreation$ = this.actions$.pipe(
-    ofType(CharacterActionsTypes.CreateCharacterSuccess),
-    tap(() => {
-      this.router.navigate(['/game']);
-    })
+  getCharacter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCharacter),
+      switchMap(() => this.characterService.getCharacter().pipe(
+        map(response => getCharacterSuccess({ payload: response })),
+        catchError((err: FailureDto) => {
+          if (err.code === 422) {
+            this.characterCommands.setNewCharacter(true);
+          }
+          return of(getCharacterFailure({ payload: err }));
+        })
+      )))
   );
 
-  constructor(private characterService: CharacterService,
-              private characterStore: Store<CharacterState>,
-              private actions$: Actions,
-              private router: Router) {
+  createCharacter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createCharacter),
+      map(action => action.payload),
+      switchMap(payload => this.characterService.createNewCharacter(payload).pipe(
+        map(response => createCharacterSuccess({ payload: response })),
+        catchError(err => of(createCharacterFailure({ payload: err })))
+      )))
+  );
+
+  redirectAfterCharacterCreation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createCharacterSuccess),
+      tap(() => {
+        this.router.navigate(['/game']);
+      })
+    ), { dispatch: false });
+
+  constructor(private readonly characterService: CharacterService,
+              private readonly characterCommands: CharacterCommands,
+              private readonly actions$: Actions,
+              private readonly router: Router) {
   }
 
 }

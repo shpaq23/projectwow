@@ -1,65 +1,61 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from 'src/app/api/auth.service';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { Action, Store } from '@ngrx/store';
-import {
-  LoginUser,
-  LoginUserFail,
-  LoginUserSuccess, LogoutUserSuccess, StartLoadingUser, StopLoadingUser,
-  UserActionsTypes
-} from 'src/app/store/actions/user.action';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UserState } from 'src/app/store/state/user.state';
-import { HttpErrorResponse } from "@angular/common/http";
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/api/auth.service';
+import { FailureDto } from 'src/app/api/dtos/failure.dto';
+import {
+  loginUser,
+  loginUserFail,
+  loginUserSuccess,
+  logoutUser,
+  logoutUserSuccess
+} from 'src/app/store/actions/user.action';
 
 @Injectable()
 export class UserEffect {
 
-  constructor(private authService: AuthService,
-              private actions$: Actions,
-              private router: Router,
-              private store: Store<UserState>) { }
-
-  @Effect()
-  loginUser: Observable<Action> = this.actions$.pipe(
-    ofType(UserActionsTypes.LoginUser),
-    map((action: LoginUser) => action.payload),
-    mergeMap(payload => this.authService.login(payload).pipe(
-      map(user => {
-        localStorage.setItem('user', JSON.stringify(user));
-        return new LoginUserSuccess(user);
-      }),
-      catchError((err: HttpErrorResponse) => {
-        return of(new LoginUserFail(err.error))
-      })
-    )));
-
-  @Effect()
-  logoutUser: Observable<Action> = this.actions$.pipe(
-    ofType(UserActionsTypes.LogoutUser),
-    map(() => {
-      this.authService.logout();
-      return new LogoutUserSuccess();
-    }));
-
-  @Effect({ dispatch: false })
-  startLoading$ = this.actions$.pipe(
-    ofType(UserActionsTypes.LoginUser),
-    tap(() => this.store.dispatch(new StartLoadingUser()))
+  loginUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginUser),
+      map(action => action.payload),
+      mergeMap(payload => this.authService.login(payload).pipe(
+        map(user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          return loginUserSuccess({ payload: user });
+        }),
+        catchError((err: FailureDto) => {
+          return of(loginUserFail({ payload: err }));
+        })
+      )))
   );
 
-  @Effect({ dispatch: false })
-  stopLoading$ = this.actions$.pipe(
-    ofType(UserActionsTypes.LoginUserSuccess, UserActionsTypes.LoginUserFail),
-    tap(() => this.store.dispatch(new StopLoadingUser()))
+  logoutUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logoutUser),
+      map(() => {
+        this.authService.logout();
+        return logoutUserSuccess();
+      }))
   );
 
-  @Effect({ dispatch: false })
-  redirectAfterLogin$ = this.actions$.pipe(
-    ofType(UserActionsTypes.LoginUserSuccess),
-    tap(() => this.router.navigate(['/game']))
-  );
+  redirectAfterLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginUserSuccess),
+      tap(() => this.router.navigate(['/game']))
+    ), { dispatch: false });
+
+  redirectAfterLogout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logoutUserSuccess),
+      tap(() => this.router.navigate(['/login']))
+    ), { dispatch: false });
+
+
+  constructor(private readonly authService: AuthService,
+              private readonly actions$: Actions,
+              private readonly router: Router) {
+  }
 
 }

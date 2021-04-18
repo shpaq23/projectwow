@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { userFeatureKey } from 'src/app/store/reducers/user.reducer';
 import { UserState } from 'src/app/store/state/user.state';
 
-const getUserFeatureState = createFeatureSelector<UserState>('loggedUser');
+const getUserFeatureState = createFeatureSelector<UserState>(userFeatureKey);
 
 export const getLoggedUser = createSelector(
   getUserFeatureState,

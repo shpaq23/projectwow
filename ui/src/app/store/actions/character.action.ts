@@ -1,70 +1,38 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { CreateCharacterDto } from 'src/app/api/dtos/character/create-character.dto';
 import { FailureDto } from 'src/app/api/dtos/failure.dto';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
 
-export enum CharacterActionsTypes {
-  GetCharacter = '[Character] Get Character',
-  GetCharacterSuccess = '[Character] Get Character Success',
-  GetCharacterFail = '[Character] Get Character Fail',
+export const setNewCharacter = createAction(
+  '[Character] Set New Character',
+  props<{ payload: boolean }>()
+);
 
-  SetIsNewCharacter = '[Character] Set New Character',
+export const getCharacter = createAction(
+  '[Character] Get Character'
+);
 
-  UpdateCharacter = '[Character] Update Character',
+export const getCharacterSuccess = createAction(
+  '[Character] Get Character Success',
+  props<{ payload: Character }>()
+);
 
-  CreateCharacter = '[Character] Create Character',
-  CreateCharacterSuccess = '[Character] Create Character Success',
-  CreateCharacterFail = '[Character] Create Character Fail',
+export const getCharacterFailure = createAction(
+  '[Character] Get Character Failure',
+  props<{ payload: FailureDto }>()
+);
 
-  ClearErrorMessage = '[Character] Clear Error Message'
-}
+export const createCharacter = createAction(
+  '[Character] Create Character',
+  props<{ payload: CreateCharacterDto }>()
+);
 
-export class SetIsNewCharacter implements Action {
-  public readonly type = CharacterActionsTypes.SetIsNewCharacter;
-  constructor(public payload: boolean) {
-  }
-}
+export const createCharacterSuccess = createAction(
+  '[Character] Create Character Success',
+  props<{ payload: Character }>()
+);
 
-export class GetCharacter implements Action {
-  public readonly type = CharacterActionsTypes.GetCharacter;
-  constructor() { }
-}
-
-export class GetCharacterSuccess implements Action {
-  public readonly type = CharacterActionsTypes.GetCharacterSuccess;
-  constructor(public payload: Character) { }
-}
-
-export class GetCharacterFail implements Action {
-  public readonly type = CharacterActionsTypes.GetCharacterFail;
-  constructor(public payload: FailureDto) { }
-}
-
-export class UpdateCharacter implements Action {
-  public readonly type = CharacterActionsTypes.UpdateCharacter;
-  constructor(public payload: Character) { }
-}
-
-export class CreateCharacter implements Action {
-  public readonly type = CharacterActionsTypes.CreateCharacter;
-  constructor(public payload: CreateCharacterDto) { }
-}
-
-export class CreateCharacterSuccess implements Action {
-  public readonly type = CharacterActionsTypes.CreateCharacterSuccess;
-  constructor(public payload: Character) { }
-}
-
-export class CreateCharacterFail implements Action {
-  public readonly type = CharacterActionsTypes.CreateCharacterFail;
-  constructor(public payload: FailureDto) { }
-}
-
-export class ClearErrorMessage implements Action {
-  public readonly type = CharacterActionsTypes.ClearErrorMessage;
-  constructor() { }
-}
-
-export type CharacterActions = GetCharacter | GetCharacterSuccess | GetCharacterFail
-  | UpdateCharacter | CreateCharacter | CreateCharacterSuccess |
-  CreateCharacterFail | ClearErrorMessage | SetIsNewCharacter;
+export const createCharacterFailure = createAction(
+  '[Character] Create Character Failure',
+  props<{ payload: FailureDto }>()
+);

@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { CharacterState } from 'src/app/store/state/character.state';
-import { getCharacter } from 'src/app/store/selectors/character.selector';
-import { BaseComponent } from 'src/app/utils/base-component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Character } from 'src/app/pw/infrastructure/character/Character';
+import { CharacterRepository } from 'src/app/store/repositories/character.repository';
+import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
   selector: 'pw-character',
   templateUrl: './character.component.html',
-  styleUrls: ['./character.component.scss']
+  styleUrls: ['./character.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharacterComponent extends BaseComponent implements OnInit {
 
   character: Character;
-  constructor(private characterStore: Store<CharacterState>) {
+
+  constructor(private readonly characterRepository: CharacterRepository,
+              private readonly changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    this.characterStore
-      .select(getCharacter)
+    this.characterRepository.selectCharacter()
       .pipe(this.takeUntilDestroy())
-      .subscribe(character => this.character = character);
+      .subscribe(character => {
+        this.character = character;
+        this.changeDetectorRef.detectChanges();
+      });
   }
 }

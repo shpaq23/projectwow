@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterPanelComponent } from 'src/app/pw/ui/login-panel/register/register-panel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from 'src/app/store/reducers/user.reducer';
+import { userFeatureKey, userReducer } from 'src/app/store/reducers/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffect } from 'src/app/store/effects/user.effect';
 
@@ -21,7 +21,7 @@ import { UserEffect } from 'src/app/store/effects/user.effect';
     LoginPanelRoutingModule,
     GenericComponentsModule,
     FontAwesomeModule,
-    StoreModule.forFeature('loggedUser', userReducer),
+    StoreModule.forFeature(userFeatureKey, userReducer),
     EffectsModule.forFeature([UserEffect])
   ]
 })

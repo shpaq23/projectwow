@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { getGlobalLoaderLoading } from 'src/app/store/selectors/global-loader.selector';
-import { GlobalLoaderState } from 'src/app/store/state/global-loader.state';
+import { GlobalLoaderRepository } from 'src/app/store/repositories/global-loader.repository';
 import { BaseComponent } from 'src/app/utils/base-component';
 
 @Component({
@@ -12,17 +10,18 @@ import { BaseComponent } from 'src/app/utils/base-component';
 })
 export class AppComponent extends BaseComponent implements OnInit {
 
-  @HostBinding('class.pw-center') classCenter = true;
+  @HostBinding('class.pw-center')
+  classCenter = true;
 
   loader: boolean;
 
-  constructor(private globalLoaderStore: Store<GlobalLoaderState>,
-              private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private readonly globalLoaderRepository: GlobalLoaderRepository,
+              private readonly changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit(): void {
-    this.globalLoaderStore.select(getGlobalLoaderLoading)
+    this.globalLoaderRepository.selectGlobalLoaderLoading()
       .pipe(this.takeUntilDestroy())
       .subscribe(
         loading => {

@@ -1,49 +1,38 @@
-import { CharacterActions, CharacterActionsTypes } from 'src/app/store/actions/character.action';
+import { Action, createReducer, on } from '@ngrx/store';
+import {
+  createCharacterFailure,
+  createCharacterSuccess,
+  getCharacterFailure,
+  getCharacterSuccess,
+  setNewCharacter
+} from 'src/app/store/actions/character.action';
 import { CharacterState, initCharacterState } from 'src/app/store/state/character.state';
 
-export function characterReducer(state = initCharacterState, action: CharacterActions): CharacterState {
-  switch (action.type) {
-    case CharacterActionsTypes.GetCharacterSuccess:
-      return {
-        ...state,
-        isNewCharacter: true,
-        character: action.payload,
-        error: { message: '' }
-      };
-    case CharacterActionsTypes.GetCharacterFail:
-      return {
-        ...state,
-        error: { message: action.payload.message }
-      };
+export const characterFeatureKey = 'character';
 
-    case CharacterActionsTypes.SetIsNewCharacter:
-      return {
-        ...state,
-        isNewCharacter: action.payload
-      };
+const reducer = createReducer(
+  initCharacterState,
+  on(getCharacterSuccess,
+    createCharacterSuccess,
+    (state, { payload }) => ({
+      ...state,
+      // isNewCharacter: true, // only for testing purpose, it should be remove and set only from setNewCharacterAction
+      character: payload,
+      error: null
+    })),
+  on(getCharacterFailure,
+    createCharacterFailure,
+    (state, { payload }) => ({
+      ...state,
+      error: payload
+    })),
+  on(setNewCharacter,
+    (state, { payload }) => ({
+      ...state,
+      isNewCharacter: payload
+    }))
+);
 
-    case CharacterActionsTypes.UpdateCharacter:
-      return {
-        ...state,
-        isNewCharacter: false,
-        character: action.payload
-      };
-    case CharacterActionsTypes.CreateCharacterSuccess:
-      return {
-        ...state,
-        error: { message: '' }
-      };
-    case CharacterActionsTypes.CreateCharacterFail:
-      return {
-        ...state,
-        error: { message: action.payload.message }
-      };
-    case CharacterActionsTypes.ClearErrorMessage:
-      return {
-        ...state,
-        error: { message: '' }
-      };
-    default:
-      return state;
-  }
+export function characterReducer(state: CharacterState, action: Action): CharacterState {
+  return reducer(state, action);
 }

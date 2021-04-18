@@ -1,52 +1,28 @@
-import { Action } from '@ngrx/store';
-import {UserDto} from 'src/app/api/dtos/user/user.dto';
-import { LoginUserDto } from 'src/app/api/dtos/user/login-user.dto';
+import { createAction, props } from '@ngrx/store';
 import { FailureDto } from 'src/app/api/dtos/failure.dto';
+import { LoginUserDto } from 'src/app/api/dtos/user/login-user.dto';
+import { UserDto } from 'src/app/api/dtos/user/user.dto';
 
-export enum UserActionsTypes {
-  LoginUser = '[User] Login User',
-  LoginUserSuccess = '[User] Login User Success',
-  LoginUserFail = '[User] Login User Fail',
+export const loginUser = createAction(
+  '[User] Login User',
+  props<{ payload: LoginUserDto }>()
+);
 
-  LogoutUser = '[User] Logout User',
-  LogoutUserSuccess = '[User] Logout User Success',
+export const loginUserSuccess = createAction(
+  '[User] Login User Success',
+  props<{ payload: UserDto }>()
+);
 
-  StartLoadingUser = '[User] Start Loading',
-  StopLoadingUser = '[User] Stop Loading'
-
-}
-
-export class LoginUser implements Action {
-  public readonly type = UserActionsTypes.LoginUser;
-  constructor(public payload: LoginUserDto) { }
-}
-
-export class LoginUserSuccess implements Action {
-  public readonly type = UserActionsTypes.LoginUserSuccess;
-  constructor(public payload: UserDto) { }
-}
-
-export class LoginUserFail implements Action {
-  public readonly type = UserActionsTypes.LoginUserFail;
-  constructor(public payload: FailureDto) { }
-}
-
-export class LogoutUser implements Action {
-  public readonly type = UserActionsTypes.LogoutUser;
-}
-
-export class LogoutUserSuccess implements Action {
-  public readonly type = UserActionsTypes.LogoutUserSuccess;
-}
-
-export class StartLoadingUser implements Action {
-  public readonly type = UserActionsTypes.StartLoadingUser;
-}
-
-export class StopLoadingUser implements Action {
-  public readonly type = UserActionsTypes.StopLoadingUser;
-}
+export const loginUserFail = createAction(
+  '[User] Login User Fail',
+  props<{ payload: FailureDto }>()
+);
 
 
-export type UserActions = LoginUser | LoginUserSuccess | LoginUserFail
-  | LogoutUser | LogoutUserSuccess | StartLoadingUser | StopLoadingUser;
+export const logoutUser = createAction(
+  '[User] Logout User'
+);
+
+export const logoutUserSuccess = createAction(
+  '[User] Logout User Success'
+);
