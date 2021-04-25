@@ -1,6 +1,9 @@
-@import "styles/mixins";
-@import "styles/variables";
-@import "styles/layout";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'styles/mixins';
+@import 'styles/variables';
+@import 'styles/layout';
 
 body {
   @include wowFont;
